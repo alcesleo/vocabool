@@ -1,7 +1,34 @@
 from django.db import models
 from django.contrib.auth.models import User
 from vocabool.apps.helpers import ellipsify
-from django.conf.global_settings import LANGUAGES # i18n language codes
+
+# significantly reduced version of this list of i18n language codes
+# from django.conf.global_settings import LANGUAGES
+# https://github.com/django/django/blob/master/django/conf/global_settings.py
+from django.utils.translation import gettext_noop
+LANGUAGES = (
+    ('cs', gettext_noop('Czech')),
+    ('da', gettext_noop('Danish')),
+    ('de', gettext_noop('German')),
+    ('el', gettext_noop('Greek')),
+    ('en', gettext_noop('English')),
+    ('en-gb', gettext_noop('British English')),
+    ('es', gettext_noop('Spanish')),
+    ('fa', gettext_noop('Persian')),
+    ('fi', gettext_noop('Finnish')),
+    ('fr', gettext_noop('French')),
+    ('hr', gettext_noop('Croatian')),
+    ('hu', gettext_noop('Hungarian')),
+    ('it', gettext_noop('Italian')),
+    ('ru', gettext_noop('Russian')),
+    ('sv', gettext_noop('Swedish')),
+)
+
+CLARIFICATION_TYPE = (
+    ('def', 'Definition'),
+    ('tra', 'Translation'),
+    ('syn', 'Synonyms'),
+)
 
 class Vocabulary(models.Model):
     """List of userterms, owned by a user."""
@@ -15,11 +42,9 @@ class Vocabulary(models.Model):
     def __str__(self):
         return self.name
 
-    # TODO: def count items
     def count(self):
         return self.terms.count()
 
-# TODO: Limit languages
 # TODO: Limit backwards relations with related_name='+' https://docs.djangoproject.com/en/dev/ref/models/fields/
 
 class Term(models.Model):
@@ -33,12 +58,6 @@ class Term(models.Model):
     def __str__(self):
         return ellipsify(self.text)
 
-CLARIFICATION_TYPE = (
-    ('def', 'Definition'),
-    ('tra', 'Translation'),
-    ('syn', 'Synonyms'),
-)
-
 class Clarification(models.Model):
     """A {definition, translation, list of synonyms} of a term."""
     term = models.ForeignKey(Term)
@@ -46,8 +65,6 @@ class Clarification(models.Model):
     clarification_type = models.CharField(max_length=3, choices=CLARIFICATION_TYPE)
     created = models.DateTimeField(auto_now_add=True)
     text = models.CharField(max_length=200)
-
-    # TODO: type = {definition, translation, synonyms}
 
     def __str__(self):
         return ellipsify(self.text)
