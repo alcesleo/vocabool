@@ -17,7 +17,7 @@ class UsertermAdmin(admin.ModelAdmin):
 admin.site.register(Userterm, UsertermAdmin)
 
 class ClarificationAdmin(admin.ModelAdmin):
-    list_display = ('term', 'text', 'language', 'created')
+    list_display = ('term', 'text', 'language', 'clarification_type', 'created')
 
 admin.site.register(Clarification, ClarificationAdmin)
 

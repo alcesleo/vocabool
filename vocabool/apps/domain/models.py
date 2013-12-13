@@ -33,12 +33,19 @@ class Term(models.Model):
     def __str__(self):
         return ellipsify(self.text)
 
+CLARIFICATION_TYPE = (
+    ('def', 'Definition'),
+    ('tra', 'Translation'),
+    ('syn', 'Synonyms'),
+)
+
 class Clarification(models.Model):
     """A {definition, translation, list of synonyms} of a term."""
     term = models.ForeignKey(Term)
-    text = models.CharField(max_length=200)
     language = models.CharField(max_length=2, choices=LANGUAGES, default='en')
+    clarification_type = models.CharField(max_length=3, choices=CLARIFICATION_TYPE)
     created = models.DateTimeField(auto_now_add=True)
+    text = models.CharField(max_length=200)
 
     # TODO: type = {definition, translation, synonyms}
 
