@@ -5,9 +5,9 @@ from django.conf.global_settings import LANGUAGES # i18n language codes
 
 class Vocabulary(models.Model):
     """List of userterms, owned by a user."""
-    name = models.CharField(max_length=30)
     owner = models.ForeignKey(User) # TODO: editable=False
     created = models.DateTimeField(auto_now_add=True)
+    name = models.CharField(max_length=30)
 
     class Meta:
         verbose_name_plural = 'vocabularies'
@@ -24,8 +24,8 @@ class Vocabulary(models.Model):
 
 class Term(models.Model):
     """A term in any language."""
-    text = models.CharField(max_length=100)
     language = models.CharField(max_length=2, choices=LANGUAGES, default='en')
+    text = models.CharField(max_length=100)
 
     class Meta:
         unique_together = ('text', 'language') # TODO: case insensitive
