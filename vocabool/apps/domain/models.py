@@ -14,7 +14,12 @@ class Vocabulary(models.Model):
     def __str__(self):
         return self.name
 
-    # def count items
+    # TODO: def count items
+    def count(self):
+        return self.terms.count()
+
+# TODO: Limit languages
+# TODO: Limit backwards relations with related_name='+' https://docs.djangoproject.com/en/dev/ref/models/fields/
 
 class Term(models.Model):
     text = models.CharField(max_length=100)
@@ -32,16 +37,18 @@ class Clarification(models.Model):
     language = models.CharField(max_length=2, choices=LANGUAGES, default='en')
     created = models.DateTimeField(auto_now_add=True)
 
+    # TODO: type = {definition, translation, synonyms}
+
     def __str__(self):
         return ellipsify(self.text)
 
 
 class Userterm(models.Model):
-    vocabulary = models.ForeignKey(Vocabulary)
     term = models.ForeignKey(Term)
+    vocabulary = models.ForeignKey(Vocabulary, related_name='terms')
     created = models.DateTimeField(auto_now_add=True)
     clarifications = models.ManyToManyField(Clarification)
-    custom_text = models.CharField(max_length=200)
+    custom_text = models.CharField(max_length=200, blank=True)
 
     def __str__(self):
-        return ellipsify(self.vocabulary.text)
+        return ellipsify(self.term.text)

@@ -16,6 +16,12 @@ class UsertermAdmin(admin.ModelAdmin):
 
 admin.site.register(Userterm, UsertermAdmin)
 
+class ClarificationAdmin(admin.ModelAdmin):
+    list_display = ('term', 'text', 'language', 'created')
 
-admin.site.register(Vocabulary)
-admin.site.register(Clarification)
+admin.site.register(Clarification, ClarificationAdmin)
+
+class VocabularyAdmin(admin.ModelAdmin):
+    list_display = ('name', 'count', 'owner', 'created')
+
+admin.site.register(Vocabulary, VocabularyAdmin)
