@@ -4,6 +4,7 @@ from vocabool.apps.helpers import ellipsify
 from django.conf.global_settings import LANGUAGES # i18n language codes
 
 class Vocabulary(models.Model):
+    """List of userterms, owned by a user."""
     name = models.CharField(max_length=30)
     owner = models.ForeignKey(User) # TODO: editable=False
     created = models.DateTimeField(auto_now_add=True)
@@ -22,6 +23,7 @@ class Vocabulary(models.Model):
 # TODO: Limit backwards relations with related_name='+' https://docs.djangoproject.com/en/dev/ref/models/fields/
 
 class Term(models.Model):
+    """A term in any language."""
     text = models.CharField(max_length=100)
     language = models.CharField(max_length=2, choices=LANGUAGES, default='en')
 
@@ -32,6 +34,7 @@ class Term(models.Model):
         return ellipsify(self.text)
 
 class Clarification(models.Model):
+    """A {definition, translation, list of synonyms} of a term."""
     term = models.ForeignKey(Term)
     text = models.CharField(max_length=200)
     language = models.CharField(max_length=2, choices=LANGUAGES, default='en')
@@ -44,6 +47,10 @@ class Clarification(models.Model):
 
 
 class Userterm(models.Model):
+    """
+    A term that is owned by a user and belongs to a vocabulary,
+    cherry picked clarification, and optional custom definition by user.
+    """
     term = models.ForeignKey(Term)
     vocabulary = models.ForeignKey(Vocabulary, related_name='terms')
     created = models.DateTimeField(auto_now_add=True)
