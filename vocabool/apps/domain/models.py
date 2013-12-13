@@ -35,7 +35,7 @@ class Clarification(models.Model):
         return ellipsify(self.text)
 
 
-class UserTerm(models.Model):
+class Userterm(models.Model):
     vocabulary = models.ForeignKey(Vocabulary)
     term = models.ForeignKey(Term)
     created = models.DateTimeField(auto_now_add=True)

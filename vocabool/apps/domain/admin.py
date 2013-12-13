@@ -1,8 +1,7 @@
 from django.contrib import admin
-from vocabool.apps.domain.models import Vocabulary, Term, Clarification, UserTerm
+from vocabool.apps.domain.models import Vocabulary, Term, Clarification, Userterm
 
-# Register your models here.
 admin.site.register(Vocabulary)
 admin.site.register(Term)
 admin.site.register(Clarification)
-admin.site.register(UserTerm)
+admin.site.register(Userterm)
