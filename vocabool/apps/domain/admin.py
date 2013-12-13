@@ -7,17 +7,17 @@ class TermAdmin(admin.ModelAdmin):
 
 admin.site.register(Term, TermAdmin)
 
-
 class UsertermAdmin(admin.ModelAdmin):
     list_display = ('term', 'vocabulary', 'created')
     list_filter = ('created',)
     search_fields = ('text',)
     ordering = ('-created',)
+    filter_horizontal = ('clarifications',)
 
 admin.site.register(Userterm, UsertermAdmin)
 
 class ClarificationAdmin(admin.ModelAdmin):
-    list_display = ('term', 'text', 'language', 'clarification_type', 'created')
+    list_display = ('term', 'text', 'language', 'category', 'created')
 
 admin.site.register(Clarification, ClarificationAdmin)
 

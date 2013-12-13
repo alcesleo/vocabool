@@ -24,7 +24,7 @@ LANGUAGES = (
     ('sv', gettext_noop('Swedish')),
 )
 
-CLARIFICATION_TYPE = (
+CLARIFICATION_CATEGORY = (
     ('def', 'Definition'),
     ('tra', 'Translation'),
     ('syn', 'Synonyms'),
@@ -45,11 +45,9 @@ class Vocabulary(models.Model):
     def count(self):
         return self.terms.count()
 
-# TODO: Limit backwards relations with related_name='+' https://docs.djangoproject.com/en/dev/ref/models/fields/
-
 class Term(models.Model):
     """A term in any language."""
-    language = models.CharField(max_length=2, choices=LANGUAGES, default='en')
+    language = models.CharField(max_length=7, choices=LANGUAGES, default='en')
     text = models.CharField(max_length=100)
 
     class Meta:
@@ -60,11 +58,13 @@ class Term(models.Model):
 
 class Clarification(models.Model):
     """A {definition, translation, list of synonyms} of a term."""
-    term = models.ForeignKey(Term)
+    term = models.ForeignKey(Term, related_name='clarifications')
     language = models.CharField(max_length=2, choices=LANGUAGES, default='en')
-    clarification_type = models.CharField(max_length=3, choices=CLARIFICATION_TYPE)
+    category = models.CharField(max_length=3, choices=CLARIFICATION_CATEGORY)
     created = models.DateTimeField(auto_now_add=True)
     text = models.CharField(max_length=200)
+
+    # TODO: Provider
 
     def __str__(self):
         return ellipsify(self.text)
