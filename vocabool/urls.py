@@ -6,5 +6,6 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
-    (r'^admin/', include(admin.site.urls))
+    (r'^admin/', include(admin.site.urls)),
+    (r'^api/', include('vocabool.service.urls')),
 )

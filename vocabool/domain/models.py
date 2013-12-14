@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from vocabool.apps.helpers import ellipsify
+from vocabool.libs.helpers import ellipsify
 
 # significantly reduced version of this list of i18n language codes
 # from django.conf.global_settings import LANGUAGES
@@ -55,27 +55,8 @@ class Clarification(models.Model):
     def __str__(self):
         return ellipsify(self.text)
 
-
-class Userterm(models.Model):
-    """
-    A term that is owned by a user and belongs to a vocabulary,
-    cherry picked clarification, and optional custom definition by user.
-    """
-    term = models.ForeignKey(Term)
-    vocabulary = models.ForeignKey(Vocabulary, related_name='terms')
-    created = models.DateTimeField(auto_now_add=True)
-    clarifications = models.ManyToManyField(Clarification)
-    custom_text = models.CharField(max_length=200, blank=True)
-
-    @property
-    def owner(self):
-        return self.vocabulary.owner
-
-    def __str__(self):
-        return ellipsify(self.term.text)
-
 class Vocabulary(models.Model):
-    """List of userterms, owned by a user."""
+    """List of listemes, owned by a user."""
     owner = models.ForeignKey(User) # TODO: editable=False
     created = models.DateTimeField(auto_now_add=True)
     name = models.CharField(max_length=30)
@@ -87,4 +68,25 @@ class Vocabulary(models.Model):
         return self.name
 
     def count(self):
-        return self.terms.count()
+        return self.listemes.count()
+
+class Listeme(models.Model):
+    """
+    A term that is owned by a user and belongs to a vocabulary,
+    with cherry picked clarifications, and optional custom definition by user.
+    """
+    term = models.ForeignKey(Term)
+    vocabulary = models.ForeignKey(Vocabulary, related_name='listemes')
+    created = models.DateTimeField(auto_now_add=True)
+    clarifications = models.ManyToManyField(Clarification, limit_choices_to = {'term': term})
+    custom_text = models.CharField(max_length=200, blank=True)
+
+    @property
+    def owner(self):
+        return self.vocabulary.owner
+
+    # TODO: Validate clarification.term = term
+
+    def __str__(self):
+        return ellipsify(self.term.text)
+

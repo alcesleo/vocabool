@@ -40,7 +40,8 @@ INSTALLED_APPS = (
 
     'south',
 
-    'vocabool.apps.domain',
+    'vocabool.domain',
+    'vocabool.service',
 )
 
 MIDDLEWARE_CLASSES = (
