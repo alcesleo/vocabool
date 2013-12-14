@@ -8,7 +8,7 @@ class TermAdmin(admin.ModelAdmin):
 admin.site.register(Term, TermAdmin)
 
 class ListemeAdmin(admin.ModelAdmin):
-    list_display = ('term', 'vocabulary', 'created')
+    list_display = ('term', 'created', 'owner')
     list_filter = ('created',)
     search_fields = ('text',)
     ordering = ('-created',)
@@ -24,5 +24,12 @@ admin.site.register(Clarification, ClarificationAdmin)
 
 class VocabularyAdmin(admin.ModelAdmin):
     list_display = ('name', 'count', 'owner', 'created')
+    filter_horizontal = ('listemes',)
+
+    # show only this users listemes
+    def formfield_for_manytomany(self, db_field, request, **kwargs):
+        if db_field.name == 'listemes':
+            kwargs['queryset'] = Listeme.objects.filter(owner=1)
+        return super(VocabularyAdmin, self).formfield_for_manytomany(db_field, request, **kwargs)
 
 admin.site.register(Vocabulary, VocabularyAdmin)
