@@ -1,6 +1,9 @@
 from tastypie import fields
 from tastypie.resources import ModelResource
+from tastypie.api import Api
 from vocabool.domain.models import Vocabulary, Listeme, Clarification
+
+# resources
 
 class ClarificationResource(ModelResource):
     class Meta:
@@ -22,3 +25,11 @@ class VocabularyResource(ModelResource):
         queryset = Vocabulary.objects.all()
         resource_name = 'vocabulary'
         # filtering = { 'title': tastypie.constants.ALL }
+
+
+# register the api
+
+v0 = Api(api_name='v0')
+v0.register(VocabularyResource())
+v0.register(ClarificationResource())
+v0.register(ListemeResource())
