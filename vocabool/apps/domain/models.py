@@ -28,22 +28,8 @@ CLARIFICATION_CATEGORY = (
     ('def', 'Definition'),
     ('tra', 'Translation'),
     ('syn', 'Synonyms'),
+    # ('exp', 'Example'),
 )
-
-class Vocabulary(models.Model):
-    """List of userterms, owned by a user."""
-    owner = models.ForeignKey(User) # TODO: editable=False
-    created = models.DateTimeField(auto_now_add=True)
-    name = models.CharField(max_length=30)
-
-    class Meta:
-        verbose_name_plural = 'vocabularies'
-
-    def __str__(self):
-        return self.name
-
-    def count(self):
-        return self.terms.count()
 
 class Term(models.Model):
     """A term in any language."""
@@ -81,5 +67,24 @@ class Userterm(models.Model):
     clarifications = models.ManyToManyField(Clarification)
     custom_text = models.CharField(max_length=200, blank=True)
 
+    @property
+    def owner(self):
+        return self.vocabulary.owner
+
     def __str__(self):
         return ellipsify(self.term.text)
+
+class Vocabulary(models.Model):
+    """List of userterms, owned by a user."""
+    owner = models.ForeignKey(User) # TODO: editable=False
+    created = models.DateTimeField(auto_now_add=True)
+    name = models.CharField(max_length=30)
+
+    class Meta:
+        verbose_name_plural = 'vocabularies'
+
+    def __str__(self):
+        return self.name
+
+    def count(self):
+        return self.terms.count()
