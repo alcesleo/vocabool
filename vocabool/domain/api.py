@@ -1,7 +1,7 @@
 from tastypie import fields
 from tastypie.resources import ModelResource
 from tastypie.api import Api
-from vocabool.domain.models import Vocabulary, Listeme, Clarification
+from vocabool.domain.models import Vocabulary, Listeme, Clarification, Term
 
 # resources
 
@@ -10,8 +10,14 @@ class ClarificationResource(ModelResource):
         queryset = Clarification.objects.all()
         resource_name = 'clarification'
 
+class TermResource(ModelResource):
+    class Meta:
+        queryset = Term.objects.all()
+        resource_name = 'term'
+
 class ListemeResource(ModelResource):
-    clarifications = fields.ManyToManyField(ClarificationResource, 'clarifications',
+    term = fields.ToOneField(TermResource, 'term', full=True)
+    clarifications = fields.ToManyField(ClarificationResource, 'clarifications',
                                             full=True)
     class Meta:
         queryset = Listeme.objects.all()
