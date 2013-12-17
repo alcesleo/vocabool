@@ -16,8 +16,8 @@ class TermResource(ModelResource):
         resource_name = 'term'
 
 class ListemeResource(ModelResource):
-    term = fields.ToOneField(TermResource, 'term', full=True)
-    clarifications = fields.ToManyField(ClarificationResource, 'clarifications',
+    term = fields.ForeignKey(TermResource, 'term', full=True)
+    clarifications = fields.ManyToManyField(ClarificationResource, 'clarifications',
                                             full=True)
     class Meta:
         queryset = Listeme.objects.all()
