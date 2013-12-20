@@ -38,5 +38,3 @@ A `Listeme` contains **one** `Term`, and a **list** of `Clarifications`.
             - clarification
 - vocabulary
 - ...
-
-
