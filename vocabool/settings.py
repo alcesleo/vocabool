@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'djangobower',
 
     'vocabool.domain',
+    'vocabool.client',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -89,8 +90,9 @@ PROJECT_ROOT = os.path.abspath(
 )
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-BOWER_COMPONENTS_ROOT = os.path.join(PROJECT_ROOT, 'static')
+BOWER_COMPONENTS_ROOT = os.path.join(PROJECT_ROOT, 'components')
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
