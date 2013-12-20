@@ -1,9 +1,11 @@
 from django.contrib import admin
 from vocabool.domain.models import Vocabulary, Term, Clarification, Listeme
 
+
 class TermAdmin(admin.ModelAdmin):
     list_display = ('text', 'language')
     search_fields = ('text',)
+
 
 class ListemeAdmin(admin.ModelAdmin):
     list_display = ('term', 'created', 'owner')
@@ -12,9 +14,11 @@ class ListemeAdmin(admin.ModelAdmin):
     ordering = ('-created',)
     filter_horizontal = ('clarifications',)
 
+
 class ClarificationAdmin(admin.ModelAdmin):
     list_display = ('text', 'term', 'language', 'category', 'created')
     ordering = ('term',)
+
 
 class VocabularyAdmin(admin.ModelAdmin):
     list_display = ('name', 'count', 'owner', 'created')
