@@ -7,6 +7,7 @@ from vocabool.libs.helpers import ellipsify
 # https://github.com/django/django/blob/master/django/conf/global_settings.py
 from django.utils.translation import gettext_noop
 LANGUAGES = (
+    ('-', gettext_noop('Not provided')),
     ('cs', gettext_noop('Czech')),
     ('da', gettext_noop('Danish')),
     ('de', gettext_noop('German')),
@@ -63,10 +64,10 @@ class Listeme(models.Model):
     owner = models.ForeignKey(User) # TODO: editable=False
     term = models.ForeignKey(Term)
     created = models.DateTimeField(auto_now_add=True)
-    clarifications = models.ManyToManyField(Clarification, blank=True)
+    clarifications = models.ManyToManyField(Clarification, blank=True) # TODO: Through with save() method to check FK
     custom_text = models.CharField(max_length=200, blank=True)
 
-    # TODO: Validate clarification.term = term
+    # TODO: archived = models.BooleanField()
 
     def __str__(self):
         return self.term.__str__()
