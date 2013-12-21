@@ -18,14 +18,19 @@
         <!-- Main Backbone view -->
         <div id="view"></div>
 
+        <!-- Handlebars templates -->
+        {% load jstemplate %}
+        {% handlebarsjs 'tpl-index' %}
+
         {% load staticfiles %}
         <!-- Dependencies -->
         <script src="{% static 'underscore/underscore.js' %}"></script>
         <script src="{% static 'jquery/jquery.js' %}"></script>
+        <script src="{% static 'handlebars/handlebars.js' %}"></script>
         <script src="{% static 'backbone/backbone.js' %}"></script>
 
         <!-- Application -->
-        <script src="{% static 'client/main.js' %}"></script>
+        <script src="{% static 'client/js/main.js' %}"></script>
 
     </body>
 </html>

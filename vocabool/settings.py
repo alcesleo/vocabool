@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'rest_framework',
     'south',
     'djangobower',
+    'jstemplate',
 
     'vocabool.domain',
     'vocabool.client',
@@ -105,4 +106,5 @@ BOWER_INSTALLED_APPS = (
     'underscore',
     'jquery',
     'backbone',
+    'handlebars',
 )
