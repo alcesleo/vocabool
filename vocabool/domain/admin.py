@@ -1,38 +1,37 @@
 from django.contrib import admin
-from vocabool.domain.models import Vocabulary, Term, Clarification, Listeme
+from vocabool.domain.models import Definition, Translation, Vocabulary, Term
 
+
+class DefinitionAdmin(admin.ModelAdmin):
+    list_display = ('text', 'definition')
+    list_filter = ('timestamp', 'language')
+    search_fields = ('text', 'definition')
+    ordering = ('-timestamp',)
+
+
+class TranslationAdmin(admin.ModelAdmin):
+    list_display = ('text', 'translation', 'from_language', 'to_language')
+    search_fields = ('text', 'translation')
+    ordering = ('text',)
+
+
+class TermInline(admin.TabularInline):
+    model = Term
 
 class TermAdmin(admin.ModelAdmin):
-    list_display = ('text', 'language')
-    search_fields = ('text',)
+    list_display = ('text', 'custom_text', 'language', 'timestamp')
+    search_fields = ('text', 'custom_text')
 
-
-class ListemeAdmin(admin.ModelAdmin):
-    list_display = ('term', 'created', 'owner')
-    list_filter = ('created',)
-    search_fields = ('text',)
-    ordering = ('-created',)
-    filter_horizontal = ('clarifications',)
-
-
-class ClarificationAdmin(admin.ModelAdmin):
-    list_display = ('text', 'term', 'language', 'category', 'created')
-    ordering = ('term',)
-
+    filter_horizontal = ('definitions', 'translations')
 
 class VocabularyAdmin(admin.ModelAdmin):
-    list_display = ('name', 'count', 'owner', 'created')
-    filter_horizontal = ('listemes',)
-
-    # show only this users listemes
-    # >1.6.1 https://code.djangoproject.com/ticket/21593
-    def formfield_for_manytomany(self, db_field, request, **kwargs):
-        if db_field.name == 'listemes':
-            kwargs['queryset'] = Listeme.objects.filter(owner=1)
-        return super(VocabularyAdmin, self).formfield_for_manytomany(db_field, request, **kwargs)
+    list_display = ('name', 'owner', 'count', 'timestamp')
+    search_fields = ('name',)
+    inlines = [TermInline]
 
 
-admin.site.register(Term, TermAdmin)
-admin.site.register(Listeme, ListemeAdmin)
-admin.site.register(Clarification, ClarificationAdmin)
+
+admin.site.register(Definition, DefinitionAdmin)
+admin.site.register(Translation, TranslationAdmin)
 admin.site.register(Vocabulary, VocabularyAdmin)
+admin.site.register(Term, TermAdmin)
