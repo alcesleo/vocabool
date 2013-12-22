@@ -11,7 +11,6 @@ LANGUAGES = (
     ('de', gettext_noop('German')),
     ('el', gettext_noop('Greek')),
     ('en', gettext_noop('English')),
-    ('en-gb', gettext_noop('British English')),
     ('es', gettext_noop('Spanish')),
     ('fa', gettext_noop('Persian')),
     ('fi', gettext_noop('Finnish')),
@@ -25,7 +24,7 @@ LANGUAGES = (
 
 class LanguageField(models.CharField):
     def __init__(self, *args, **kwargs):
-        kwargs.setdefault('max_length', 7)
+        kwargs.setdefault('max_length', 2)
         kwargs.setdefault('choices', LANGUAGES)
 
         super(LanguageField, self).__init__(*args, **kwargs)
