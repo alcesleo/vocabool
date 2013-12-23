@@ -84,6 +84,15 @@ USE_L10N = True
 
 USE_TZ = True
 
+### Rest configuration
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer', # TODO: Disable this when Debug = False
+    )
+}
+
 
 # Static files (CSS, JavaScript, Images)
 
@@ -107,4 +116,5 @@ BOWER_INSTALLED_APPS = (
     'jquery',
     'backbone',
     'handlebars',
+    'bootstrap',
 )
