@@ -11,6 +11,7 @@ from vocabool.libs.fields import LanguageField
 # and are very easy to work with. If this app actually gets a ton of users, this
 # is where optimizations should be done first.
 
+
 class Definition(models.Model):
     language = LanguageField()
     text = models.CharField(max_length=100)
@@ -50,13 +51,14 @@ class Vocabulary(models.Model):
 
 class Term(models.Model):
     """A term in any language provided by a user."""
-    owner = models.ForeignKey(User)
+    owner = models.ForeignKey(User, related_name='terms')
     vocabulary = models.ForeignKey(Vocabulary, related_name='terms')
     language = LanguageField()
     text = models.CharField(max_length=100)
     custom_text = models.CharField(max_length=100)
     timestamp = models.DateTimeField(auto_now_add=True)
 
+    # TODO: limit_choices_to text = self.text
     definitions = models.ManyToManyField(Definition, blank=True)
     translations = models.ManyToManyField(Translation, blank=True)
 

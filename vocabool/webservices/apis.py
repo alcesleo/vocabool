@@ -54,3 +54,4 @@ class GoogleDictionaryAPI():
         data = response.content.decode('unicode-escape')
         data = self._jsonp_to_json(data)
         return json.loads(data)
+

@@ -14,6 +14,31 @@ class Service():
         self.definitions_api = GoogleDictionaryAPI()
         self.translation_api = YandexTranslateAPI()
 
+    def _database_define(self, text, language):
+        """Get definition from database."""
+        definitions = Definition.objects.filter(text=text, language=language)
+        if definitions:
+            return definitions[0]
+        return None
+
+    def _api_define(self, text, language):
+        # define in same language
+        definition = self.definitions_api.define(text, language, language)
+
+        # TODO: errors
+        # catch couldnotdefine
+        # obj = Definition(text=text, language=language, definition=)
+        # definition.save()
+        return definition
+
+
+    def get_definition(self, text, language):
+        # get from cache
+        definition = self._database_define(text, language)
+        if not definition:
+            definition = self._api_define(text, language)
+
+        return definition
 
     def _database_translate(self, text, from_language, to_language):
         """Get translation from DB, returns None if none exist."""
@@ -39,7 +64,7 @@ class Service():
                           to_language=to_language,
                           # comma separated if more than one translation is returned
                           translation=', '.join(translation['text']))
-        # create object
+
         obj.save()
         return obj
 

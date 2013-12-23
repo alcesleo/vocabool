@@ -19,11 +19,8 @@ class TermSerializer(serializers.ModelSerializer):
 
 
 class VocabularySerializer(serializers.ModelSerializer):
-    terms = TermSerializer(many=True)
+    # terms = TermSerializer(many=True) only in detail
+    owner = serializers.Field(source='owner.username') # username intsead of id
     class Meta:
         model = Vocabulary
-
-    def restore_fields(self, data, files):
-        deserialized = super(VocabularySerializer, self).restore_fields(data, files)
-        #TODO: whatever you feel like doing before it gets saved
-        return deserialized
+        fields = ('name', 'owner')

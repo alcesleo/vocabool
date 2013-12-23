@@ -4,15 +4,23 @@ VOCABOOL.Models = VOCABOOL.Models || {};
 VOCABOOL.Views = VOCABOOL.Views || {};
 VOCABOOL.Collections = VOCABOOL.Collections || {};
 
-VOCABOOL.Models.Listeme = Backbone.Model.extend({
+VOCABOOL.Views.Vocabulary = Backbone.View.extend({
+
     initialize: function () {
-        console.log('Listeme');
+        console.log('VocabularyView');
     },
+
+    template: Handlebars.compile($('#tpl-index').html()),
+
+    render: function () {
+        this.$el.html(this.template({ test: 'hello '}));
+        return this.el;
+    }
 
 });
 
 $(function () {
-    var listeme = new VOCABOOL.Models.Listeme();
+    var listeme = new VOCABOOL.Views.Vocabulary();
 });
 
 
