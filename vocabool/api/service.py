@@ -1,5 +1,7 @@
-from vocabool.webservices.apis import YandexTranslateAPI, GoogleDictionaryAPI
+from vocabool.webservices.adapters import GoogleDictionaryAPIAdapter, YandexTranslateAPIAdapter
 from vocabool.domain.models import Definition, Translation
+
+# TODO: if webservice unavailable
 
 class Service():
     """
@@ -11,8 +13,8 @@ class Service():
         # kwargs['definitions'].setdefault(WikipediaAPI)
         # kwargs['translations'].setdefault(YandexTranslateAPI)
 
-        self.definitions_api = GoogleDictionaryAPI()
-        self.translation_api = YandexTranslateAPI()
+        self.definitions_api = GoogleDictionaryAPIAdapter()
+        self.translation_api = YandexTranslateAPIAdapter()
 
     def _database_define(self, text, language):
         """Get definition from database."""
@@ -25,10 +27,10 @@ class Service():
         # define in same language
         definition = self.definitions_api.define(text, language, language)
 
-        # TODO: errors
-        # catch couldnotdefine
-        # obj = Definition(text=text, language=language, definition=)
-        # definition.save()
+        if not definition:
+            return None
+
+        definition.save()
         return definition
 
 
@@ -39,6 +41,8 @@ class Service():
             definition = self._api_define(text, language)
 
         return definition
+
+    #####################
 
     def _database_translate(self, text, from_language, to_language):
         """Get translation from DB, returns None if none exist."""
@@ -58,15 +62,8 @@ class Service():
         if not translation:
             return None
 
-        # Create and save object to db
-        obj = Translation(text=text,
-                          from_language=from_language,
-                          to_language=to_language,
-                          # comma separated if more than one translation is returned
-                          translation=', '.join(translation['text']))
-
-        obj.save()
-        return obj
+        translation.save()
+        return translation
 
     def get_translation(self, text, from_language, to_language):
         """Get translation from database, or fallback to external API."""
