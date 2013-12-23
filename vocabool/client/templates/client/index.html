@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -8,12 +9,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- Place favicon.ico and apple-touch-icon(s) in the root directory -->
+        <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}">
 
     </head>
     <body>
         <!--[if lt IE 8]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
+
+        {% include 'client/navbar.html' %}
 
         <!-- Main Backbone view -->
         <div id="view"></div>
@@ -22,12 +26,12 @@
         {% load jstemplate %}
         {% handlebarsjs 'tpl-index' %}
 
-        {% load staticfiles %}
         <!-- Dependencies -->
         <script src="{% static 'underscore/underscore.js' %}"></script>
         <script src="{% static 'jquery/jquery.js' %}"></script>
         <script src="{% static 'handlebars/handlebars.js' %}"></script>
         <script src="{% static 'backbone/backbone.js' %}"></script>
+        <script src="{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>
 
         <!-- Application -->
         <script src="{% static 'client/js/main.js' %}"></script>
