@@ -1,3 +1,5 @@
+"""Handles the connection to external resources."""
+
 import json, requests
 from .keys import YANDEX_TRANSLATE_API_KEY # TODO settings.secrets?
 

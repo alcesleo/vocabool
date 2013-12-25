@@ -1,7 +1,8 @@
+"""Parses data from API:s and maps it to domain models."""
+
 from .apis import GoogleDictionaryAPI, YandexTranslateAPI
 from vocabool.domain.models import Definition, Translation
 
-# Adapters to the API:s that return domain models directly
 
 class GoogleDictionaryAPIAdapter():
 

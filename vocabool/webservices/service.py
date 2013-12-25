@@ -1,3 +1,5 @@
+"""Returns models from database, or falls back to external API calls."""
+
 from vocabool.webservices.adapters import GoogleDictionaryAPIAdapter, YandexTranslateAPIAdapter
 from vocabool.domain.models import Definition, Translation
 
