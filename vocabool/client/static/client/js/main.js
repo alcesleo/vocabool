@@ -1,26 +1,54 @@
 // Initialize namespace
-var VOCABOOL = VOCABOOL || {};
-VOCABOOL.Models = VOCABOOL.Models || {};
-VOCABOOL.Views = VOCABOOL.Views || {};
-VOCABOOL.Collections = VOCABOOL.Collections || {};
+var App = App || {};
+App.Models = App.Models || {};
+App.Views = App.Views || {};
+App.Collections = App.Collections || {};
 
-VOCABOOL.Views.Vocabulary = Backbone.View.extend({
 
-    initialize: function () {
-        console.log('VocabularyView');
-    },
+App.Models.Vocabulary = Backbone.Model.extend({
+
+});
+
+App.Views.Vocabulary = Backbone.View.extend({
 
     template: Handlebars.compile($('#tpl-index').html()),
 
+    initialize: function () {
+        this.listenTo(model, 'change', this.render);
+    },
+
     render: function () {
-        this.$el.html(this.template({ test: 'hello '}));
-        return this.el;
+        this.$el.html(this.template(this.model.attributes));
+        return this;
     }
 
 });
 
+// http://mikefowler.me/2013/11/18/page-transitions-in-backbone/
+App.Views.App = Backbone.View.extend({
+
+    show: function (view) {
+        var previous = this.currentPage || null;
+        var next = view;
+
+        if (previous) {
+            previous.remove();
+        }
+
+        next.render();
+        this.$el.html(next.el);
+        this.currentPage = next;
+    }
+
+});
+
+
 $(function () {
-    var listeme = new VOCABOOL.Views.Vocabulary();
+    model = new App.Models.Vocabulary({ test: 'hello'})
+    testview = new App.Views.Vocabulary({ model: model });
+    appView = new App.Views.App({ el: $('#view') });
+    appView.render();
+    appView.show(testview);
 });
 
 
