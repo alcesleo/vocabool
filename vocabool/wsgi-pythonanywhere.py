@@ -1,5 +1,6 @@
 """
 WSGI config for PythonAnywhere using Python3.3 in a virtualenv.
+https://www.pythonanywhere.com/wiki/VirtualEnvForNewerDjango
 """
 
 # activate virtualenv
