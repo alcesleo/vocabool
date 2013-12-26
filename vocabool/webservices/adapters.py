@@ -20,7 +20,7 @@ class WiktionaryAPIAdapter():
 
     def _get_relevant_rows(self, content):
         """Get the rows where definitions are placed, without the leading #."""
-        return re.findall('#([^:].*?)\n', content)
+        return re.findall('#([^:\*].*?)\n', content)
 
 
     def _strip_templating(self, text):
@@ -41,7 +41,9 @@ class WiktionaryAPIAdapter():
         # make them readable
         definitions = []
         for d in raw_definitions:
-            definitions.append(self._strip_templating(d))
+            text = self._strip_templating(d)
+            if text:
+                definitions.append(text)
 
 
         # wikicode = mwparserfromhell.parse(content)
