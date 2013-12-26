@@ -12,6 +12,8 @@ class WiktionaryAPIAdapter():
     def __init__(self):
         self.definitions = WiktionaryAPI()
 
+
+    # TODO: error
     def _get_content_string(self, data):
         """The string where the interesting data, among with tons of other junk is."""
         for key, value in data['query']['pages'].items():
@@ -20,7 +22,9 @@ class WiktionaryAPIAdapter():
 
     def _get_relevant_rows(self, content):
         """Get the rows where definitions are placed, without the leading #."""
-        return re.findall('#([^:\*].*?)\n', content)
+
+        # TODO: ignore definitions from other languages
+        return re.findall(r'^#([^:*].*?)$', content, re.MULTILINE)
 
 
     def _strip_templating(self, text):
