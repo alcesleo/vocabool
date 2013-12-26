@@ -21,6 +21,7 @@ class TermSerializer(serializers.ModelSerializer):
 class VocabularySerializer(serializers.ModelSerializer):
     # terms = TermSerializer(many=True) only in detail
     owner = serializers.Field(source='owner.username') # username intsead of id
+    count = serializers.Field(source='count')
     class Meta:
         model = Vocabulary
-        fields = ('name', 'owner')
+        fields = ('name', 'count', 'owner')
