@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from .fields import LanguageField
 from vocabool.libs.helpers import ellipsify
-from vocabool.libs.fields import LanguageField
 
 # These models are meant to cache results from external API:s, and make them
 # easy to filter and search in. They are NOT meant to store the entire wordstock,
@@ -11,6 +11,7 @@ from vocabool.libs.fields import LanguageField
 # and are very easy to work with. If this app actually gets a ton of users, this
 # is where optimizations should be done first.
 
+# TODO: Limit input text lengths
 
 class Definition(models.Model):
     language = LanguageField()
@@ -19,8 +20,8 @@ class Definition(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return '{0} - {1}'.format(ellipsify(self.text, 10),
-                                  ellipsify(self.definition, 10))
+        return '{0}: {1}'.format(ellipsify(self.text, 10),
+                                 ellipsify(self.definition, 10))
 
 
 class Translation(models.Model):
@@ -31,7 +32,8 @@ class Translation(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return '{0} - {1}'.format(self.text, self.to_language)
+        return '{0}: {1}'.format(ellipsify(self.text),
+                                 ellipsify(self.translation))
 
 
 class Vocabulary(models.Model):
@@ -52,7 +54,7 @@ class Vocabulary(models.Model):
 class Term(models.Model):
     """A term in any language provided by a user."""
     owner = models.ForeignKey(User, related_name='terms')
-    vocabulary = models.ForeignKey(Vocabulary, related_name='terms')
+    vocabulary = models.ForeignKey(Vocabulary, related_name='vocabularies')
     language = LanguageField()
     text = models.CharField(max_length=100)
     custom_text = models.CharField(max_length=100)
