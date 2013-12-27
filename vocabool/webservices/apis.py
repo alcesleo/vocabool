@@ -1,4 +1,4 @@
-"""Handles the connection to external resources."""
+"""Handles the connection to external API:s."""
 
 import json, requests
 from .keys import YANDEX_TRANSLATE_API_KEY # TODO settings.secrets?
@@ -26,11 +26,29 @@ class YandexTranslateAPI():
         data = response.content.decode('utf-8')
         return json.loads(data)
 
+class WiktionaryAPI():
+    """
+    One of the absolutely best sources of data, has almost everything
+    one could want from a dictionary. However, the formatting of the data
+    is a murderous demon drenched in hellfire. Good fucking luck parsing it.
+    """
+
+    def define(self, text, language):
+
+        # https://www.mediawiki.org/wiki/API
+        url = 'http://{lang}.wiktionary.org/w/api.php?format=json&action=query&titles={word}&prop=revisions&rvprop=content'
+        url = url.format(lang=language, word=text)
+
+        # TODO: do this on all of them
+        response = requests.get(url, headers={'User-Agent': 'Vocabool (https://github.com/alcesleo/vocabool; lagginglion@gmail.com)'})
+        data = response.content.decode('utf-8')
+        return json.loads(data)
+
 
 class GoogleDictionaryAPI():
     """
     WARNING: This API is deprecated and has no documentation.
-    However it is still one of the best and most simple dictionary API:s I
+    However it is still one of the most simple dictionary API:s I
     could find, and I'm very happy as long as it works.
     """
 
