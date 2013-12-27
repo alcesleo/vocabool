@@ -1,29 +1,26 @@
 """Parses data from API:s and maps it to domain models."""
 
-from .apis import GoogleDictionaryAPI, YandexTranslateAPI, WiktionaryAPI
+from .apis import YandexTranslateAPI, WiktionaryAPI
 from vocabool.domain.models import Definition, Translation
 from vocabool.libs.helpers import strip_on_last
-
 import mwparserfromhell
 import re
 
 
-class WiktionaryAPIAdapter():
-
+class WiktionaryAdapter():
     def __init__(self):
-        self.definitions = WiktionaryAPI()
+        self.api = WiktionaryAPI()
 
 
-    # TODO: error
     def _get_content_string(self, data):
         """The string where the interesting data, among with tons of other junk is."""
+        # TODO: error handling
         for key, value in data['query']['pages'].items():
             return value['revisions'][0]['*']
 
 
     def _get_relevant_rows(self, content):
         """Get the rows where definitions are placed, without the leading #."""
-
         # TODO: ignore definitions from other languages
         return re.findall(r'^#([^:*].*?)$', content, re.MULTILINE)
 
@@ -36,8 +33,8 @@ class WiktionaryAPIAdapter():
 
     def _combine_definitions(self, definitions, max_length=300):
         """
-        Combines the definitions into one string, including only
-        those that fit within the max_length.
+        Place definitions on separate rows, if there are many and/or lengthy
+        definitions, only the ones that fit within the max_length will be included.
         """
         text = '\n'.join(definitions)
         return strip_on_last('\n', text, max_length)
@@ -46,7 +43,6 @@ class WiktionaryAPIAdapter():
 
     def _parse_data(self, data):
         """Make sense out of the Mediawiki data."""
-
         # find the node with the actual content
         content = self._get_content_string(data)
 
@@ -66,19 +62,20 @@ class WiktionaryAPIAdapter():
 
 
     def define(self, text, language):
-        """Get processed data from Wiktionary as a Definition object."""
-        data = self.definitions.define(text, language)
+        """Get data from Wiktionary as a Definition object."""
+        data = self.api.define(text, language)
         definition_text = self._parse_data(data)
         return Definition(text=text, language=language, definition=definition_text)
 
 
-class YandexTranslateAPIAdapter():
-
+class YandexTranslateAdapter():
     def __init__(self):
-        self.translation_api = YandexTranslateAPI()
+        self.api = YandexTranslateAPI()
+
 
     def translate(self, text, from_language, to_language):
-        data = self.translation_api.translate(text, from_language, to_language)
+        """Get data from Yandex Translate as a Translation object."""
+        data = self.api.translate(text, from_language, to_language)
         translation_text = self._parse_data(data)
         translation = Translation(text=text,
                                   from_language=from_language,
@@ -87,6 +84,7 @@ class YandexTranslateAPIAdapter():
 
         return translation
 
+
     def _parse_data(self, data):
-        """Comma separate multiple translations."""
-        return ', '.join(data['text'])
+        """Place translations on separate rows."""
+        return '\n'.join(data['text'])
