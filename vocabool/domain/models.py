@@ -8,8 +8,11 @@ from vocabool.libs.helpers import ellipsify
 # nor are they meant to provide 'links' between translations and terms-definitions.
 # From a database design perspective, these are a catastrophe, and they are not
 # suited for HUGE amounts of data. They are however very logical and understandable,
-# and are very easy to work with. If this app actually gets a ton of users, this
-# is where optimizations should be done first.
+# and are very easy to work with.
+# The definition and translation CharFields can contain multiple definitions, each on their own
+# row - since they should be limited, and always displayed together, this has
+# not been broken up into separate rows and should be handled later(like surrounding
+# each line with p-tags or similar)
 
 # TODO: Limit input text lengths
 
@@ -54,15 +57,15 @@ class Vocabulary(models.Model):
 class Term(models.Model):
     """A term in any language provided by a user."""
     owner = models.ForeignKey(User, related_name='terms')
-    vocabulary = models.ForeignKey(Vocabulary, related_name='vocabularies')
+    vocabulary = models.ForeignKey(Vocabulary, related_name='terms')
     language = LanguageField()
     text = models.CharField(max_length=100)
     custom_text = models.CharField(max_length=100)
     timestamp = models.DateTimeField(auto_now_add=True)
 
     # TODO: limit_choices_to text = self.text
-    definitions = models.ManyToManyField(Definition, blank=True)
-    translations = models.ManyToManyField(Translation, blank=True)
+    definitions = models.ManyToManyField(Definition, blank=True, related_name='+') # + removes the backward relation
+    translations = models.ManyToManyField(Translation, blank=True, related_name='+')
 
     def __str__(self):
         return ellipsify(self.text)
