@@ -2,6 +2,7 @@
 
 from .apis import GoogleDictionaryAPI, YandexTranslateAPI, WiktionaryAPI
 from vocabool.domain.models import Definition, Translation
+from vocabool.libs.helpers import strip_on_last
 
 import mwparserfromhell
 import re
@@ -33,6 +34,16 @@ class WiktionaryAPIAdapter():
         return mw.strip_code().strip() # strip templates and whitespace
 
 
+    def _combine_definitions(self, definitions, max_length=300):
+        """
+        Combines the definitions into one string, including only
+        those that fit within the max_length.
+        """
+        text = '\n'.join(definitions)
+        return strip_on_last('\n', text, max_length)
+
+
+
     def _parse_data(self, data):
         """Make sense out of the Mediawiki data."""
 
@@ -49,24 +60,16 @@ class WiktionaryAPIAdapter():
             if text:
                 definitions.append(text)
 
-
-        # wikicode = mwparserfromhell.parse(content)
-        for d in definitions:
-            print(d)
-
-        return definitions
-
+        # return string with all definitions on separate rows
+        return self._combine_definitions(definitions)
 
 
 
     def define(self, text, language):
+        """Get processed data from Wiktionary as a Definition object."""
         data = self.definitions.define(text, language)
-        # data = {'query': {'pages': {'14419': {'ns': 0, 'pageid': 14419, 'revisions': [{'*': '{{se även|bajs-}}\n\n==Svenska==\n===Substantiv===\n{{sv-subst-t-oräkn|genitivändelse=|betydelser=1-2.}}\n\'\'\'bajs\'\'\' \'\'n\'\'\n*{{uttal|ipa=bajs}}\n#{{tagg|vardagligt|barnspråk}} [[avföring]]\n#:\'\'Blöjan var full av \'\'\'bajs\'\'\'.\'\'\n#:{{synonymer|[[avföring]], [[faeces]], [[fekalier]], [[exkrementer]], [[skit]], [[spillning]], [[podish]] {{?|hur pass vedertaget?}}}}\n#{{tagg|slang}} [[struntprat]], [[nonsens]], [[skit]]\n#:\'\'Du pratar bara \'\'\'bajs\'\'\'.\'\'\n#(\'\'skolslang från 1930-talet\'\') [[flicka]]\n#{{böjning|sv|subst|baj}}\n:{{avgränsare}}\n:{{besläktade ord|[[baj]], [[baja]], [[bajsa]], [[bajsig]]}}\n\n====Etymologi====\nSedan 1842 av svenska dialektala (Östergötland) \'\'baj\'\' "avföring", vanligt i form uttrycket \'\'fy baj\'\' (jämför [[ajabaja]]), en tillrättavisande term riktat till eller använt av småbarn. Johan Ernst Rietz \'\'Svenskt dialektlexikon\'\' (1962) hänvisar angående \'\'baj\'\' till ett ord ur medelhögtyskan, \'\'baht\'\'.\n\n====Sammansättningar====\n;avföring\n*[[bajshumor]]\n*[[kiss och bajs-humor]]\n*[[bajskorv]]\n*[[bajsnödig]]\n*[[bajsord]]\n*[[bajspåse]]\n*[[hundbajs]]\n\n====Översättningar====\n{{ö-topp}}\n*albanska: {{ö|sq|mut}}, {{ö|sq|jashtëqitje}}\n*bokmål: {{ö+|no|bæsj}}\n*engelska: {{ö+|en|poop}}\n*finska: {{ö+|fi|kakka}}\n*franska: {{ö+|fr|caca}}\n{{ö-mitt}}\n*italienska: {{ö+|it|cacca}}\n*kroatiska: {{ö+|hr|kaka}}\n*polska: {{ö+|pl|kupa}}\n*ryska: {{ö+|ru|какашка|f}}, {{ö+|ru|кака|f}}\n*spanska: {{ö+|es|caca}}\n*tyska: {{ö+|de|Scheiss}}\n{{ö-botten}}\n\n[[en:bajs]]\n[[fr:bajs]]\n[[hu:bajs]]\n[[no:bajs]]\n[[pl:bajs]]\n[[ru:bajs]]', 'contentformat': 'text/x-wiki','contentmodel': 'wikitext'}],'title': 'bajs'}}}}
-        print(data)
-        print()
-        print('-------------- After parsing -----------------')
-        print()
-        return self._parse_data(data)
+        definition_text = self._parse_data(data)
+        return Definition(text=text, language=language, definition=definition_text)
 
 
 class GoogleDictionaryAPIAdapter():
