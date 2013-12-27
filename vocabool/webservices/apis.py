@@ -26,6 +26,7 @@ class YandexTranslateAPI():
         data = response.content.decode('utf-8')
         return json.loads(data)
 
+
 class WiktionaryAPI():
     """
     One of the absolutely best sources of data, has almost everything
@@ -43,35 +44,3 @@ class WiktionaryAPI():
         response = requests.get(url, headers={'User-Agent': 'Vocabool (https://github.com/alcesleo/vocabool; lagginglion@gmail.com)'})
         data = response.content.decode('utf-8')
         return json.loads(data)
-
-
-class GoogleDictionaryAPI():
-    """
-    WARNING: This API is deprecated and has no documentation.
-    However it is still one of the most simple dictionary API:s I
-    could find, and I'm very happy as long as it works.
-    """
-
-    def _jsonp_to_json(self, data):
-        """
-        Convert jsonp to json,
-        removing everything before first {,
-        and everything after last }.
-        """
-        left = data.find('{')
-        right = data.rfind('}') + 1
-        return data[left:right]
-
-    def define(self, text, source_language, target_language):
-
-        base_url = 'http://www.google.com/dictionary/json'
-
-        # only supports jsonp
-        data = '?callback=c&sl={0}&tl={1}&q={2}'.format(source_language, target_language, text)
-        url = base_url + data
-
-        response = requests.get(url)
-        data = response.content.decode('unicode-escape')
-        data = self._jsonp_to_json(data)
-        return json.loads(data)
-
