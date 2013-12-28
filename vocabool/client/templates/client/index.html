@@ -30,7 +30,7 @@
         {% load jstemplate %}
         {% handlebarsjs 'tpl-index' %}
 
-        <!-- Dependencies -->
+        <!-- JS Dependencies -->
         <script src="{% static 'underscore/underscore.js' %}"></script>
         <script src="{% static 'jquery/jquery.js' %}"></script>
         <script src="{% static 'handlebars/handlebars.js' %}"></script>
@@ -38,7 +38,8 @@
         <script src="{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>
 
         <!-- Application -->
-        <script src="{% static 'client/js/main.js' %}"></script>
+        <script src="{% static 'client/js/models.js' %}"></script>
+        <script src="{% static 'client/js/collections.js' %}"></script>
 
     </body>
 </html>
