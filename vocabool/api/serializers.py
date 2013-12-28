@@ -15,7 +15,7 @@ class TermSerializer(serializers.ModelSerializer):
     owner = serializers.Field(source='owner.username') # username intsead of id
     class Meta:
         model = Term
-        fields = ('text', 'custom_text', 'language', 'owner')
+        fields = ('text', 'custom_text', 'language', 'vocabulary', 'owner')
 
 
 class VocabularySerializer(serializers.ModelSerializer):

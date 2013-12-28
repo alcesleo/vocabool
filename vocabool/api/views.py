@@ -28,6 +28,16 @@ class TermList(generics.ListCreateAPIView):
     model = Term
     serializer_class = TermSerializer
 
+    def pre_save(self, obj):
+        # set current user to owner
+        obj.owner = self.request.user
+
+
+    def get_queryset(self):
+        # select only terms from vocabulary
+        vocabulary = self.kwargs['pk'] # TODO: slugfield?
+        return Term.objects.filter(vocabulary=vocabulary)
+
 
 class TermDetail(generics.RetrieveUpdateDestroyAPIView):
     model = Term
