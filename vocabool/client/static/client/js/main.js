@@ -1,54 +1,43 @@
+// 'use strict';
 // Initialize namespace
-var App = App || {};
-App.Models = App.Models || {};
-App.Views = App.Views || {};
-App.Collections = App.Collections || {};
+window.VB = window.VB || {};
+VB.Models = VB.Models || {};
+VB.Views = VB.Views || {};
+VB.Collections = VB.Collections || {};
 
-
-App.Models.Vocabulary = Backbone.Model.extend({
-
-});
-
-App.Views.Vocabulary = Backbone.View.extend({
-
-    template: Handlebars.compile($('#tpl-index').html()),
-
-    initialize: function () {
-        this.listenTo(model, 'change', this.render);
-    },
-
-    render: function () {
-        this.$el.html(this.template(this.model.attributes));
-        return this;
-    }
-
-});
-
-// http://mikefowler.me/2013/11/18/page-transitions-in-backbone/
-App.Views.App = Backbone.View.extend({
-
-    show: function (view) {
-        var previous = this.currentPage || null;
-        var next = view;
-
-        if (previous) {
-            previous.remove();
-        }
-
-        next.render();
-        this.$el.html(next.el);
-        this.currentPage = next;
-    }
-
-});
+// TODO: p_tagify linebreaks in definitions
 
 
 $(function () {
-    model = new App.Models.Vocabulary({ test: 'hello'})
-    testview = new App.Views.Vocabulary({ model: model });
-    appView = new App.Views.App({ el: $('#view') });
-    appView.render();
-    appView.show(testview);
+    // window.vocabularies = new VB.Collections.VocabularyCollection();
+    // window.listView = new VB.Views.VocabularyList({ collection: vocabularies });
+    // window.appView = new VB.Views.App({ el: '#view' });
+
+    // VB.app = {};
+    // VB.app.view = new VB.Views.App();
+
+    // VB.app.router = new VB.Router();
+    // // Backbone.history.start();
+    //
+    //
+    // TESTING CODE
+    vs = new VB.Collections.Vocabularies()
+    vs.fetch({success: function () {
+        v = vs.at(0)
+        vv = new VB.Views.Vocabulary({model: v})
+        vv.render()
+
+        // coll
+        vl = new VB.Views.VocabularyList({collection: vs});
+
+        app = new VB.Views.App({el: '#view'});
+        app.show(vl);
+    }})
+
+    Backbone.history.start({pushState: true, root: '/app/'})
+
 });
+
+
 
 
