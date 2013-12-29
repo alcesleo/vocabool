@@ -6,10 +6,15 @@ from vocabool.libs.helpers import strip_on_last
 import mwparserfromhell
 import re
 
+# TODO: if not found
 
 class WiktionaryAdapter():
+
     def __init__(self):
         self.api = WiktionaryAPI()
+
+
+    # WARNING: A LOT of private parsing methods coming up!
 
 
     def _get_content_string(self, data):

@@ -1,84 +1,37 @@
-"""Returns models from database, or falls back to external API calls."""
-
-from vocabool.webservices.adapters import GoogleDictionaryAPIAdapter, YandexTranslateAPIAdapter
-from vocabool.domain.models import Definition, Translation
-
-# TODO: if webservice unavailable
+"""Attatches appropriate translations and definitions to term-objects."""
+from .repositories import TranslationRepository, DefinitionRepository
 
 class Service():
-    """
-    Gets translations and definitions.
-    Primarily from database, falls back to external API:s
-    """
-    def __init__(self, **kwargs):
-        # TODO: inject standard apis
-        # kwargs['definitions'].setdefault(WikipediaAPI)
-        # kwargs['translations'].setdefault(YandexTranslateAPI)
 
-        self.definitions_api = GoogleDictionaryAPIAdapter()
-        self.translation_api = YandexTranslateAPIAdapter()
+    def __init__(self):
+        self._translation_repo = None
+        self._definition_repo = None
 
-    def _database_define(self, text, language):
-        """Get definition from database."""
-        definitions = Definition.objects.filter(text=text, language=language)
-        if definitions:
-            return definitions[0]
-        return None
+    # lazy initializations
 
-    def _api_define(self, text, language):
-        # define in same language
-        definition = self.definitions_api.define(text, language, language)
+    @property
+    def translation_repo(self):
+        if self._translation_repo is None:
+            self._translation_repo = TranslationRepository()
+        return self._translation_repo
 
-        if not definition:
-            return None
-
-        definition.save()
-        return definition
+    @property
+    def definition_repo(self):
+        if self._definition_repo is None:
+            self._definition_repo = DefinitionRepository()
+        return self._definition_repo
 
 
-    def get_definition(self, text, language):
-        # get from cache
-        definition = self._database_define(text, language)
-        if not definition:
-            definition = self._api_define(text, language)
-
-        return definition
-
-    #####################
-
-    def _database_translate(self, text, from_language, to_language):
-        """Get translation from DB, returns None if none exist."""
-        # get the first object matching, will not throw
-        translations = Translation.objects.filter(text=text,
-                                                  from_language=from_language,
-                                                  to_language=to_language)
-        if translations:
-            return translations[0]
-        return None
-
-    def _api_translate(self, text, from_language, to_language):
-        """Get translation from external API."""
-        translation = self.translation_api.translate(text, from_language, to_language)
-
-        # TODO: errors
-        if not translation:
-            return None
-
-        translation.save()
-        return translation
-
-    def get_translation(self, text, from_language, to_language):
-        """Get translation from database, or fallback to external API."""
-        translation = self._database_translate(text, from_language, to_language)
-        if not translation:
-            print('api call made')
-            translation = self._api_translate(text, from_language, to_language)
-
-        return translation
+    def translate(self, term_obj, to_language):
+        """Adds a translation to the passed term object."""
+        translation = self.translation_repo.get_translation(term_obj.text, term_obj.language, to_language)
+        term_obj.translations.add(translation)
 
 
-### IN API FILE
+    def define(self, term_obj):
+        """Adds a definition to the passed term object."""
 
-def definition(text, language):
-    definition = service.get_definition(text, language)
-    term.definitions.add(definition)
+        # TODO: 404?
+        definition = self.definition_repo.get_definition(term_obj.text, term_obj.language)
+        term_obj.definitions.add(definition)
+        # term_obj.save()
