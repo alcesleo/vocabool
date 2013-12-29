@@ -5,7 +5,6 @@ from django.utils.translation import gettext_noop
 # from django.conf.global_settings import LANGUAGES
 # https://github.com/django/django/blob/master/django/conf/global_settings.py
 LANGUAGES = (
-    ('-', gettext_noop('Not provided')),
     ('cs', gettext_noop('Czech')),
     ('da', gettext_noop('Danish')),
     ('de', gettext_noop('German')),
