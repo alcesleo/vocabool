@@ -5,8 +5,6 @@ VB.Models = VB.Models || {};
 VB.Views = VB.Views || {};
 VB.Collections = VB.Collections || {};
 
-// TODO: p_tagify linebreaks in definitions
-
 
 $(function () {
     // window.vocabularies = new VB.Collections.VocabularyCollection();
@@ -31,9 +29,17 @@ $(function () {
         vl = new VB.Views.VocabularyList({collection: vs});
 
         app = new VB.Views.App({el: '#view'});
-        app.show(vl);
-    }})
+        // app.show(vl);
 
+        ts = v.terms;
+        ts.fetch({success: function () {
+            tl = new VB.Views.TermList({collection: ts});
+            app.show(tl)
+        }});
+    }});
+
+    // Router
+    new VB.Router();
     Backbone.history.start({pushState: true, root: '/app/'})
 
 });

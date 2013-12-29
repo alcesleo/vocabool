@@ -15,5 +15,4 @@ VB.Models.Vocabulary = Backbone.Model.extend({
     fetchTerms: function () {
         return this.terms.fetch();
     }
-    // TODO: override url with slug?
 });

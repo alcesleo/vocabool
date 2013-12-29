@@ -1,0 +1,20 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#term-list" href="#termDetail{{id}}">
+                {{text}}
+            </a>
+        </h4>
+    </div>
+    <div id="termDetail{{id}}" class="panel-collapse collapse">
+        <div class="panel-body">
+            <p>Lang: {{language}}</p>
+            <p>Custom: {{custom_text}}</p>
+            <ul>Definitions
+            {{#each definitions}}
+                <li>{{language}}: {{definition}}</li>
+            {{/each}}
+            </ul>
+        </div>
+    </div>
+</div>
