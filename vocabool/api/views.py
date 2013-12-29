@@ -1,9 +1,10 @@
 from rest_framework import generics
 from django.contrib.auth.models import User
 from rest_framework import permissions
-from vocabool.domain.models import Vocabulary, Term
+from vocabool.domain.models import Vocabulary, Term, Definition
 from .serializers import VocabularySerializer, TermSerializer, UserSerializer
 from .permissions import IsOwnerOrReadOnly
+from vocabool.webservices.service import Service
 
 
 class VocabularyList(generics.ListCreateAPIView):
@@ -52,4 +53,28 @@ class TermDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = TermSerializer
 
 
-# TODO: Everyone has read only
+    def _handle_query(self, term, params):
+        """Calls service methods on object based on GET-parameters."""
+
+        # TODO: DOCUMENT QUERY PARAMS!!!!!
+        # TODO: instanciate when needed or static service?
+        service = Service()
+
+        if 'define' in params:
+            service.define(term)
+
+
+        if 'translate_to' in params:
+            service.translate(term, params['translate_to'])
+
+    # handle query params
+    def get_object(self):
+
+        # get the object normally
+        term = super().get_object()
+        # TODO handle not found
+
+        # attatch definitions and translations if requested
+        self._handle_query(term, self.request.QUERY_PARAMS)
+
+        return term

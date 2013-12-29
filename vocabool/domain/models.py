@@ -40,7 +40,7 @@ class Translation(models.Model):
 
 
 class Vocabulary(models.Model):
-    owner = models.ForeignKey(User)  # TODO: editable=False
+    owner = models.ForeignKey(User, related_name='vocabularies')  # TODO: editable=False
     timestamp = models.DateTimeField(auto_now_add=True)
     name = models.CharField(max_length=30)
 
@@ -64,8 +64,8 @@ class Term(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
 
     # TODO: limit_choices_to text = self.text
-    definitions = models.ManyToManyField(Definition, blank=True, related_name='+') # + removes the backward relation
-    translations = models.ManyToManyField(Translation, blank=True, related_name='+')
+    definitions = models.ManyToManyField(Definition, blank=True, related_name='terms')
+    translations = models.ManyToManyField(Translation, blank=True, related_name='terms')
 
     def __str__(self):
         return ellipsify(self.text)

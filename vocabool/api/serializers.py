@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from vocabool.domain.models import Vocabulary, Term
+from vocabool.domain.models import Vocabulary, Term, Definition, Translation
 from django.contrib.auth.models import User
 
 
@@ -11,17 +11,31 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('id', 'username', 'vocabularies')
 
 
+class DefinitionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Definition
+        fields = ('definition', 'language')
+
+
+class TranslationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Translation
+        fields = ('translation', 'to_language')
+
+
 class TermSerializer(serializers.ModelSerializer):
-    owner = serializers.Field(source='owner.username') # username intsead of id
+    definitions = DefinitionSerializer(many=True)
+    translations = TranslationSerializer(many=True)
+
     class Meta:
         model = Term
-        fields = ('id', 'text', 'custom_text', 'language', 'vocabulary', 'owner')
+        fields = ('id', 'text', 'custom_text', 'language',
+                  'vocabulary', 'definitions', 'translations')
 
 
 class VocabularySerializer(serializers.ModelSerializer):
-    # terms = TermSerializer(many=True) only in detail
-    owner = serializers.Field(source='owner.username') # username intsead of id
     count = serializers.Field(source='count')
+
     class Meta:
         model = Vocabulary
-        fields = ('id', 'name', 'count', 'owner') # TODO: Slug?
+        fields = ('id', 'name', 'count')
