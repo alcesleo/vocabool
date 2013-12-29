@@ -94,11 +94,7 @@ REST_FRAMEWORK = {
 }
 
 
-# Static files (CSS, JavaScript, Images)
-
-PROJECT_ROOT = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), ".."),
-)
+### Static files (CSS, JavaScript, Images)
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
