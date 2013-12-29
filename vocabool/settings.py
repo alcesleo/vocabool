@@ -28,7 +28,7 @@ TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 ALLOWED_HOSTS = []
 
 
-# Application definition
+### Application definition
 
 INSTALLED_APPS = (
     'django.contrib.admin',
@@ -61,7 +61,7 @@ ROOT_URLCONF = 'vocabool.urls'
 WSGI_APPLICATION = 'vocabool.wsgi.application'
 
 
-# Database
+### Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
 DATABASES = {
@@ -71,17 +71,13 @@ DATABASES = {
     }
 }
 
-# Internationalization
+### Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 ### Rest configuration
@@ -90,7 +86,10 @@ REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer', # TODO: Disable this when Debug = False
-    )
+    ),
+    'PAGINATE_BY': 10,                 # Default to 10
+    'PAGINATE_BY_PARAM': 'page_size',  # Allow client to override, using `?page_size=xxx`.
+    'MAX_PAGINATE_BY': 100,            # Maximum limit allowed when using `?page_size=xxx
 }
 
 
