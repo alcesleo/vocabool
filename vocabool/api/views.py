@@ -49,6 +49,20 @@ class TermList(generics.ListCreateAPIView):
 
 
 class TermDetail(generics.RetrieveUpdateDestroyAPIView):
+    """
+    On top of handling the normal operations on specific Term object,
+    this class handles some query params.
+
+    GET-parameters:
+        ?define           -- add a definition object before returning
+        ?translate_to=en  -- add a translation (here to english) object before returning
+
+    These can be used together:
+
+        /api/term/3/?translate_to=ru&define
+
+    """
+
     model = Term
     serializer_class = TermSerializer
 
