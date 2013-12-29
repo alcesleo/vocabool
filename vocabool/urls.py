@@ -6,10 +6,9 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^admin/', include(admin.site.urls)),
-    url(r'^api/', include('vocabool.api.urls')),
-
-    # route to the backbone app
     url(r'^$', lambda r: HttpResponseRedirect('app/')),
+
     url(r'^app/', TemplateView.as_view(template_name='client/index.html')),
+    url(r'^api/', include('vocabool.api.urls')),
+    url(r'^admin/', include(admin.site.urls)),
 )
