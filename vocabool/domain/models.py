@@ -60,7 +60,7 @@ class Term(models.Model):
     vocabulary = models.ForeignKey(Vocabulary, related_name='terms')
     language = LanguageField()
     text = models.CharField(max_length=100)
-    custom_text = models.CharField(max_length=100)
+    custom_text = models.CharField(max_length=100, blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
 
     # TODO: limit_choices_to text = self.text
