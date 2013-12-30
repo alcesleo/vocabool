@@ -37,8 +37,6 @@ class TermList(generics.ListCreateAPIView):
     model = Term
     serializer_class = TermSerializer
 
-    # FIXME: Needs to have objects passed to the m2m-fields (can be empty)
-    # or throws an object not iterable-error. Old bug in DRF?? https://github.com/tomchristie/django-rest-framework/issues/314
 
     def pre_save(self, obj):
         obj.owner = self.request.user

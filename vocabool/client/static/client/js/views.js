@@ -28,6 +28,8 @@ VB.Views.Vocabulary = Backbone.View.extend({
     className: 'vocabulary',
     template: Handlebars.compile($('#tpl-vocabulary').html()),
 
+    // TODO: don't hardcode the links
+
     render: function () {
         this.$el.html(this.template(this.model.toJSON()));
         return this;
