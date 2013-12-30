@@ -14,5 +14,9 @@ VB.Models.Vocabulary = Backbone.Model.extend({
     },
     fetchTerms: function () {
         return this.terms.fetch();
+    },
+    // FIXME: right way??
+    url: function () {
+        return '/api/vocabulary/' + this.get('id');
     }
 });
