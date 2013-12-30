@@ -24,8 +24,8 @@ class TranslationSerializer(serializers.ModelSerializer):
 
 
 class TermSerializer(serializers.ModelSerializer):
-    definitions = DefinitionSerializer(many=True)
-    translations = TranslationSerializer(many=True)
+    definitions = DefinitionSerializer(many=True, read_only=True)
+    translations = TranslationSerializer(many=True, read_only=True)
 
     class Meta:
         model = Term
