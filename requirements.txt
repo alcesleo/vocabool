@@ -2,7 +2,7 @@ Django==1.6.1
 South==0.8.4
 django-appconf==0.6
 django-bower==4.8.1
-django-compressor==1.3
+django-compressor==dev
 django-jstemplate==1.3.6
 djangorestframework==2.3.10
 ipython==1.1.0
