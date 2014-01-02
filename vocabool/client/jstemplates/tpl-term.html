@@ -1,4 +1,5 @@
 <div class="panel panel-default">
+    {{!-- Text --}}
     <div class="panel-heading">
         <h4 class="panel-title">
             <a data-toggle="collapse" data-parent="#term-list" href="#termDetail{{id}}">
@@ -6,20 +7,33 @@
             </a>
         </h4>
     </div>
+
+    {{!-- Dropdown --}}
     <div id="termDetail{{id}}" class="panel-collapse collapse">
         <div class="panel-body">
-            <p>Lang: {{language}}</p>
-            <p>Custom: {{custom_text}}</p>
-            <ul>Definitions
-            {{#each definitions}}
-                <li>{{language}}: {{definition}}</li>
-            {{/each}}
-            </ul>
-            <ul>
-            {{#each translations}}
-                <li>{{to_language}}: {{translation}}</li>
-            {{/each}}
-            </ul>
+            {{!-- <p>Lang: {{language}}</p> --}}
+
+            {{!-- Custom --}}
+            {{#if custom_text}}
+                <h4>Custom</h4>
+                <p>{{custom_text}}</p>
+            {{/if}}
+
+            {{!-- Definitions --}}
+            {{#if definitions}}
+                <h4>Definitions</h4>
+                {{#each definitions}}
+                    {{bootstrapListLines definition}}
+                {{/each}}
+            {{/if}}
+
+            {{!-- Translations --}}
+            {{#if translations}}
+                <h4>Translations</h4>
+                {{#each translations}}
+                    {{bootstrapListLines translation}}
+                {{/each}}
+            {{/if}}
         </div>
     </div>
 </div>
