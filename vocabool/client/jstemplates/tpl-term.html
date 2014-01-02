@@ -20,17 +20,24 @@
 
         {{!-- Definitions --}}
         {{#if definitions}}
+
             <h4>Definitions</h4>
             {{#each definitions}}
-                {{bootstrapListLines definition}}
+                {{#eachLine definition}}
+                    <p>{{line}}</p>
+                {{/eachLine}}
             {{/each}}
+
         {{/if}}
 
         {{!-- Translations --}}
         {{#if translations}}
             <h4>Translations</h4>
             {{#each translations}}
-                {{bootstrapListLines translation}}
+                <p>
+                {{countryFlag to_language}}
+                {{replace translation '\n' ', '}}
+                </p>
             {{/each}}
         {{/if}}
 
