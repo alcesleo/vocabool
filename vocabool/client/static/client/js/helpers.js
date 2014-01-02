@@ -39,10 +39,20 @@ VB.helpers.surroundLines = function (text, start, end) {
     return start + lines.join(end + start) + end;
 }
 
-Handlebars.registerHelper('bootstrapListLines', function (text) {
-    return new Handlebars.SafeString('<ul class="list-group">' +
-            VB.helpers.surroundLines(text, '<li class="list-group-item">', '</li>') +
-            '</ul>');
+
+Handlebars.registerHelper('replace', function (text, replace_this, with_this) {
+    return new Handlebars.SafeString(text.split(replace_this).join(with_this));
+});
+
+Handlebars.registerHelper('eachLine', function(text, options) {
+    var lines = text.split('\n'),
+        ret = '';
+
+    for(var i=0, len=lines.length; i<len; i++) {
+        var line = { line: lines[i] };
+        ret = ret + options.fn(line);
+    }
+    return ret;
 });
 
 Handlebars.registerHelper('countryFlag', function (country_code) {
