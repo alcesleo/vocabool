@@ -58,9 +58,8 @@ Handlebars.registerHelper('eachLine', function(text, options) {
     var lines = text.split('\n'),
         ret = '';
 
-    for(var i=0, len=lines.length; i<len; i++) {
-        var line = { line: lines[i] };
-        ret = ret + options.fn(line);
+    for(var i in lines) {
+        ret = ret + options.fn({line: lines[i]});
     }
     return ret;
 });
