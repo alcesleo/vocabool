@@ -64,6 +64,18 @@ Handlebars.registerHelper('eachLine', function(text, options) {
     return ret;
 });
 
+Handlebars.registerHelper('selectFrom', function (hash, name, options) {
+    // TODO if hash len
+    // TODO selected option
+    var ret = '<select name="' + name + '">';
+    for (var key in hash) {
+        ret += '<option value="' + key + '">' + hash[key] + '</option>';
+    }
+    ret += '</select>';
+
+    return new Handlebars.SafeString(ret);
+});
+
 Handlebars.registerHelper('countryFlag', function (country_code) {
     return new Handlebars.SafeString('<div class="flag flag-' + country_code + '" />');
 });
