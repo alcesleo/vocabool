@@ -38,6 +38,9 @@ VB.Views.Vocabulary = Backbone.View.extend({
 
 VB.Views.VocabularyList = Backbone.View.extend({
 
+    initialize: function () {
+        // TODO: this.listenTo(this.collection, 'add', this.appendOne)
+    },
     // TODO: remove views on destroy
     tagName: 'ul',
     className: 'vocabularies',
@@ -58,13 +61,26 @@ VB.Views.VocabularyList = Backbone.View.extend({
 
 VB.Views.Term = Backbone.View.extend({
 
+    // TODO: put this in template
+    className: 'panel panel-default',
+
+    initialize: function () {
+        this.listenTo(this.model, 'change', this.render);
+    },
+
     template: Handlebars.compile($('#tpl-term').html()),
 
+    events: {
+        'click .default-term-action': 'termAction'
+    },
+
+    termAction: function () {
+        console.log('click!');
+        this.model.translateAndDefine('sv');
+    },
+
     render: function () {
-        // TODO: zombie events when re-rendering?
-        // FIXME: nicer... this sets the element directly without wrapping a div for bootstraps accordion
-        this.el = this.template(this.model.toJSON());
-        this.delegateEvents()
+        this.$el.html(this.template(this.model.toJSON()));
         return this;
     }
 });
