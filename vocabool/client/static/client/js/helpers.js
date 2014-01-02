@@ -44,3 +44,7 @@ Handlebars.registerHelper('bootstrapListLines', function (text) {
             VB.helpers.surroundLines(text, '<li class="list-group-item">', '</li>') +
             '</ul>');
 });
+
+Handlebars.registerHelper('countryFlag', function (country_code) {
+    return new Handlebars.SafeString('<div class="flag flag-' + country_code + '" />');
+});
