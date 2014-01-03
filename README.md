@@ -1,13 +1,35 @@
+## API
+
+Endpoints:
+Variables are listed as examples, it should be obvious which they are.
+
+|                 URL                 |                      Descriptions                     |
+| ----------------------------------- | ----------------------------------------------------- |
+| /api/vocabulary/                    | List logged in users vocabularies                     |
+| /api/vocabulary/terms               | List terms in that vocabulary                         |
+| /api/term/3                         | View a specific term                                  |
+| /api/term/3/?define                 | Adds a definition to the object before it is returned |
+| /api/term/3/?translate_to=de        | Adds a translation to german before returning         |
+| /api/term/3/?define&translate_to=ru | The query params can be used together                 |
+|                                     |                                                       |
+
+
+## Standards
+
+I do my best to follow PEP8 and JSHint standards. I like Python's one **module**
+per file, so I've carried that over to the JS as well.
 
 ## Deployment steps
 
+### Initial deployment
+
 Initial deploy to PythonAnywhere for future reference.
 
-First, create a Python3.3 web app, then enter a console.
+First, create a Python2.7 web app, then enter a console.
 
     # create and activate the virtualenv
     source virtuanenvwrapper.sh
-    mkvirtualenv vocabool --no-site-packages --python=/usr/bin/python3.3
+    mkvirtualenv vocabool --python=/usr/bin/python2.7
     workon vocabool
 
     # download the project
@@ -31,11 +53,40 @@ Add static files to Web configuration, like so:
 
 Paste `wsgi.py` to the global wsgi (from web tab), then reload the web app.
 
-### TODO
+### Updating
 
-- mysql-python
-- wsgi.py production settings
-- requirements.production txt
+Get access to a terminal.
+
+    cd to/wherever/it/is
+    git pull
+
+    # PLEASE don't forget to do this
+    source virtualenvwrapper.sh
+    workon vocabool
+
+    pip install -r requirements.txt
+
+
+## Supported languages
+
+    ('cs', gettext_noop('Czech')),
+    ('da', gettext_noop('Danish')),
+    ('de', gettext_noop('German')),
+    ('el', gettext_noop('Greek')),
+    ('en', gettext_noop('English')),
+    ('es', gettext_noop('Spanish')),
+    ('fi', gettext_noop('Finnish')),
+    ('fr', gettext_noop('French')),
+    ('hr', gettext_noop('Croatian')),
+    ('hu', gettext_noop('Hungarian')),
+    ('it', gettext_noop('Italian')),
+    ('ru', gettext_noop('Russian')),
+    ('sv', gettext_noop('Swedish')),
+
+## Technologies
+
+- flags from http://flag-sprites.com/
+- caching django compressor, only on debug
 
 
 ## API:s
