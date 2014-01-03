@@ -2,7 +2,16 @@
 window.VB = window.VB || {};
 VB.Collections = VB.Collections || {};
 
-VB.Collections.Terms = Backbone.Collection.extend({
+/**
+ * Baseclass that handles paginated result-sets from Django Rest Framework
+ */
+VB.Collections.DRFCollection = Backbone.PageableCollection.extend({
+    parseRecords: function (resp) {
+        return resp.results;
+    }
+});
+
+VB.Collections.Terms = VB.Collections.DRFCollection.extend({
     model: VB.Models.Term,
     initialize: function (models, options) {
         this.vocabulary = options.vocabulary;
@@ -14,7 +23,7 @@ VB.Collections.Terms = Backbone.Collection.extend({
 });
 
 
-VB.Collections.Vocabularies = Backbone.Collection.extend({
+VB.Collections.Vocabularies = VB.Collections.DRFCollection.extend({
     model: VB.Models.Vocabulary,
     url: '/api/vocabulary',
 });
