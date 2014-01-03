@@ -6,7 +6,19 @@ from vocabool.settings.credentials import YANDEX_TRANSLATE_API_KEY, USER_AGENT
 # TODO: Shitload of error handling
 # TODO: URL:ify chars, ' ' to %20
 
-class YandexTranslateAPI():
+class APIBase():
+
+    def _get_json_data(self, url):
+        """Get json from external url and return object."""
+        # make request
+        response = requests.get(url, headers=USER_AGENT)
+        response.raise_for_status() # throw on non-ok response codes
+
+        # parse result
+        return json.loads(response.text)
+
+
+class YandexTranslateAPI(APIBase):
 
     def translate(self, text, from_language, to_language):
 
@@ -21,12 +33,10 @@ class YandexTranslateAPI():
         # TODO: if response == input, no translation available?
 
         # fetch and parse data
-        response = requests.get(url)
-        data = response.content.decode('utf-8')
-        return json.loads(data)
+        return self._get_json_data(url)
 
 
-class WiktionaryAPI():
+class WiktionaryAPI(APIBase):
     """
     One of the absolutely best sources of data, has almost everything
     one could want from a dictionary. However, the formatting of the data
@@ -39,7 +49,4 @@ class WiktionaryAPI():
         url = 'http://{lang}.wiktionary.org/w/api.php?format=json&action=query&titles={word}&prop=revisions&rvprop=content'
         url = url.format(lang=language, word=text)
 
-        # TODO: do this on all of them
-        response = requests.get(url, headers={'User-Agent': 'Vocabool (https://github.com/alcesleo/vocabool; lagginglion@gmail.com)'})
-        data = response.content.decode('utf-8')
-        return json.loads(data)
+        return self._get_json_data(url)
