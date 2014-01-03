@@ -35,7 +35,7 @@ VB.Router = Backbone.Router.extend({
     },
 
     showVocabulary: function (id) {
-        // TODO: check isInt
+        id = parseInt(id, 10);
         // TODO: use vocabulary model from already downloaded collection?
 
         var self = this,

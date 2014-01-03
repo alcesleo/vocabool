@@ -21,7 +21,7 @@ SECRET_KEY = '1&*)1_0&zavd7)#b6v3gfyp(9ike6%(!!jvv-o*-gsw@o*bwlj'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-COMPRESS_ENABLED = True
+# COMPRESS_ENABLED = True
 
 TEMPLATE_DEBUG = True
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
@@ -81,9 +81,9 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer', # TODO: Disable this when Debug = False
     ),
-    # 'PAGINATE_BY': 10,                 # Default to 10
-    # 'PAGINATE_BY_PARAM': 'page_size',  # Allow client to override, using `?page_size=xxx`.
-    # 'MAX_PAGINATE_BY': 100,            # Maximum limit allowed when using `?page_size=xxx
+    'PAGINATE_BY': 10,                 # Default to 10
+    'PAGINATE_BY_PARAM': 'page_size',  # Allow client to override, using `?page_size=xxx`.
+    'MAX_PAGINATE_BY': 100,            # Maximum limit allowed when using `?page_size=xxx
 }
 
 

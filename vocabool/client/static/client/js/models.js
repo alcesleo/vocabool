@@ -9,7 +9,6 @@ VB.Models.Term = Backbone.Model.extend({
     },
 
     translateAndDefine: function (language) {
-        console.log('tradef!');
 
         var params = {define: '', translate_to: language},
             self = this;
@@ -27,9 +26,6 @@ VB.Models.Vocabulary = Backbone.Model.extend({
     initialize: function () {
         // create empty term collection with reference to this vocabulary
         this.terms = new VB.Collections.Terms([], { vocabulary: this });
-    },
-    fetchTerms: function () {
-        return this.terms.fetch();
     },
     url: function () {
         return '/api/vocabulary/' + this.get('id');
