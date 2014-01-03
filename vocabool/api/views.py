@@ -87,7 +87,7 @@ class TermDetail(generics.RetrieveUpdateDestroyAPIView):
     def get_object(self):
 
         # get the object normally
-        term = super().get_object()
+        term = super(TermDetail, self).get_object()
         # TODO handle not found
 
         # attatch definitions and translations if requested

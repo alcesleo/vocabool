@@ -22,7 +22,7 @@ class Definition(models.Model):
     definition = models.CharField(max_length=300)
     timestamp = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return '{0}: {1}'.format(ellipsify(self.text),
                                  ellipsify(self.definition))
 
@@ -34,7 +34,7 @@ class Translation(models.Model):
     translation = models.CharField(max_length=100)
     timestamp = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return '{0}: {1}'.format(ellipsify(self.text),
                                  ellipsify(self.translation))
 
@@ -47,7 +47,7 @@ class Vocabulary(models.Model):
     class Meta:
         verbose_name_plural = 'vocabularies'
 
-    def __str__(self):
+    def __unicode__(self):
         return self.name
 
     def count(self):
@@ -70,5 +70,5 @@ class Term(models.Model):
     class Meta:
         unique_together = ('text', 'vocabulary')
 
-    def __str__(self):
+    def __unicode__(self):
         return ellipsify(self.text)
