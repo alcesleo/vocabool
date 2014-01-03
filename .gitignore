@@ -1,8 +1,8 @@
 *.log
 *.pot
 *.pyc
-local_settings.py
 db.sqlite3
-components/
+/components/
+/static/
 vocabool/settings/credentials.py
 
