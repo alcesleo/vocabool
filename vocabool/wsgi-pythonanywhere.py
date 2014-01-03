@@ -1,13 +1,11 @@
 """
-WSGI config for PythonAnywhere using Python3.3 in a virtualenv.
+WSGI config for PythonAnywhere using Python2.7 in a virtualenv.
 https://www.pythonanywhere.com/wiki/VirtualEnvForNewerDjango
 """
 
 # activate virtualenv
-activate_this = '/home/alcesleo/.virtualenvs/vocabool/bin/activate_this.py'
-with open(activate_this) as f:
-    code = compile(f.read(), activate_this, 'exec')
-    exec(code, dict(__file__=activate_this))
+activate_this = '/home/alcesleo/.virtualenvs/vocabool2/bin/activate_this.py'
+execfile(activate_this, dict(__file__=activate_this))
 
 import os
 import sys
