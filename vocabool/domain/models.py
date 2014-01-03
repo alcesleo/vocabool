@@ -67,5 +67,8 @@ class Term(models.Model):
     definitions = models.ManyToManyField(Definition, blank=True, related_name='terms')
     translations = models.ManyToManyField(Translation, blank=True, related_name='terms')
 
+    class Meta:
+        unique_together = ('text', 'vocabulary')
+
     def __str__(self):
         return ellipsify(self.text)
