@@ -2,7 +2,7 @@
 window.VB = window.VB || {};
 
 // FIXME: Code duplication from fields.py
-VB.language_codes = {
+VB.languages = {
     'cs': 'Czech',
     'da': 'Danish',
     'de': 'German',

@@ -2,20 +2,35 @@
 window.VB = window.VB || {};
 VB.Models = VB.Models || {};
 
-VB.Models.Term = Backbone.Model.extend({});
+VB.Models.Term = Backbone.Model.extend({
+
+    url: function () {
+        return '/api/term/' + this.get('id');
+    },
+
+    translateAndDefine: function (language) {
+        console.log('tradef!');
+
+        var params = {define: '', translate_to: language},
+            self = this;
+
+        this.fetch({ data: $.param(params) }).done(function () {
+            // TODO: Complete events, remove deepmodel
+            self.trigger('change');
+        });
+        return this;
+
+    }
+});
 
 VB.Models.Vocabulary = Backbone.Model.extend({
     initialize: function () {
         // create empty term collection with reference to this vocabulary
         this.terms = new VB.Collections.Terms([], { vocabulary: this });
     },
-    addTerm: function (props) {
-        // TODO
-    },
     fetchTerms: function () {
         return this.terms.fetch();
     },
-    // FIXME: right way??
     url: function () {
         return '/api/vocabulary/' + this.get('id');
     }

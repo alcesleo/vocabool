@@ -13,6 +13,8 @@ def strip_on_last(char, text, max_length):
     if len(text) < max_length:
         return text
 
+    # FIXME: edge cases
+
     text = text[:max_length - 1] # if last character is char
     text = text[:text.rfind(char) + 1]
     return text

@@ -3,6 +3,7 @@ window.VB = window.VB || {};
 VB.Views = VB.Views || {};
 
 // Misc
+// VB.Views.DRFPageableCollection
 
 // http://mikefowler.me/2013/11/18/page-transitions-in-backbone/
 VB.Views.App = Backbone.View.extend({
@@ -75,8 +76,7 @@ VB.Views.Term = Backbone.View.extend({
     },
 
     termAction: function () {
-        console.log('click!');
-        this.model.translateAndDefine('sv');
+        this.model.translateAndDefine('sv'); // TODO: Dynamic
     },
 
     render: function () {
@@ -91,7 +91,11 @@ VB.Views.TermList = Backbone.View.extend({
     className: 'panel-group',
     id: 'term-list',
 
+
     render: function () {
+
+        console.log('TermList:render');
+
         var self = this;
 
         this.$el.empty(); // FIXME: Reset safely
@@ -99,6 +103,30 @@ VB.Views.TermList = Backbone.View.extend({
             var view = new VB.Views.Term({model: term});
             self.$el.append(view.render().el);
         });
+        return this;
+    }
+});
+
+VB.Views.CreateTerm = Backbone.View.extend({
+
+})
+
+// Users
+
+VB.Views.Login = Backbone.View.extend({
+    template: Handlebars.compile($('#tpl-login').html()),
+
+    events: {
+        'click .login': 'login'
+    },
+
+    login: function () {
+
+    },
+
+    render: function () {
+        // TODO: zombie events
+        this.$el.html(this.template());
         return this;
     }
 });

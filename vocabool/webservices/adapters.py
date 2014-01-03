@@ -7,6 +7,7 @@ import mwparserfromhell
 import re
 
 # TODO: if not found
+# Wiktionary returns ""
 
 class WiktionaryAdapter():
 

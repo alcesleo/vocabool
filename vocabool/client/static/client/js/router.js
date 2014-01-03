@@ -8,9 +8,10 @@ VB.Router = Backbone.Router.extend({
     },
 
     routes: {
-        '': 'index',
-        'vocabulary(/)': 'listVocabularies',
-        'vocabulary/:id(/)': 'showVocabulary'
+        '': 'listVocabularies',
+        'vocabularies(/)': 'listVocabularies',
+        'vocabulary/:id(/)': 'showVocabulary',
+        'login(/)': 'login'
     },
 
     index: function () {
@@ -46,5 +47,11 @@ VB.Router = Backbone.Router.extend({
             var view = new VB.Views.TermList({collection: vocabulary.terms});
             self.app.show(view);
         });
+    },
+
+    login: function () {
+        // TODO: check if logged in and show different pages?
+        var view = new VB.Views.Login();
+        this.app.show(view);
     }
 });

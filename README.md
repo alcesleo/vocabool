@@ -104,3 +104,5 @@ Get access to a terminal.
     probably have gone for this one
 - Yandex seems to have a decent dictionary API as well.
 - http://www.dictionaryapi.com/products/index.htm
+
+# License

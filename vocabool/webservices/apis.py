@@ -1,10 +1,9 @@
 """Handles the connection to external API:s."""
 
 import json, requests
-from .keys import YANDEX_TRANSLATE_API_KEY # TODO settings.secrets?
+from vocabool.settings.credentials import YANDEX_TRANSLATE_API_KEY, USER_AGENT
 
 # TODO: Shitload of error handling
-# TODO: headers = {'User-Agent': 'Vocabool (https://github.com/alcesleo/vocabool; lagginglion@gmail.com)'}
 # TODO: URL:ify chars, ' ' to %20
 
 class YandexTranslateAPI():

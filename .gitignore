@@ -4,5 +4,5 @@
 local_settings.py
 db.sqlite3
 components/
-
+vocabool/settings/credentials.py
 

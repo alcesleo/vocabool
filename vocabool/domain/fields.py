@@ -11,7 +11,6 @@ LANGUAGES = (
     ('el', gettext_noop('Greek')),
     ('en', gettext_noop('English')),
     ('es', gettext_noop('Spanish')),
-    ('fa', gettext_noop('Persian')),
     ('fi', gettext_noop('Finnish')),
     ('fr', gettext_noop('French')),
     ('hr', gettext_noop('Croatian')),
