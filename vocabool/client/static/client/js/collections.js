@@ -33,7 +33,7 @@ VB.Collections.Terms = VB.Collections.DRFCollection.extend({
         this.vocabulary = options.vocabulary;
     },
     url: function () {
-        return this.vocabulary.url() + '/terms';
+        return this.vocabulary.url() + '/terms/';
     }
 });
 
