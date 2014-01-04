@@ -4,9 +4,11 @@ VB.Models = VB.Models || {};
 
 VB.Models.Term = Backbone.Model.extend({
 
-    url: function () {
-        return '/api/term/' + this.get('id');
-    },
+    // url: function () {
+    //     return '/api/term/' + this.get('id');
+    // },
+
+    // urlRoot: '/api/term/', // should work only when not in a collection
 
     validate: function (attributes, options) {
         if (attributes.text.trim().length === 0) {
@@ -33,9 +35,7 @@ VB.Models.Vocabulary = Backbone.Model.extend({
         // create empty term collection with reference to this vocabulary
         this.terms = new VB.Collections.Terms([], { vocabulary: this });
     },
-    url: function () {
-        return '/api/vocabulary/' + this.get('id');
-    }
+    urlRoot: '/api/vocabulary/'
 });
 
 
