@@ -1,5 +1,11 @@
 // Super
 
+/**
+ * // All that's needed!
+ * var MyListView = VB.Views.ListView.extend({
+ *     itemView: MyBackboneView
+ * })
+ */
 VB.Views.ListView = Backbone.View.extend({
 
     itemView: null,
