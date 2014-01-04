@@ -30,7 +30,7 @@ class TermSerializer(serializers.ModelSerializer):
     class Meta:
         model = Term
         fields = ('id', 'text', 'custom_text', 'language',
-                  'vocabulary', 'definitions', 'translations')
+                  'definitions', 'translations')
 
 
 class VocabularySerializer(serializers.ModelSerializer):
