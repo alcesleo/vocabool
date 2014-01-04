@@ -22,7 +22,7 @@ $(function () {
     // Router
 
     VB.app.router = new VB.Router();
-    Backbone.history.start({pushState: true, root: '/app/'})
+    Backbone.history.start({pushState: false, root: '/app/'})
 
 });
 
