@@ -104,6 +104,7 @@ STATICFILES_FINDERS = (
 BOWER_INSTALLED_APPS = (
     'underscore',
     'jquery',
+    'jquery.cookie',
     'backbone',
     'backbone-pageable',
     'Backbone.dualStorage',
