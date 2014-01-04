@@ -10,7 +10,7 @@ Handlebars.registerHelper('replace', function (text, replace_this, with_this) {
  * Iterate over every line in a string
  */
 Handlebars.registerHelper('eachLine', function(text, options) {
-    var lines = text.split('\n'),
+    var lines = text.trim().split('\n'),
         ret = '';
 
     for(var i in lines) {
