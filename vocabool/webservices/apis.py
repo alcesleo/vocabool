@@ -1,7 +1,7 @@
 """Handles the connection to external API:s."""
 
 import json, requests
-from vocabool.settings.credentials import YANDEX_TRANSLATE_API_KEY, USER_AGENT
+from vocabool.settings import YANDEX_TRANSLATE_API_KEY, USER_AGENT
 
 # TODO: Shitload of error handling
 # TODO: URL:ify chars, ' ' to %20
