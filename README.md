@@ -39,6 +39,8 @@ First, create a Python2.7 web app, then enter a console.
     # install python dependencies
     pip install -r requirements.txt
 
+Enter `vocabool/settings/environment.py` and insert the appropriate credentials.
+
     # create/update the database
     python manage.py syncdb
 
@@ -49,11 +51,13 @@ Add static files to Web configuration, like so:
     # install css/js dependencies
     npm install bower
     python manage.py bower_install
-    python manage.py collectstatic # optional, for production
+    python manage.py collectstatic
 
-Paste `wsgi.py` to the global wsgi (from web tab), then reload the web app.
+Paste `wsgi-pythonanywhere.py` to the global wsgi (from web tab), then reload the web app.
 
 ### Updating
+
+TODO: fabric
 
 Get access to a terminal.
 
@@ -64,7 +68,16 @@ Get access to a terminal.
     source virtualenvwrapper.sh
     workon vocabool
 
+    # install python deps
     pip install -r requirements.txt
+
+    # install static deps
+    python manage.py bower_install
+    python manage.py collectstatic
+
+Reload the webapp, or
+
+    touch /var/www/web_app_name_wsgi.py'
 
 
 ## Supported languages
