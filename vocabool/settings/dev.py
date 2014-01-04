@@ -2,6 +2,7 @@ from .general import *
 import os
 
 ALLOWED_HOSTS = ['localhost', 'alcesleo.pythonanywhere.com']
+DEBUG = True
 
 DATABASES = {
     'default': {
