@@ -8,6 +8,12 @@ VB.Models.Term = Backbone.Model.extend({
         return '/api/term/' + this.get('id');
     },
 
+    validate: function (attributes, options) {
+        if (attributes.text.trim().length === 0) {
+            return 'Text can not be empty!';
+        }
+    },
+
     translateAndDefine: function (language) {
 
         var params = {define: '', translate_to: language},
