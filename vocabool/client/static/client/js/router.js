@@ -4,7 +4,7 @@ window.VB = window.VB || {};
 VB.Router = Backbone.Router.extend({
 
     initialize: function () {
-        this.app = new VB.Views.App({el: '#view'});
+        this.appView = new VB.Views.RegionManager({el: '#view'});
     },
 
     routes: {
@@ -12,14 +12,6 @@ VB.Router = Backbone.Router.extend({
         'vocabularies(/)': 'listVocabularies',
         'vocabulary/:id(/)': 'showVocabulary',
         'login(/)': 'login'
-    },
-
-    index: function () {
-        // var c = new VB.Collections.Vocabularies();
-        // c.fetch({reset: true});
-        // var view = new VB.Views.VocabularyList({collection: c});
-        // VB.app.view.show(view);
-        console.log('index');
     },
 
     listVocabularies: function () {
@@ -30,7 +22,7 @@ VB.Router = Backbone.Router.extend({
         // TODO: Fail
         vocabularies.fetch().done(function () {
             var view = new VB.Views.VocabularyList({collection: vocabularies});
-            self.app.show(view);
+            self.appView.show(view);
         });
     },
 
@@ -45,13 +37,13 @@ VB.Router = Backbone.Router.extend({
 
         vocabulary.terms.fetch().done(function () {
             var view = new VB.Views.TermList({collection: vocabulary.terms});
-            self.app.show(view);
+            self.appView.show(view);
         });
     },
 
     login: function () {
         // TODO: check if logged in and show different pages?
         var view = new VB.Views.Login();
-        this.app.show(view);
+        this.appView.show(view);
     }
 });
