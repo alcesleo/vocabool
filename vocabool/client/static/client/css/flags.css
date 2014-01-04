@@ -11,10 +11,10 @@
 .flag.flag-es {background-position: 0 -11px}
 .flag.flag-fi {background-position: -16px -11px}
 .flag.flag-fr {background-position: -32px -11px}
-.flag.flag-gb {background-position: -48px -11px}
+.flag.flag-en {background-position: -48px -11px} /* default: gb */
 .flag.flag-gr {background-position: 0 -22px}
 .flag.flag-hr {background-position: -16px -22px}
 .flag.flag-hu {background-position: -32px -22px}
 .flag.flag-it {background-position: -48px -22px}
 .flag.flag-ru {background-position: 0 -33px}
-.flag.flag-sv {background-position: -16px -33px}
+.flag.flag-sv {background-position: -16px -33px} /* default: se */
