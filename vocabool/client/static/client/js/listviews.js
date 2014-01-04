@@ -61,7 +61,7 @@ VB.Views.TermList = VB.Views.ListView.extend({
 
     // TODO: listento add
     initialize: function () {
-        console.log('I work now!')
+        this.listenTo(this.collection, 'add', function (data) { console.log(data)});
     },
 
     className: 'panel-group',
@@ -74,11 +74,15 @@ VB.Views.TermList = VB.Views.ListView.extend({
     },
 
     addTerm: function () {
-        console.log(this.$('#add-term-text').val());
         // get attributes
+        var text = this.$('#add-term-text').val();
+
         // add to collection
-        // sync
-        // scroll to added term
+        this.collection.create({
+            text: text,
+            language: 'en' // TODO: lang
+        });
+        // TODO: scroll to added term, make sure it's open
     },
 
     // override to prepend template

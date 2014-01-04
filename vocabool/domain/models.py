@@ -14,7 +14,6 @@ from vocabool.libs.helpers import ellipsify
 # not been broken up into separate rows and should be handled later(like surrounding
 # each line with p-tags or similar)
 
-# TODO: Limit input text lengths
 
 class Definition(models.Model):
     language = LanguageField()

@@ -69,6 +69,7 @@ class WiktionaryAdapter():
 
     def define(self, text, language):
         """Get data from Wiktionary as a Definition object."""
+        # TODO: toLowercase?
         data = self.api.define(text, language)
         definition_text = self._parse_data(data)
         return Definition(text=text, language=language, definition=definition_text)

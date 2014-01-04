@@ -1,18 +1,3 @@
-## API
-
-Endpoints:
-Variables are listed as examples, it should be obvious which they are.
-
-|                 URL                 |                      Descriptions                     |
-| ----------------------------------- | ----------------------------------------------------- |
-| /api/vocabulary/                    | List logged in users vocabularies                     |
-| /api/vocabulary/terms               | List terms in that vocabulary                         |
-| /api/term/3                         | View a specific term                                  |
-| /api/term/3/?define                 | Adds a definition to the object before it is returned |
-| /api/term/3/?translate_to=de        | Adds a translation to german before returning         |
-| /api/term/3/?define&translate_to=ru | The query params can be used together                 |
-|                                     |                                                       |
-
 
 ## Standards
 

@@ -4,5 +4,4 @@
 db.sqlite3
 /components/
 /static/
-vocabool/settings/credentials.py
-
+vocabool/settings/environment.py
