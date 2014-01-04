@@ -2,7 +2,7 @@
 <div class="panel-heading">
     <h4 class="panel-title">
         <a data-toggle="collapse" data-parent="#term-list" href="#termDetail{{id}}">
-            {{text}}
+            {{countryFlag language}}{{text}}
         </a>
     </h4>
 </div>
@@ -23,9 +23,11 @@
 
             <h4>Definitions</h4>
             {{#each definitions}}
+                <ul class="definitions">{{countryFlag language}}
                 {{#eachLine definition}}
-                    <p>{{line}}</p>
+                    <li class="definition">{{line}}</li>
                 {{/eachLine}}
+                </ul>
             {{/each}}
 
         {{/if}}
@@ -33,12 +35,14 @@
         {{!-- Translations --}}
         {{#if translations}}
             <h4>Translations</h4>
+            <ul class="translations">
             {{#each translations}}
-                <p>
-                {{countryFlag to_language}}
-                {{replace translation '\n' ', '}}
-                </p>
+                    <li>
+                        {{countryFlag to_language}}
+                        {{replace translation '\n' ', '}}
+                    </li>
             {{/each}}
+            </ul>
         {{/if}}
 
         <button type="button" class="btn btn-primary btn-block default-term-action">Translate and define</button>
