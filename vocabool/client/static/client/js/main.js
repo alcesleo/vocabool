@@ -8,14 +8,14 @@ $(function () {
     // window.listView = new VB.Views.VocabularyList({ collection: vocabularies });
     // window.appView = new VB.Views.App({ el: '#view' });
 
-    function initSpinner(options) {
-        options = options || {};
-        $("#loading").spin(options).hide();
-        $('#loading').ajaxStart(function(){ $(this).fadeIn(); });
-        $('#loading').ajaxComplete(function(){ $(this).fadeOut(); });
-    }
+    // function initSpinner(options) {
+    //     options = options || {};
+    //     $("#loading").spin(options).hide();
+    //     $('#loading').ajaxStart(function(){ $(this).fadeIn(); });
+    //     $('#loading').ajaxComplete(function(){ $(this).fadeOut(); });
+    // }
 
-    initSpinner();
+    // initSpinner();
 
 
 

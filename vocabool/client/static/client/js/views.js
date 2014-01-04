@@ -2,27 +2,25 @@
 window.VB = window.VB || {};
 VB.Views = VB.Views || {};
 
-// Misc
-// VB.Views.DRFPageableCollection
 
 // http://mikefowler.me/2013/11/18/page-transitions-in-backbone/
-VB.Views.App = Backbone.View.extend({
+// new RegionManager({el: '#my-region'});
+VB.Views.RegionManager = Backbone.View.extend({
 
     show: function (view) {
 
-        if (this.currentPage) {
-            this.currentPage.remove();
+        if (this.currentView) {
+            this.currentView.remove();
         }
 
-        this.currentPage = view;
-        this.currentPage.render();
+        this.currentView = view;
+        this.currentView.render();
 
-        this.$el.html(this.currentPage.el);
+        this.$el.html(this.currentView.el);
     }
 
 });
 
-// Vocabularies
 
 VB.Views.Vocabulary = Backbone.View.extend({
     tagName: 'li',
@@ -37,32 +35,8 @@ VB.Views.Vocabulary = Backbone.View.extend({
     }
 });
 
-VB.Views.VocabularyList = Backbone.View.extend({
-
-    initialize: function () {
-        // TODO: this.listenTo(this.collection, 'add', this.appendOne)
-    },
-    // TODO: remove views on destroy
-    tagName: 'ul',
-    className: 'vocabularies',
-
-    render: function () {
-        var self = this;
-        // FIXME: reset safely
-        this.$el.empty();
-        this.collection.each(function (vocabulary) {
-            var view = new VB.Views.Vocabulary({model: vocabulary});
-            self.$el.append(view.render().el);
-        });
-        return this;
-    }
-});
-
-// Terms
 
 VB.Views.Term = Backbone.View.extend({
-
-    // TODO: put this in template
     className: 'panel panel-default',
 
     initialize: function () {
@@ -81,52 +55,6 @@ VB.Views.Term = Backbone.View.extend({
 
     render: function () {
         this.$el.html(this.template(this.model.toJSON()));
-        return this;
-    }
-});
-
-VB.Views.TermList = Backbone.View.extend({
-
-    // FIXME: Define these in template
-    className: 'panel-group',
-    id: 'term-list',
-
-
-    render: function () {
-
-        console.log('TermList:render');
-
-        var self = this;
-
-        this.$el.empty(); // FIXME: Reset safely
-        this.collection.each(function (term) {
-            var view = new VB.Views.Term({model: term});
-            self.$el.append(view.render().el);
-        });
-        return this;
-    }
-});
-
-VB.Views.CreateTerm = Backbone.View.extend({
-
-})
-
-// Users
-
-VB.Views.Login = Backbone.View.extend({
-    template: Handlebars.compile($('#tpl-login').html()),
-
-    events: {
-        'click .login': 'login'
-    },
-
-    login: function () {
-
-    },
-
-    render: function () {
-        // TODO: zombie events
-        this.$el.html(this.template());
         return this;
     }
 });

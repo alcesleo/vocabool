@@ -23,15 +23,16 @@ VB.vent = _.extend({}, Backbone.Events);
 
 VB.helpers = {};
 
-VB.disableDebug = function () {
-    // Set console functions to no-op
-    var noop = function () {};
-    console.error = noop;
-    console.log = noop;
-    console.warn = noop;
-    console.info = noop;
+VB.debug = {
+    disable: function () {
+        // Set console functions to no-op
+        var noop = function () {};
+        console.error = noop;
+        console.log = noop;
+        console.warn = noop;
+        console.info = noop;
+    }
 }
-
 
 /**
  * Places text at the start and end of every line in a string,

@@ -24,7 +24,6 @@ VB.Views.ListView = Backbone.View.extend({
     },
 
     removeSubviews: function () {
-        console.log(this)
         // remove all subviews
         this.subviews.forEach(function (view) {
             view.remove();

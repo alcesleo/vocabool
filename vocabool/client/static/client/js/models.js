@@ -31,3 +31,11 @@ VB.Models.Vocabulary = Backbone.Model.extend({
         return '/api/vocabulary/' + this.get('id');
     }
 });
+
+
+VB.Models.Status = Backbone.Model.extend({
+    defaults: {
+        user: null,
+        vocabulary: null,
+    }
+});

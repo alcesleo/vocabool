@@ -8,6 +8,8 @@ class DefinitionAdmin(admin.ModelAdmin):
     search_fields = ('text', 'definition')
     ordering = ('-timestamp',)
 
+    # TODO: textarea for definition
+
 
 class TranslationAdmin(admin.ModelAdmin):
     list_display = ('text', 'translation', 'from_language', 'to_language')
