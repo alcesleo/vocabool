@@ -2,6 +2,7 @@
 window.VB = window.VB || {};
 VB.Collections = VB.Collections || {};
 
+
 /**
  * Baseclass that handles paginated result-sets from Django Rest Framework
  */
@@ -20,11 +21,15 @@ VB.Collections.DRFCollection = Backbone.PageableCollection.extend({
     }
 });
 
-// new Terms({vocabulary: v});
+
+// new Terms([], {vocabulary: v});
 VB.Collections.Terms = VB.Collections.DRFCollection.extend({
     model: VB.Models.Term,
     initialize: function (models, options) {
-        // TODO: throw on no vocabulary
+        // Must get a vocabulary
+        if (!(options.vocabulary instanceof VB.Models.Vocabulary)) {
+            throw new Error('Terms must be associated with a Vocabulary.')
+        }
         this.vocabulary = options.vocabulary;
     },
     url: function () {
