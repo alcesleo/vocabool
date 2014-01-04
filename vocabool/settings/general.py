@@ -21,7 +21,6 @@ SECRET_KEY = '1&*)1_0&zavd7)#b6v3gfyp(9ike6%(!!jvv-o*-gsw@o*bwlj'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-ALLOWED_HOSTS = ['localhost', 'alcesleo.pythonanywhere.com']
 # COMPRESS_ENABLED = True
 
 TEMPLATE_DEBUG = True

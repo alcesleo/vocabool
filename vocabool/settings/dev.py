@@ -1,6 +1,8 @@
 from .general import *
 import os
 
+ALLOWED_HOSTS = ['localhost', 'alcesleo.pythonanywhere.com']
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
