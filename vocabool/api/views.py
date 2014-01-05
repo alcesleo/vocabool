@@ -72,8 +72,8 @@ class TermDetail(generics.RetrieveUpdateDestroyAPIView):
     def _handle_query(self, term, params):
         """Calls service methods on object based on GET-parameters."""
 
-        # TODO: DOCUMENT QUERY PARAMS!!!!!
         # TODO: instanciate when needed or static service?
+        # TODO: Raise NotFound
         service = Service()
 
         if 'define' in params:
@@ -88,7 +88,7 @@ class TermDetail(generics.RetrieveUpdateDestroyAPIView):
 
         # get the object normally
         term = super(TermDetail, self).get_object()
-        # TODO handle not found
+        # TODO handle not found, get object or 404?
 
         # attatch definitions and translations if requested
         self._handle_query(term, self.request.QUERY_PARAMS)
