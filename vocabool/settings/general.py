@@ -45,6 +45,10 @@ INSTALLED_APPS = (
     'jstemplate',
     'compressor',
 
+    # authentication
+    'registration',
+    'registration_defaults',
+
     'vocabool.domain',
     'vocabool.client',
     'vocabool.api',
