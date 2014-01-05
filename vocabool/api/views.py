@@ -1,9 +1,9 @@
-from rest_framework import generics
 from django.contrib.auth.models import User
-from rest_framework import permissions
-from vocabool.domain.models import Vocabulary, Term, Definition
+from rest_framework import permissions, exceptions
+from rest_framework import generics
 from .serializers import VocabularySerializer, TermSerializer, UserSerializer
 from .permissions import IsOwnerOrReadOnly
+from vocabool.domain.models import Vocabulary, Term, Definition
 from vocabool.webservices.service import Service
 
 
@@ -36,6 +36,7 @@ class VocabularyDetail(generics.RetrieveUpdateDestroyAPIView):
 class TermList(generics.ListCreateAPIView):
     model = Term
     serializer_class = TermSerializer
+    permission_classes = (IsOwnerOrReadOnly,)
 
 
     def pre_save(self, obj):
