@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}The app{% endblock %}
+
+{% block content %}
+
+    {% include 'client/navbar.html' %}
+
+    <!-- Main Backbone view -->
+    <div id="container">
+        <div id="view"></div>
+    </div>
+
+
+    <!-- Handlebars templates -->
+    {% load jstemplate %}
+    {% handlebarsjs 'tpl-vocabulary' %}
+    {% handlebarsjs 'tpl-term' %}
+    {% handlebarsjs 'tpl-termlist' %}
+    {% handlebarsjs 'tpl-login' %}
+
+    {% load staticfiles %}
+    {% load compress %}
+
+    {% compress js %}
+    <!-- JS Dependencies -->
+    <script src="{% static 'underscore/underscore.js' %}"></script>
+    <script src="{% static 'jquery/jquery.js' %}"></script>
+    <script src="{% static 'jquery.cookie/jquery.cookie.js' %}"></script>
+    <script src="{% static 'handlebars/handlebars.js' %}"></script>
+    <script src="{% static 'backbone/backbone.js' %}"></script>
+    <script src="{% static 'backbone-pageable/lib/backbone-pageable.js' %}"></script>
+    <script src="{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'spinjs/spin.js' %}"></script>
+    <script src="{% static 'spinjs/jquery.spin.js' %}"></script>
+
+    <!-- Application -->
+    <script src="{% static 'client/js/models.js' %}"></script>
+    <script src="{% static 'client/js/collections.js' %}"></script>
+    <script src="{% static 'client/js/views.js' %}"></script>
+    <script src="{% static 'client/js/listviews.js' %}"></script>
+    <script src="{% static 'client/js/router.js' %}"></script>
+    <script src="{% static 'client/js/helpers.js' %}"></script>
+    <script src="{% static 'client/js/template-helpers.js' %}"></script>
+    <script src="{% static 'client/js/main.js' %}"></script>
+    {% endcompress %}
+
+{% endblock %}
