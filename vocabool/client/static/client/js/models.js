@@ -21,8 +21,8 @@ VB.Models.Term = Backbone.Model.extend({
         var params = {define: '', translate_to: language},
             self = this;
 
-        this.fetch({ data: $.param(params) }).done(function () {
-            // TODO: Complete events, remove deepmodel
+        this.fetch({ data: params }).done(function () {
+            // TODO: Complete events
             self.trigger('change');
         });
         return this;
