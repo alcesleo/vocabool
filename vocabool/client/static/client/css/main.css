@@ -1,3 +1,7 @@
 body {
     background: #fefefe;
 }
+
+.term ul {
+    list-style-type: none;
+}

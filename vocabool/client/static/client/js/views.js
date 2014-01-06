@@ -37,7 +37,7 @@ VB.Views.Vocabulary = Backbone.View.extend({
 
 
 VB.Views.Term = Backbone.View.extend({
-    className: 'panel panel-default',
+    className: 'term panel panel-default',
 
     initialize: function () {
         this.listenTo(this.model, 'change', this.render);
