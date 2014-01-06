@@ -36,6 +36,7 @@ class TermSerializer(serializers.ModelSerializer):
 
 class VocabularySerializer(serializers.ModelSerializer):
     count = serializers.Field(source='count')
+    # TODO: hyperlink to terms
 
     class Meta:
         model = Vocabulary
