@@ -1,7 +1,7 @@
 """
 Parses data from API:s and maps it to domain models.
 If the content provided by API:s are not satisfying the needs of the models,
-a NotFoundError will be raised, errors thrown by API classes are not handled here.
+a NotFound will be raised, errors thrown by API classes are not handled here.
 """
 
 from .apis import YandexTranslateAPI, WiktionaryAPI
@@ -11,9 +11,10 @@ import mwparserfromhell
 import re
 
 
-class NotFoundError(Exception):
+class NotFound(Exception):
     """Used when there is no content to put in model."""
     pass
+
 
 class WiktionaryAdapter():
 
@@ -27,11 +28,12 @@ class WiktionaryAdapter():
     def _get_content_string(self, data):
         """The string where the interesting data, among with tons of other junk is."""
         # TODO: this should be much nicer
+        # empty response
         try:
             for key, value in data['query']['pages'].items():
                 return value['revisions'][0]['*']
         except Exception, e:
-            raise NotFoundError
+            raise NotFound
 
 
     def _get_relevant_rows(self, content):
@@ -81,9 +83,9 @@ class WiktionaryAdapter():
         data = self.api.define(text, language)
         definition_text = self._parse_data(data)
 
+        # no definition parsed
         if not definition_text:
-            print('No definition')
-            raise NotFoundError
+            raise NotFound
 
         return Definition(text=text, language=language, definition=definition_text)
 
@@ -98,8 +100,10 @@ class YandexTranslateAdapter():
         data = self.api.translate(text, from_language, to_language)
         translation_text = self._parse_data(data)
 
+        # no translation
+        # (Yandex returns input when not finding a translation, very annoying.)
         if not translation_text or translation_text == text:
-            raise NotFoundError
+            raise NotFound
 
         translation = Translation(text=text,
                                   from_language=from_language,
