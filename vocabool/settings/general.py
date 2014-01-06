@@ -78,7 +78,24 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-### Rest configuration
+# https://github.com/django/django/blob/master/django/conf/global_settings.py
+SUPPORTED_LANGUAGES = (
+    ('cs', 'Czech'),
+    ('da', 'Danish'),
+    ('de', 'German'),
+    ('el', 'Greek'),
+    ('en', 'English'),
+    ('es', 'Spanish'),
+    ('fi', 'Finnish'),
+    ('fr', 'French'),
+    ('hr', 'Croatian'),
+    ('hu', 'Hungarian'),
+    ('it', 'Italian'),
+    ('ru', 'Russian'),
+    ('sv', 'Swedish'),
+)
+
+### REST configuration
 
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': (
@@ -111,7 +128,6 @@ BOWER_INSTALLED_APPS = (
     'jquery.cookie',
     'backbone',
     'backbone-pageable',
-    'Backbone.dualStorage',
     'backbone',
     'handlebars',
     'bootstrap',
