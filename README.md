@@ -1,8 +1,40 @@
+# Vocabool
 
-## Standards
+## Supported languages
 
-I do my best to follow PEP8 and JSHint standards. I like Python's one **module**
-per file, so I've carried that over to the JS as well.
+- Czech
+- Danish
+- German
+- Greek
+- English
+- Spanish
+- Finnish
+- French
+- Croatian
+- Hungarian
+- Italian
+- Russian
+- Swedish
+
+## Credits
+
+During this project I have worked with a bunch of **awesome** framewoks/services that
+have seriously impressed me, and make me proud to be a human being.
+
+- Backend is driven by [Django](LINK HERE) and [DRF](LINK HERE)
+- Frontend is driven by [Backbone](LINK HERE), [Handlebars](LINK HERE) and of course [jQuery](LINK HERE) and [Underscore](LINK HERE)
+- Design is based on [Bootstrap 3](LINK HERE)
+- Definitions are from [Wiktionary](LINK HERE) and translations are from [Yandex Translate](LINK HERE)
+
+Minor:
+
+- flags from <http://flag-sprites.com/>
+- caching django compressor
+- django-registration login outside the SPA
+
+# License
+
+TODO
 
 ## Deployment steps
 
@@ -14,7 +46,7 @@ First, create a Python2.7 web app, then enter a console.
 
     # create and activate the virtualenv
     source virtuanenvwrapper.sh
-    mkvirtualenv vocabool --python=/usr/bin/python2.7
+    mkvirtualenv vocabool --python=/usr/bin/python2.7 --system-site-packages # system mysql
     workon vocabool
 
     # download the project
@@ -63,44 +95,3 @@ Get access to a terminal.
 Reload the webapp, or
 
     touch /var/www/web_app_name_wsgi.py'
-
-
-## Supported languages
-
-    ('cs', gettext_noop('Czech')),
-    ('da', gettext_noop('Danish')),
-    ('de', gettext_noop('German')),
-    ('el', gettext_noop('Greek')),
-    ('en', gettext_noop('English')),
-    ('es', gettext_noop('Spanish')),
-    ('fi', gettext_noop('Finnish')),
-    ('fr', gettext_noop('French')),
-    ('hr', gettext_noop('Croatian')),
-    ('hu', gettext_noop('Hungarian')),
-    ('it', gettext_noop('Italian')),
-    ('ru', gettext_noop('Russian')),
-    ('sv', gettext_noop('Swedish')),
-
-## Technologies
-
-- flags from http://flag-sprites.com/
-- caching django compressor, only on debug
-
-
-## API:s
-
-- Yandex Translate
-- Google Dictionary
-
-### Potential
-
-- Wiktionary
-    - Sadly, **extremely** messy output, very difficult to make sense of and
-    would take a lot of work to get the short concise definitions I'm looking for
-- Wordnik
-    - Looks very nice, if I was only interested in English definitions I would
-    probably have gone for this one
-- Yandex seems to have a decent dictionary API as well.
-- http://www.dictionaryapi.com/products/index.htm
-
-# License
