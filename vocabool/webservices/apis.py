@@ -1,12 +1,16 @@
-"""Handles the connection to external API:s."""
+"""
+Handles the connection to external API:s.
+They are made with User-Agent headers from settings, and use requests' errors:
+http://docs.python-requests.org/en/latest/user/quickstart/#errors-and-exceptions.
+"""
+
 
 import json, requests
 from vocabool.settings import YANDEX_TRANSLATE_API_KEY, USER_AGENT
 
-# TODO: Shitload of error handling
-# TODO: URL:ify chars, ' ' to %20
 
 class APIBase():
+    """Sends requests to API:s with correct user-agent headers and exceptions."""
 
     def _get_json_data(self, url):
         """Get json from external url and return object."""
