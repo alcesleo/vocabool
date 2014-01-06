@@ -18,7 +18,7 @@ from vocabool.libs.helpers import ellipsify
 class Definition(models.Model):
     language = LanguageField()
     text = models.CharField(max_length=100)
-    definition = models.CharField(max_length=300)
+    definition = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
@@ -30,7 +30,7 @@ class Translation(models.Model):
     from_language = LanguageField()
     to_language = LanguageField()
     text = models.CharField(max_length=100)
-    translation = models.CharField(max_length=100)
+    translation = models.CharField(max_length=200)
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):

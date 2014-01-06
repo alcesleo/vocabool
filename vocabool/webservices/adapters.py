@@ -37,14 +37,13 @@ class WiktionaryAdapter():
         return mw.strip_code().strip() # strip templates and whitespace
 
 
-    def _combine_definitions(self, definitions, max_length=300):
+    # TODO: don't hardcode max_length
+    def _combine_definitions(self, definitions):
         """
         Place definitions on separate rows, if there are many and/or lengthy
         definitions, only the ones that fit within the max_length will be included.
         """
-        text = '\n'.join(definitions)
-        return strip_on_last('\n', text, max_length)
-
+        return '\n'.join(definitions)
 
 
     def _parse_data(self, data):

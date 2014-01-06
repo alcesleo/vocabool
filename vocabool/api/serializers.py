@@ -12,6 +12,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class DefinitionSerializer(serializers.ModelSerializer):
+    # TODO: strip_on_last('\n', text, max_length)
     class Meta:
         model = Definition
         fields = ('definition', 'language')
