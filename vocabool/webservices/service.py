@@ -30,8 +30,5 @@ class Service():
 
     def define(self, term_obj):
         """Adds a definition to the passed term object."""
-
-        # TODO: 404?
         definition = self.definition_repo.get_definition(term_obj.text, term_obj.language)
         term_obj.definitions.add(definition)
-        # term_obj.save()
