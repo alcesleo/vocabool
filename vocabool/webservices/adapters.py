@@ -1,4 +1,8 @@
-"""Parses data from API:s and maps it to domain models."""
+"""
+Parses data from API:s and maps it to domain models.
+If the content provided by API:s are not satisfying the needs of the models,
+a NotFoundError will be raised, errors thrown by API classes are not handled here.
+"""
 
 from .apis import YandexTranslateAPI, WiktionaryAPI
 from vocabool.domain.models import Definition, Translation
@@ -6,8 +10,10 @@ from vocabool.libs.helpers import strip_on_last
 import mwparserfromhell
 import re
 
-# TODO: if not found
-# Wiktionary returns ""
+
+class NotFoundError(Exception):
+    """Used when there is no content to put in model."""
+    pass
 
 class WiktionaryAdapter():
 
@@ -20,9 +26,12 @@ class WiktionaryAdapter():
 
     def _get_content_string(self, data):
         """The string where the interesting data, among with tons of other junk is."""
-        # TODO: error handling
-        for key, value in data['query']['pages'].items():
-            return value['revisions'][0]['*']
+        # TODO: this should be much nicer
+        try:
+            for key, value in data['query']['pages'].items():
+                return value['revisions'][0]['*']
+        except Exception, e:
+            raise NotFoundError
 
 
     def _get_relevant_rows(self, content):
@@ -71,6 +80,11 @@ class WiktionaryAdapter():
         # TODO: toLowercase?
         data = self.api.define(text, language)
         definition_text = self._parse_data(data)
+
+        if not definition_text:
+            print('No definition')
+            raise NotFoundError
+
         return Definition(text=text, language=language, definition=definition_text)
 
 
@@ -83,6 +97,10 @@ class YandexTranslateAdapter():
         """Get data from Yandex Translate as a Translation object."""
         data = self.api.translate(text, from_language, to_language)
         translation_text = self._parse_data(data)
+
+        if not translation_text or translation_text == text:
+            raise NotFoundError
+
         translation = Translation(text=text,
                                   from_language=from_language,
                                   to_language=to_language,
