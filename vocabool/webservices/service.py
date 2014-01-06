@@ -1,5 +1,11 @@
-"""Attatches appropriate translations and definitions to term-objects."""
+"""
+Attatches appropriate translations and definitions to term-objects,
+raises 404 if not successful.
+"""
+
 from .repositories import TranslationRepository, DefinitionRepository
+from vocabool.settings import SUPPORTED_LANGUAGES
+from django.http import Http404
 
 class Service():
 
@@ -24,11 +30,25 @@ class Service():
 
     def translate(self, term_obj, to_language):
         """Adds a translation to the passed term object."""
-        translation = self.translation_repo.get_translation(term_obj.text, term_obj.language, to_language)
+        # validate requested language
+        if to_language not in SUPPORTED_LANGUAGES:
+            raise Http404
+
+        # try to get translation object
+        try:
+            translation = self.translation_repo.get_translation(term_obj.text, term_obj.language, to_language)
+        except Exception, e:
+            raise Http404
+
         term_obj.translations.add(translation)
 
 
     def define(self, term_obj):
         """Adds a definition to the passed term object."""
-        definition = self.definition_repo.get_definition(term_obj.text, term_obj.language)
+        # try to get definition object
+        try:
+            definition = self.definition_repo.get_definition(term_obj.text, term_obj.language)
+        except Exception, e:
+            raise Http404
+
         term_obj.definitions.add(definition)

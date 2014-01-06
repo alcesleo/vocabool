@@ -71,14 +71,10 @@ class TermDetail(generics.RetrieveUpdateDestroyAPIView):
 
     def _handle_query(self, term, params):
         """Calls service methods on object based on GET-parameters."""
-
-        # TODO: instanciate when needed or static service?
-        # TODO: Raise NotFound
         service = Service()
 
         if 'define' in params:
             service.define(term)
-
 
         if 'translate_to' in params:
             service.translate(term, params['translate_to'])
