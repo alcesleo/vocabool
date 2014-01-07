@@ -1,5 +1,7 @@
 # Vocabool
 
+Pretty much everything is Python3 ready except Compressor
+
 ## Supported languages
 
 - Czech
@@ -36,7 +38,7 @@ Minor:
 
 TODO
 
-## Deployment steps
+## PythonAnywhere deployment
 
 ### Initial deployment
 
@@ -95,3 +97,8 @@ Get access to a terminal.
 Reload the webapp, or
 
     touch /var/www/web_app_name_wsgi.py'
+
+### Getting to the MySQL database
+
+    ssh -L 3306:mysql.server:3306 username@ssh.pythonanywhere.com
+    mysql -h 127.0.0.1 -u username -p

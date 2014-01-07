@@ -5,3 +5,7 @@ body {
 .term ul {
     list-style-type: none;
 }
+
+.term h4 .flag {
+    float: right;
+}

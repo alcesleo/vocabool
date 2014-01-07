@@ -9,6 +9,9 @@ VB.Models.Term = Backbone.Model.extend({
     // },
 
     // urlRoot: '/api/term/', // should work only when not in a collection
+    defaults: {
+        text: ''
+    },
 
     validate: function (attributes, options) {
         if (attributes.text.trim().length === 0) {

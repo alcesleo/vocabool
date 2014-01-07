@@ -3,6 +3,7 @@ Den skriftliga projektrapporten du lämnar in ska innehålla följande:
 ## TODO:
 
 - väldigt trevligt att ha en kraftfull backend till sin JS, compressor, apis, serving etc - dynamiskt på servern istället för buildstep
+- auth på servern känns tryggt, och skickar inte massor av templates för login till appen vilket minskar laddningstiden och avsevärt förenklar js
 
 
 # Inledning / Bakgrund

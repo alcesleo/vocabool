@@ -18,8 +18,8 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
             <!-- TODO: Obviously make this more dynamic -->
-            <li><a href="/api/auth/login/?next=/app/">Log in</a></li>
-            <li><a href="/api/auth/logout/?next=/app/">Log out</a></li>
+            <li>Logged in as {{ user.username }}</li>
+            <li><a href="/accounts/logout/">Log out</a></li>
         </ul>
    </div><!-- /.navbar-collapse -->
 </nav>

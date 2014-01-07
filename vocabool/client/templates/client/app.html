@@ -6,7 +6,9 @@
     {% include 'client/navbar.html' %}
 
     <!-- Main Backbone view -->
-    <div id="view" class="container"></div>
+    <div class="container">
+        <div id="view" class="row"></div>
+    </div>
 
 
     <!-- Handlebars templates -->
@@ -32,6 +34,7 @@
     <script src="{% static 'spinjs/jquery.spin.js' %}"></script>
 
     <!-- Application -->
+    <script src="{% static 'client/js/extensions.js' %}"></script>
     <script src="{% static 'client/js/models.js' %}"></script>
     <script src="{% static 'client/js/collections.js' %}"></script>
     <script src="{% static 'client/js/views.js' %}"></script>
