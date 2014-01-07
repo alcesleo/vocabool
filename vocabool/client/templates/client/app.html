@@ -1,22 +1,20 @@
 {% extends 'base.html' %}
-{% block title %}The app{% endblock %}
+{% block title %}Vocabool{% endblock %}
 
 {% block content %}
 
     {% include 'client/navbar.html' %}
 
     <!-- Main Backbone view -->
-    <div id="container">
-        <div id="view"></div>
-    </div>
+    <div id="view" class="container"></div>
 
 
     <!-- Handlebars templates -->
     {% load jstemplate %}
     {% handlebarsjs 'tpl-vocabulary' %}
     {% handlebarsjs 'tpl-term' %}
-    {% handlebarsjs 'tpl-termlist' %}
-    {% handlebarsjs 'tpl-login' %}
+    {% handlebarsjs 'tpl-addterm' %}
+    {% handlebarsjs 'tpl-addvocabulary' %}
 
     {% load staticfiles %}
     {% load compress %}

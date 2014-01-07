@@ -1,45 +1,47 @@
-{{!-- Text --}}
-<div class="panel-heading">
-    <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#term-list" href="#termDetail{{id}}">
-            {{countryFlag language}}{{text}}
-        </a>
-    </h4>
-</div>
+<div class="col-md-12">
+    {{!-- Text --}}
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#term-list" href="#termDetail{{id}}">
+                {{countryFlag language}}{{text}}
+            </a>
+        </h4>
+    </div>
 
-{{!-- Dropdown --}}
-<div id="termDetail{{id}}" class="term-detail panel-collapse collapse">
-    <div class="panel-body">
+    {{!-- Dropdown --}}
+    <div id="termDetail{{id}}" class="term-detail panel-collapse collapse">
+        <div class="panel-body">
 
-        {{!-- Custom --}}
-        {{#if custom_text}}
-            <p>{{custom_text}}</p>
-        {{/if}}
+            {{!-- Custom --}}
+            {{#if custom_text}}
+                <p>{{custom_text}}</p>
+            {{/if}}
 
-        {{!-- Definitions --}}
-        {{#if definitions}}
-            {{#each definitions}}
-                <ul class="definitions">{{countryFlag language}}
-                {{#eachLine definition}}
-                    <li class="definition">{{line}}</li>
-                {{/eachLine}}
+            {{!-- Definitions --}}
+            {{#if definitions}}
+                {{#each definitions}}
+                    <ul class="definitions">{{countryFlag language}}
+                    {{#eachLine definition}}
+                        <li class="definition">{{line}}</li>
+                    {{/eachLine}}
+                    </ul>
+                {{/each}}
+
+            {{/if}}
+
+            {{!-- Translations --}}
+            {{#if translations}}
+                <ul class="translations">
+                {{#each translations}}
+                        <li>
+                            {{countryFlag to_language}}
+                            {{replace translation '\n' ', '}}
+                        </li>
+                {{/each}}
                 </ul>
-            {{/each}}
+            {{/if}}
 
-        {{/if}}
-
-        {{!-- Translations --}}
-        {{#if translations}}
-            <ul class="translations">
-            {{#each translations}}
-                    <li>
-                        {{countryFlag to_language}}
-                        {{replace translation '\n' ', '}}
-                    </li>
-            {{/each}}
-            </ul>
-        {{/if}}
-
-        <button type="button" class="btn btn-primary btn-block default-term-action">Translate and define</button>
+            <button type="button" class="btn btn-primary btn-block default-term-action">Translate and define</button>
+        </div>
     </div>
 </div>
