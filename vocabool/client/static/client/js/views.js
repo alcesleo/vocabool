@@ -44,6 +44,7 @@ VB.Views.Term = Backbone.View.extend({
 
     initialize: function () {
         this.listenTo(this.model, 'change', this.render);
+        this.listenTo(this.model, 'error', this.error);
     },
 
     template: Handlebars.compile($('#tpl-term').html()),
@@ -54,6 +55,10 @@ VB.Views.Term = Backbone.View.extend({
 
     termAction: function () {
         this.model.translateAndDefine('sv'); // TODO: Dynamic
+    },
+
+    error: function (obj, xhr, options) {
+        alert(xhr.responseJSON.detail);
     },
 
     render: function () {
@@ -67,6 +72,8 @@ VB.Views.Term = Backbone.View.extend({
 VB.Views.AddTerm = Backbone.View.extend({
 
     className: 'row add-term',
+
+    // TODO: Handle 'invalid' event
 
     // TODO: override template, extensions.js?
     template: Handlebars.compile($('#tpl-addterm').html()),
