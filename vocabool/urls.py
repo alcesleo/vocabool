@@ -7,7 +7,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$', lambda r: HttpResponseRedirect('app/')),
+    url(r'^$', lambda r: HttpResponseRedirect('/app/')),
 
     url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^app/', login_required(TemplateView.as_view(template_name='client/app.html'))),
