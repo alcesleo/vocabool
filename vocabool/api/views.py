@@ -20,7 +20,7 @@ class VocabularyList(generics.ListCreateAPIView):
         user = self.request.user
         if user.is_authenticated():
             return Vocabulary.objects.filter(owner=user)
-        return Vocabulary.objects.all() # TODO: When logged out?
+        raise exceptions.NotAuthenticated()
 
 
 class VocabularyDetail(generics.RetrieveUpdateDestroyAPIView):
