@@ -1,10 +1,14 @@
+'use strict';
+window.VB = window.VB || {};
+VB.Bases = VB.Bases || {};
+
 /**
  * // All that's needed!
- * var MyListView = VB.Views.ListView.extend({
+ * var MyListView = VB.Bases.ListView.extend({
  *     itemView: MyBackboneView
  * })
  */
-Backbone.ListView = Backbone.View.extend({
+VB.Bases.ListView = Backbone.View.extend({
 
     itemView: null,
     subviews: [],

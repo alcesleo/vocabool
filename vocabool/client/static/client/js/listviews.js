@@ -2,7 +2,7 @@
 window.VB = window.VB || {};
 VB.Views = VB.Views || {};
 
-VB.Views.VocabularyList = Backbone.ListView.extend({
+VB.Views.VocabularyList = VB.Bases.ListView.extend({
 
     tagName: 'ul',
     className: 'vocabularies',
@@ -11,7 +11,7 @@ VB.Views.VocabularyList = Backbone.ListView.extend({
 });
 
 
-VB.Views.TermList = Backbone.ListView.extend({
+VB.Views.TermList = VB.Bases.ListView.extend({
     className: 'panel-group',
     id: 'term-list',
     itemView: VB.Views.Term,
