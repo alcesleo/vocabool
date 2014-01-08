@@ -1,3 +1,6 @@
+'use strict';
+window.VB = window.VB || {};
+VB.Views = VB.Views || {};
 
 VB.Views.VocabularyList = Backbone.ListView.extend({
 
