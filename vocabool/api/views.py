@@ -1,6 +1,5 @@
 from django.contrib.auth.models import User
-from rest_framework import permissions, exceptions
-from rest_framework import generics
+from rest_framework import permissions, exceptions, generics, filters
 from .serializers import VocabularySerializer, TermSerializer, UserSerializer
 from .permissions import IsOwnerOrReadOnly
 from vocabool.domain.models import Vocabulary, Term, Definition
@@ -38,10 +37,14 @@ class TermList(generics.ListCreateAPIView):
     serializer_class = TermSerializer
     permission_classes = (IsOwnerOrReadOnly,)
 
+    # enable ?ordering=
+    filter_backends = (filters.OrderingFilter,)
+    ordering = ('text', 'timestamp')
+
 
     def pre_save(self, obj):
         obj.owner = self.request.user
-        obj.vocabulary_id = self.kwargs['pk']
+        obj.vocabulary_id = self.kwargs['pk'] # TODO if exists
 
 
     def get_queryset(self):
