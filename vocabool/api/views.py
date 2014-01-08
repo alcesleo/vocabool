@@ -33,6 +33,12 @@ class VocabularyDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class TermList(generics.ListCreateAPIView):
+    """
+    Lists terms in a specific vocabulary (from query-string).
+    Owner has full permissions, everyone has read premissions.
+    Handles ?ordering= in query-string.
+    """
+
     model = Term
     serializer_class = TermSerializer
     permission_classes = (IsOwnerOrReadOnly,)
@@ -70,6 +76,7 @@ class TermDetail(generics.RetrieveUpdateDestroyAPIView):
 
     model = Term
     serializer_class = TermSerializer
+    permission_classes = (IsOwnerOrReadOnly,)
 
 
     def _handle_query(self, term, params):
