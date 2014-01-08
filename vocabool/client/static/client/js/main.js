@@ -17,19 +17,9 @@ $(function () {
 
     // initSpinner();
 
-    // sets up csrf-protection for backbone
-    // https://gist.github.com/gcollazo/1240683
-    var oldSync = Backbone.sync;
-    Backbone.sync = function(method, model, options){
-        options.beforeSend = function(xhr){
-            xhr.setRequestHeader('X-CSRFToken', $.cookie('csrftoken'));
-        };
-        return oldSync(method, model, options);
-    };
-
-
     // Router
 
+    VB.helpers.enableCsrf();
     VB.app.router = new VB.Router();
     Backbone.history.start({pushState: false, root: '/app/'})
 
