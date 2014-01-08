@@ -47,7 +47,7 @@ INSTALLED_APPS = (
 
     # authentication
     'registration',
-    'registration_defaults',
+    # 'registration_defaults',
 
     'vocabool.domain',
     'vocabool.client',
@@ -67,6 +67,10 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'vocabool.urls'
 
 WSGI_APPLICATION = 'vocabool.wsgi.application'
+
+### Users
+
+LOGIN_REDIRECT_URL = '/app/'
 
 
 ### Internationalization
