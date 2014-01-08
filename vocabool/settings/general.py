@@ -47,7 +47,7 @@ INSTALLED_APPS = (
 
     # authentication
     'registration',
-    # 'registration_defaults',
+    'vocabool.accounts',
 
     'vocabool.domain',
     'vocabool.client',
