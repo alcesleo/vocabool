@@ -20,21 +20,6 @@ Handlebars.registerHelper('eachLine', function(text, options) {
 });
 
 /**
- * Create a select-element from an object
- */
-Handlebars.registerHelper('selectFrom', function (hash, name, options) {
-    // TODO if hash len
-    // TODO selected option
-    var ret = '<select name="' + name + '">';
-    for (var key in hash) {
-        ret += '<option value="' + key + '">' + hash[key] + '</option>';
-    }
-    ret += '</select>';
-
-    return new Handlebars.SafeString(ret);
-});
-
-/**
  * A flag icon
  */
 Handlebars.registerHelper('countryFlag', function (country_code) {
