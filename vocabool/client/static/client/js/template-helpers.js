@@ -19,6 +19,7 @@ Handlebars.registerHelper('eachLine', function(text, options) {
     return ret;
 });
 
+// TODO: This should probably be a partial
 /**
  * A flag icon
  */
