@@ -53,62 +53,14 @@ VB.Views.Term = Backbone.View.extend({
         'click .default-term-action': 'termAction'
     },
 
-    termAction: function () {
-        this.model.translateAndDefine('sv'); // TODO: Dynamic
-    },
-
     error: function (obj, xhr, options) {
         alert(xhr.responseJSON.detail);
     },
 
     render: function () {
-        this.$el.html(this.template(this.model.toJSON()));
-        return this;
-    }
-});
-
-// FORMS
-
-VB.Views.AddTerm = Backbone.View.extend({
-
-    className: 'row add-term',
-
-    // TODO: Handle 'invalid' event
-
-    // TODO: override template, extensions.js?
-    template: Handlebars.compile($('#tpl-addterm').html()),
-
-    events: {
-        'click #add-term-btn': 'addTerm'
-    },
-
-    addTerm: function () {
-        // get attributes
-        var text = this.$('#add-term-text').val();
-
-        // add to collection
-        this.collection.create({
-            text: text,
-            language: 'en' // TODO: lang
-        });
-        // TODO: scroll to added term, make sure it's open
-    },
-
-    render: function () {
-        this.$el.html(this.template({languages: VB.languages}));
-        return this;
-    }
-});
-
-VB.Views.AddVocabulary = Backbone.View.extend({
-    className: 'col-md-12 add-vocabulary',
-
-    template: Handlebars.compile($('#tpl-addvocabulary').html()),
-    events: {
-        'click #add-vocabulary-btn': 'addVocabulary'
-    },
-    render: function () {
-        this.$el.html(this.template());
+        // FIXME: ugly hack to get language context
+        var context = _.extend(this.model.toJSON(), { languages: VB.languages });
+        this.$el.html(this.template(context));
         return this;
     }
 });

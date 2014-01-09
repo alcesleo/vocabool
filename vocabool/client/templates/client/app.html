@@ -5,8 +5,7 @@
 
 
     <!-- Main Backbone view -->
-    <div class="container">
-        <div id="view" class="row"></div>
+    <div id="view" class="container">
     </div>
 
 
@@ -16,6 +15,7 @@
     {% handlebarsjs 'tpl-term' %}
     {% handlebarsjs 'tpl-addterm' %}
     {% handlebarsjs 'tpl-addvocabulary' %}
+    {% handlebarsjs 'tpl-partial-selectlanguage' %}
 
     {% load staticfiles %}
     {% load compress %}
@@ -38,6 +38,7 @@
     <script src="{% static 'client/js/collections.js' %}"></script>
     <script src="{% static 'client/js/views.js' %}"></script>
     <script src="{% static 'client/js/listviews.js' %}"></script>
+    <script src="{% static 'client/js/controlviews.js' %}"></script>
     <script src="{% static 'client/js/router.js' %}"></script>
     <script src="{% static 'client/js/helpers.js' %}"></script>
     <script src="{% static 'client/js/template-helpers.js' %}"></script>

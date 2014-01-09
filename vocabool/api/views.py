@@ -55,7 +55,7 @@ class TermList(generics.ListCreateAPIView):
 
     def get_queryset(self):
         # select only terms from vocabulary
-        vocabulary = self.kwargs['v_pk']
+        vocabulary = self.kwargs['pk']
         return Term.objects.filter(vocabulary=vocabulary)
 
 

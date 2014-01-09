@@ -26,3 +26,6 @@ Handlebars.registerHelper('eachLine', function(text, options) {
 Handlebars.registerHelper('countryFlag', function (country_code) {
     return new Handlebars.SafeString('<div class="flag flag-' + country_code + '" />');
 });
+
+
+Handlebars.registerPartial('selectLanguage', $('#tpl-partial-selectlanguage').html())
