@@ -1,10 +1,13 @@
-<div class="col-md-12">
-    <div class="input-group">
-        <input id="add-term-text" type="text" class="form-control">
-        <div class="input-group-btn">
-            <!-- Button and dropdown menu -->
-            <button id="add-term-btn" class="btn btn-default" type="button">Go!</button>
-        </span>
-    </div>
+<div class="input-group">
+    <input id="add-term-text" type="text" class="form-control">
+    <div class="input-group-btn">
+        <!-- Button and dropdown menu -->
+        <button id="add-term-btn" class="btn btn-success" type="button">Go!</button>
+    </span>
+    <select name="language">
+        {{#each languages}}
+            <option value="{{@key}}">{{this}}</option>
+        {{/each}}
+    </select>
 </div>
 
