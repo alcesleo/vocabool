@@ -50,12 +50,12 @@ class TermList(generics.ListCreateAPIView):
 
     def pre_save(self, obj):
         obj.owner = self.request.user
-        obj.vocabulary_id = self.kwargs['pk'] # TODO if exists
+        obj.vocabulary_id = self.kwargs['v_pk']
 
 
     def get_queryset(self):
         # select only terms from vocabulary
-        vocabulary = self.kwargs['pk'] # TODO: slugfield?
+        vocabulary = self.kwargs['v_pk']
         return Term.objects.filter(vocabulary=vocabulary)
 
 
