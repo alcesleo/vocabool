@@ -50,7 +50,7 @@ class TermList(generics.ListCreateAPIView):
 
     def pre_save(self, obj):
         obj.owner = self.request.user
-        obj.vocabulary_id = self.kwargs['v_pk']
+        obj.vocabulary_id = self.kwargs['pk'] # TODO: if not exists
 
 
     def get_queryset(self):
