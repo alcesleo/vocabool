@@ -4,20 +4,39 @@ VB.Models = VB.Models || {};
 
 VB.Models.Term = Backbone.Model.extend({
 
-    // url: function () {
-    //     return '/api/term/' + this.get('id');
-    // },
-
-    // urlRoot: '/api/term/', // should work only when not in a collection
-    defaults: {
-        text: ''
-    },
-
-    validate: function (attributes, options) {
-        if (attributes.text.trim().length === 0) {
-            return 'Text can not be empty!';
+    validate: function (attrs, options) {
+        var errors = [];
+        if (_.isEmpty(attrs.text)) {
+            errors.push('Text can not be empty!');
         }
+        if (!(attrs.language in VB.languages)) {
+            errors.push('Invalid language: ' + attrs.language);
+        }
+        return _.any(errors) ? errors : null;
     },
+
+    define: function () {
+        var self = this,
+            params = { define: null };
+
+        this.fetch({ data: params }).done(function () {
+            self.trigger('change');
+        });
+        return this;
+    },
+
+    translate: function (language) {
+        // TODO: if not in settings.languages
+        var self = this,
+            params = { translate_to: language };
+
+
+        this.fetch({ data: params }).done(function () {
+            self.trigger('change');
+        });
+        return this;
+    },
+
 
     translateAndDefine: function (language) {
 
