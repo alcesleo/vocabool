@@ -50,17 +50,25 @@ VB.Views.Term = Backbone.View.extend({
     template: Handlebars.compile($('#tpl-term').html()),
 
     events: {
-        'click .default-term-action': 'termAction'
+        'click .btn-define': 'define',
+        'click .btn-translate': 'translate',
     },
 
     error: function (obj, xhr, options) {
         alert(xhr.responseJSON.detail);
     },
 
+    define: function () {
+        this.model.define();
+    },
+
+    translate: function () {
+        var lang = this.$('.language-selector :selected').val();
+        this.model.translate(lang);
+    },
+
     render: function () {
-        // FIXME: ugly hack to get language context
-        var context = _.extend(this.model.toJSON(), { languages: VB.languages });
-        this.$el.html(this.template(context));
+        this.$el.html(this.template(this.model.toJSON()));
         return this;
     }
 });
@@ -68,7 +76,6 @@ VB.Views.Term = Backbone.View.extend({
 // PAGES
 
 VB.Views.TermsPage = Backbone.View.extend({
-    className: 'row',
     id: 'terms-page',
 
     initialize: function (options) {
