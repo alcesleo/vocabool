@@ -10,3 +10,7 @@ class LanguageField(models.CharField):
 
     def get_internal_type(self):
         return "CharField"
+
+# make south accept it
+from south.modelsinspector import add_introspection_rules
+add_introspection_rules([], [r'^vocabool.domain.fields.LanguageField'])
