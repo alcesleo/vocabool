@@ -1,5 +1,9 @@
 {% extends "registration/registration_base.html" %}
 {% block title %}Logged out{% endblock %}
 {% block content %}
-Successfully logged out!
+<div class="container">
+
+<div class="alert alert-success">Successfully logged out!</div>
+<a href="{% url 'auth_login' %}" class="btn btn-default navbar-btn"><span class="glyphicon glyphicon-log-in" ></span> Sign in</a>
+</div>
 {% endblock %}

@@ -1,7 +1,7 @@
 {% for field in form %}
   <fieldset class="control-group {% if field.errors %}error{% endif %}">
     <label for="{{ field.auto_id }}">{{ field.label }}</label>
-    <div class="controls">
+    <div class="form-group">
       {{ field }}
       {% if field.help_text %}
         <span class="help-inline">{{ field.help_text }}</span>

@@ -6,7 +6,7 @@
     {% include 'registration/form_fields.html' %}
 
     <p><a href="{% url 'auth_password_reset' %}">Forgot</a> your password?  <a href="{% url 'registration_register' %}">Need an account</a>?</p>
-    <input type="submit" class="btn" value="Login" />
+    <input type="submit" class="btn btn-primary btn-lg btn-block" value="Login" />
     <input type="hidden" name="next" value="{{ next }}" />
   </form>
 {% endblock %}
