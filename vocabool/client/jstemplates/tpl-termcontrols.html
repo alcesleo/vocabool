@@ -1,13 +1,55 @@
-<div class="input-group">
-    <input id="add-term-text" type="text" class="form-control">
-    <div class="input-group-btn">
-        <!-- Button and dropdown menu -->
-        <button id="add-term-btn" class="btn btn-success" type="button">Go!</button>
-    </span>
-    <select name="language">
-        {{#each languages}}
-            <option value="{{@key}}">{{this}}</option>
-        {{/each}}
-    </select>
-</div>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="well">
+            {{!-- Sorting --}}
+{{!--             <div class="row">
+                <div class="col-sm-8">
+                    <div class="btn-group">
+                        <button data-sort="a-z" type="button" class="btn-sort btn btn-default">
+                            <span class="glyphicon glyphicon-sort-by-alphabet"></span> A &#8594; Z
+                        </button>
 
+                        <button data-sort="z-a" type="button" class="btn-sort btn btn-default">
+                            <span class="glyphicon glyphicon-sort-by-alphabet-alt"></span> Z &#8594; A
+                        </button>
+
+                        <button data-sort="new-old" type="button" class="btn-sort btn btn-default">
+                            <span class="glyphicon glyphicon-sort-by-order"></span> New &#8594; Old
+                        </button>
+
+                        <button data-sort="old-new" type="button" class="btn-sort btn btn-default">
+                            <span class="glyphicon glyphicon-sort-by-order-alt"></span> Old &#8594; New
+                        </button>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <button id="btn-extend-vocabulary" type="button" class="btn btn-success btn-block">
+                        Extend vocabulary
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                </div>
+ --}}
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="term-text" placeholder="Term">
+                </div>
+                <div class="col-sm-2 col-xs-4">
+                    {{>selectLanguage}}
+                </div>
+                <div class="col-sm-4 col-xs-8">
+                    <button id="btn-extend-vocabulary" type="button" class="btn btn-success btn-block">
+                        Extend vocabulary
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                </div>
+            </div>
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+</div>
