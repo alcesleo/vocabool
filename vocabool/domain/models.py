@@ -67,7 +67,7 @@ class Term(models.Model):
     translations = models.ManyToManyField(Translation, blank=True, related_name='terms')
 
     class Meta:
-        unique_together = ('text', 'vocabulary')
+        unique_together = ('text', 'language', 'vocabulary')
 
     def __unicode__(self):
         return ellipsify(self.text)
