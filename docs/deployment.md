@@ -38,6 +38,18 @@ Paste `wsgi-pythonanywhere.py` to the global wsgi (from web tab), then reload th
 
 TODO: fabric
 
+#### Local
+
+If you've made changes to the models, create a migration schema with something like:
+
+    python manage.py schemamigration myapp --auto
+
+and commit it.
+
+Push all your changes.
+
+#### Remote
+
 Get access to a terminal.
 
     cd to/wherever/it/is
@@ -49,6 +61,10 @@ Get access to a terminal.
 
     # install python deps
     pip install -r requirements.txt
+
+    # update the db
+    python manage.py syncdb
+    python manage.py migrate
 
     # install static deps
     python manage.py bower_install
