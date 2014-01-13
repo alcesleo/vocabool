@@ -15,6 +15,7 @@ $(function () {
     //     $('#loading').ajaxComplete(function(){ $(this).fadeOut(); });
     // }
 
+    // TODO: elsewhere?
     // initSpinner();
 
     // Router

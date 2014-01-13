@@ -6,7 +6,11 @@ VB.Views.VocabularyList = VB.Bases.ListView.extend({
 
     tagName: 'ul',
     className: 'vocabularies',
-    itemView: VB.Views.Vocabulary
+    itemView: VB.Views.Vocabulary,
+
+    initialize: function () {
+        this.listenTo(this.collection, 'add', this.addOne);
+    },
 
 });
 

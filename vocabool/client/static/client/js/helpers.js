@@ -19,8 +19,6 @@ VB.languages = {
     'sv': 'Swedish'
 };
 
-VB.vent = _.extend({}, Backbone.Events);
-
 VB.helpers = {};
 
 VB.helpers.enableCsrf = function () {

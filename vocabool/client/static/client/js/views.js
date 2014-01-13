@@ -59,10 +59,13 @@ VB.Views.Term = Backbone.View.extend({
     },
 
     define: function () {
+        var btn = this.$('.btn-define').button('loading');
         this.model.define();
     },
 
     translate: function () {
+        // TODO: Refactor loading buttons
+        var btn = this.$('.btn-translate').button('loading');
         var lang = this.$('.language-selector :selected').val();
         this.model.translate(lang);
     },
