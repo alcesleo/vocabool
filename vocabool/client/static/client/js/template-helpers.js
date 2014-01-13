@@ -19,6 +19,21 @@ Handlebars.registerHelper('eachLine', function(text, options) {
     return ret;
 });
 
+// Gives Handlebars access to global variable
+Handlebars.registerHelper('global', function (name, options) {
+    return options.fn(window[name]);
+});
+
+Handlebars.registerHelper('debug', function(optionalValue) {
+    console.log('Current Context');
+    console.log(this);
+
+    if (optionalValue) {
+        console.log('Value');
+        console.log(optionalValue);
+    }
+});
+
 // TODO: This should probably be a partial
 /**
  * A flag icon
