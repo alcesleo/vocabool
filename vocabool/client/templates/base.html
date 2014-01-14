@@ -28,10 +28,13 @@
             {% include 'client/navbar-logged-out.html' %}
         {% endif %}
 
+        {# Main Bootstrap content container #}
         <div class="container" id="view">
             {% block content %}{% endblock %}
         </div>
 
+        {# TODO: Put compress up here? #}
+        {# Javascript dependencies #}
         {% block javascript %}{% endblock %}
     </body>
 </html>
