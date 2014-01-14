@@ -1,3 +1,5 @@
+(function () {
+
 'use strict';
 window.VB = window.VB || {};
 VB.Collections = VB.Collections || {};
@@ -24,3 +26,5 @@ VB.Collections.Vocabularies = VB.Bases.DRFCollection.extend({
     model: VB.Models.Vocabulary,
     url: '/api/vocabulary/',
 });
+
+}());

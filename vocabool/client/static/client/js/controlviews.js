@@ -1,3 +1,6 @@
+(function () {
+
+'use strict';
 
 VB.Views.AddTerm = VB.Bases.View.extend({
 
@@ -86,3 +89,5 @@ VB.Views.AddVocabulary = Backbone.View.extend({
         return this;
     }
 });
+
+}());

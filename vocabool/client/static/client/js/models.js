@@ -1,3 +1,5 @@
+(function () {
+
 'use strict';
 window.VB = window.VB || {};
 VB.Models = VB.Models || {};
@@ -67,3 +69,5 @@ VB.Models.Status = Backbone.Model.extend({
         vocabulary: null,
     }
 });
+
+}());

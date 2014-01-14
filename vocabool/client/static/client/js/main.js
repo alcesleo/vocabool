@@ -1,9 +1,9 @@
-'use strict';
-// Initialize namespace
-window.VB = window.VB || {};
-VB.app = VB.app || {}; // holds global intances
 
 $(function () {
+    'use strict';
+    // Initialize namespace
+    window.VB = window.VB || {};
+    VB.app = VB.app || {}; // holds global intances
     // window.vocabularies = new VB.Collections.VocabularyCollection();
     // window.listView = new VB.Views.VocabularyList({ collection: vocabularies });
     // window.appView = new VB.Views.App({ el: '#view' });

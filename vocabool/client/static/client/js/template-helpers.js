@@ -1,3 +1,7 @@
+(function () {
+
+'use strict';
+
 /**
  * Replace all occurences in text
  */
@@ -43,4 +47,6 @@ Handlebars.registerHelper('countryFlag', function (country_code) {
 });
 
 
-Handlebars.registerPartial('selectLanguage', $('#tpl-partial-selectlanguage').html())
+Handlebars.registerPartial('selectLanguage', $('#tpl-partial-selectlanguage').html());
+
+}());

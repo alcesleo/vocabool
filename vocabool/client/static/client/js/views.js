@@ -1,3 +1,5 @@
+(function () {
+
 'use strict';
 window.VB = window.VB || {};
 VB.Views = VB.Views || {};
@@ -110,3 +112,5 @@ VB.Views.VocabulariesPage = Backbone.View.extend({
         return this;
     }
 });
+
+}());

@@ -1,3 +1,5 @@
+(function () {
+
 'use strict';
 window.VB = window.VB || {};
 VB.Bases = VB.Bases || {};
@@ -98,3 +100,5 @@ VB.Bases.DRFCollection = Backbone.PageableCollection.extend({
         return { totalRecords: resp.count };
     }
 });
+
+}());
