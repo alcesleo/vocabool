@@ -13,7 +13,7 @@ VB.Views.VocabularyList = ListView.extend({
     itemView: VB.Views.Vocabulary,
 
     initialize: function () {
-        this.listenTo(this.collection, 'add', this.addOne);
+        this.listenTo(this.collection, 'sync', this.render);
     },
 
 });

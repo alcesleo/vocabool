@@ -81,7 +81,7 @@ VB.Views.AddVocabulary = Backbone.View.extend({
         }
         // Wait for the server to respond,
         // the link will not work until the model gets a PK.
-        this.collection.create(attrs, {wait: true});
+        this.collection.create(attrs);
     },
 
     render: function () {
