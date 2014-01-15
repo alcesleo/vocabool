@@ -1,8 +1,8 @@
 (function () {
-
 'use strict';
 window.VB = window.VB || {};
 VB.Models = VB.Models || {};
+
 
 VB.Models.Term = Backbone.Model.extend({
 
