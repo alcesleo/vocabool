@@ -79,7 +79,7 @@ class WiktionaryAdapter():
 
     def define(self, text, language):
         """Get data from Wiktionary as a Definition object."""
-        # TODO: toLowercase?
+        text = text.lower()
         data = self.api.define(text, language)
         definition_text = self._parse_data(data)
 
@@ -97,6 +97,7 @@ class YandexTranslateAdapter():
 
     def translate(self, text, from_language, to_language):
         """Get data from Yandex Translate as a Translation object."""
+        text = text.lower()
         data = self.api.translate(text, from_language, to_language)
         translation_text = self._parse_data(data)
 
