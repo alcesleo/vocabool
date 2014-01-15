@@ -64,15 +64,23 @@ VB.Views.Term = View.extend({
     },
 
     define: function () {
-        var btn = this.$('.btn-define').button('loading');
-        this.model.define();
+        // TODO: DRY
+        var btn = this.$('.btn-define');
+        btn.button('loading');
+        this.model.define().always(function () {
+            btn.button('reset');
+        });
     },
 
     translate: function () {
         // TODO: Refactor loading buttons
-        var btn = this.$('.btn-translate').button('loading');
-        var lang = this.$('.language-selector :selected').val();
-        this.model.translate(lang);
+        var btn = this.$('.btn-translate'),
+            lang = this.$('.language-selector :selected').val();
+
+        btn.button('loading');
+        this.model.translate(lang).always(function () {
+            btn.button('reset');
+        });
     },
 
     // worth noting is that both 'delete' and 'remove' are already taken
@@ -92,7 +100,7 @@ VB.Views.Term = View.extend({
     render: function (collapse) {
         this.$el.html(this.template(this.model.toJSON()));
         if (collapse) {
-            // TODO: make it stay down
+            // FIXME: make it stay down
             this.$('.collapse').collapse('show');
         }
         return this;
