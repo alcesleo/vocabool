@@ -2,14 +2,14 @@
 <div class="panel-heading">
     <h4 class="panel-title">
         {{countryFlag language}}
-        <a data-toggle="collapse" data-parent="#term-list" href="#termDetail{{id}}">
+        <a data-toggle="collapse" data-parent="#term-list" href="#term-detail-{{id}}">
             {{text}}
         </a>
     </h4>
 </div>
 
 {{!-- Dropdown --}}
-<div id="termDetail{{id}}" class="term-detail panel-collapse collapse">
+<div id="term-detail-{{id}}" class="term-detail panel-collapse collapse">
     <div class="panel-body">
 
         {{!-- Custom --}}
@@ -43,13 +43,15 @@
 
         <div class="row">
             <div class="col-sm-6">
-                <button type="button" class="btn btn-primary btn-block btn-define">Define</button>
-            </div>
-            <div class="col-sm-3">
-                <button type="button" class="btn btn-warning btn-block btn-translate">Translate</button>
-            </div>
-            <div class="col-sm-3">
+                <button type="button" class="btn btn-primary btn-define"><span class="glyphicon glyphicon-book" /> Add definition</button>
+                <button type="button" class="btn btn-primary btn-translate"><span class="glyphicon glyphicon-flag" /> Add translation</button>
                 {{>selectLanguage}}
+            </div>
+            <div class="col-sm-2 col-sm-offset-4">
+                <div class="pull-right">
+                    <button type="button" class="btn btn-warning btn-clear"><span class="glyphicon glyphicon-remove" /> </button>
+                    <button type="button" class="btn btn-danger btn-trash"><span class="glyphicon glyphicon-trash" /> </button>
+                </div>
             </div>
         </div>
 

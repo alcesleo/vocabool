@@ -50,12 +50,14 @@ VB.Views.Term = View.extend({
     initialize: function () {
         this.listenTo(this.model, 'change', function () {this.render(true)});
         this.listenTo(this.model, 'error', this.error);
+        this.listenTo(this.model, 'destroy', this.remove); // TODO: handle in collection as well
     },
 
 
     events: {
         'click .btn-define': 'define',
         'click .btn-translate': 'translate',
+        'click .btn-trash': 'trash',
     },
 
     error: function (obj, xhr, options) {
@@ -72,6 +74,13 @@ VB.Views.Term = View.extend({
         var btn = this.$('.btn-translate').button('loading');
         var lang = this.$('.language-selector :selected').val();
         this.model.translate(lang);
+    },
+
+    // worth noting is that both 'delete' and 'remove' are already taken
+    trash: function () {
+        if (confirm('Are you sure you want to delete this term?')) {
+            this.model.destroy();
+        }
     },
 
     render: function (collapse) {
