@@ -4,10 +4,12 @@
 window.VB = window.VB || {};
 VB.Views = VB.Views || {};
 
+var View = VB.Bases.View;
+
 
 // http://mikefowler.me/2013/11/18/page-transitions-in-backbone/
 // new RegionManager({el: '#my-region'});
-VB.Views.RegionManager = Backbone.View.extend({
+VB.Views.RegionManager = View.extend({
 
     show: function (view) {
 
@@ -27,10 +29,10 @@ VB.Views.RegionManager = Backbone.View.extend({
 // REPRESENTATION
 
 
-VB.Views.Vocabulary = Backbone.View.extend({
+VB.Views.Vocabulary = View.extend({
     tagName: 'li',
     className: 'vocabulary',
-    template: Handlebars.compile($('#tpl-vocabulary').html()),
+    templateId: 'vocabulary',
 
     // TODO: don't hardcode the links
 
@@ -41,15 +43,15 @@ VB.Views.Vocabulary = Backbone.View.extend({
 });
 
 
-VB.Views.Term = Backbone.View.extend({
+VB.Views.Term = View.extend({
     className: 'term panel panel-default',
+    templateId: 'term',
 
     initialize: function () {
         this.listenTo(this.model, 'change', this.render);
         this.listenTo(this.model, 'error', this.error);
     },
 
-    template: Handlebars.compile($('#tpl-term').html()),
 
     events: {
         'click .btn-define': 'define',
@@ -74,41 +76,6 @@ VB.Views.Term = Backbone.View.extend({
 
     render: function () {
         this.$el.html(this.template(this.model.toJSON()));
-        return this;
-    }
-});
-
-// PAGES
-
-VB.Views.TermsPage = Backbone.View.extend({
-    id: 'terms-page',
-
-    initialize: function (options) {
-        this.addView = new VB.Views.AddTerm({collection: options.vocabulary.terms});
-        this.listView = new VB.Views.TermList({collection: options.vocabulary.terms});
-    },
-
-    render: function () {
-        // TODO: cleaner
-        this.$el.empty();
-        this.$el.append(this.addView.render().el);
-        this.$el.append(this.listView.render().el);
-        return this;
-    }
-
-});
-
-VB.Views.VocabulariesPage = Backbone.View.extend({
-
-    initialize: function (options) {
-        this.addView = new VB.Views.AddVocabulary({collection: options.vocabularies});
-        this.listView = new VB.Views.VocabularyList({collection: options.vocabularies});
-    },
-
-    render: function () {
-        this.$el.empty();
-        this.$el.append(this.addView.render().el);
-        this.$el.append(this.listView.render().el);
         return this;
     }
 });

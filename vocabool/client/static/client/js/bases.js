@@ -10,7 +10,6 @@ VB.Bases.View = Backbone.View.extend({
 
     // Set this to the name of the template instead of compiling yourself
     templateId: '',
-    subviews: [],
 
     constructor: function () {
         this.setTemplate(this.templateId);
@@ -18,22 +17,12 @@ VB.Bases.View = Backbone.View.extend({
     },
 
     setTemplate: function (templateId) {
-        this.template = Handlebars.compile($('#tpl-' + this.templateId).html());
+        // non-empty string
+        if (_.isString(this.templateId) && this.templateId) {
+            this.template = Handlebars.compile($('#tpl-' + this.templateId).html());
+        }
     },
 
-    remove: function () {
-        this.removeSubviews();
-        Backbone.View.prototype.remove.apply(this, arguments);
-    },
-
-    removeSubviews: function () {
-        // remove all subviews
-        this.subviews.forEach(function (view) {
-            view.remove();
-        });
-        // empty subiews
-        this.subviews.length = 0;
-    },
 });
 
 /**
@@ -90,7 +79,8 @@ VB.Bases.DRFCollection = Backbone.PageableCollection.extend({
     mode: 'server',
 
     queryParams: {
-        currentPage: 'page'
+        currentPage: 'page',
+        // TODO: ordering
     },
 
     parseRecords: function (resp) {
