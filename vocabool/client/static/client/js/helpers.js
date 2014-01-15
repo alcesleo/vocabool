@@ -11,7 +11,6 @@ VB.languages = {
     'el': 'Greek',
     'en': 'English',
     'es': 'Spanish',
-    'fa': 'Persian',
     'fi': 'Finnish',
     'fr': 'French',
     'hr': 'Croatian',
