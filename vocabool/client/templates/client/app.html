@@ -9,6 +9,7 @@
     {% handlebarsjs 'tpl-term' %}
     {% handlebarsjs 'tpl-termcontrols' %}
     {% handlebarsjs 'tpl-addvocabulary' %}
+    {% handlebarsjs 'tpl-paginationlinks' %}
     {% handlebarsjs 'tpl-partial-selectlanguage' %}
 
     {% load staticfiles %}
@@ -27,10 +28,10 @@
     <script src="{% static 'spinjs/jquery.spin.js' %}"></script>
 
     <!-- Application -->
-    <script src="{% static 'client/js/bases.js' %}"></script>
     <script src="{% static 'client/js/models.js' %}"></script>
     <script src="{% static 'client/js/collections.js' %}"></script>
 
+    <script src="{% static 'client/js/baseviews.js' %}"></script>
     <script src="{% static 'client/js/views.js' %}"></script>
     <script src="{% static 'client/js/listviews.js' %}"></script>
     <script src="{% static 'client/js/controlviews.js' %}"></script>

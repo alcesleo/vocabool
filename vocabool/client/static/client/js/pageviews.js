@@ -1,21 +1,11 @@
 (function () {
 'use strict';
+window.VB = window.VB || {};
+VB.Views = VB.Views || {};
 
-// var FlowView = Backbone.View.extend({
+var View = VB.Views.View;
 
-//     viewClasses: [],
-//     subviews: [],
-//     createViews: function (options) {
-//         for (var i = 0, len = viewClasses.length; i < len; i++) {
-//             this.subviews[i] = new viewClasses[i](options);
-//         }
-//     }
-
-// });
-
-// PAGES
-
-VB.Views.TermsPage = Backbone.View.extend({
+VB.Views.TermsPage = View.extend({
     id: 'terms-page',
 
     initialize: function (options) {
@@ -35,7 +25,7 @@ VB.Views.TermsPage = Backbone.View.extend({
 
 });
 
-VB.Views.VocabulariesPage = Backbone.View.extend({
+VB.Views.VocabulariesPage = View.extend({
 
     initialize: function (options) {
         this.addView = new VB.Views.AddVocabulary({collection: options.vocabularies});

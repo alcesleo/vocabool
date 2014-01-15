@@ -5,8 +5,28 @@ window.VB = window.VB || {};
 VB.Collections = VB.Collections || {};
 
 
+/**
+ * Baseclass that handles paginated result-sets from Django Rest Framework
+ */
+VB.Collections.DRFCollection = Backbone.PageableCollection.extend({
+    mode: 'server',
+
+    queryParams: {
+        currentPage: 'page',
+        // TODO: ordering
+    },
+
+    parseRecords: function (resp) {
+        return resp.results;
+    },
+    parseState: function (resp, queryParams, state, options) {
+        return { totalRecords: resp.count };
+    }
+});
+
+
 // new Terms([], {vocabulary: v});
-VB.Collections.Terms = VB.Bases.DRFCollection.extend({
+VB.Collections.Terms = VB.Collections.DRFCollection.extend({
     model: VB.Models.Term,
     initialize: function (models, options) {
         // Must get a vocabulary
@@ -22,7 +42,7 @@ VB.Collections.Terms = VB.Bases.DRFCollection.extend({
 });
 
 
-VB.Collections.Vocabularies = VB.Bases.DRFCollection.extend({
+VB.Collections.Vocabularies = VB.Collections.DRFCollection.extend({
     model: VB.Models.Vocabulary,
     url: '/api/vocabulary/',
 });

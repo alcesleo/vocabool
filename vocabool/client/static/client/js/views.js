@@ -1,10 +1,9 @@
 (function () {
-
 'use strict';
 window.VB = window.VB || {};
 VB.Views = VB.Views || {};
 
-var View = VB.Bases.View;
+var View = VB.Views.View;
 
 
 // http://mikefowler.me/2013/11/18/page-transitions-in-backbone/

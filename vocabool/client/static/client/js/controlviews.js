@@ -1,8 +1,11 @@
 (function () {
-
 'use strict';
+window.VB = window.VB || {};
+VB.Views = VB.Views || {};
 
-VB.Views.AddTerm = VB.Bases.View.extend({
+var View = VB.Views.View;
+
+VB.Views.AddTerm = View.extend({
 
     initialize: function () {
         this.listenTo(this.collection, 'invalid', this.showErrors);
@@ -67,7 +70,7 @@ VB.Views.AddTerm = VB.Bases.View.extend({
 });
 
 
-VB.Views.AddVocabulary = Backbone.View.extend({
+VB.Views.AddVocabulary = View.extend({
     className: 'add-vocabulary',
 
     template: Handlebars.compile($('#tpl-addvocabulary').html()),

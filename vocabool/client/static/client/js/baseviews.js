@@ -2,12 +2,15 @@
 
 'use strict';
 window.VB = window.VB || {};
-VB.Bases = VB.Bases || {};
+VB.Views = VB.Views || {};
 
 
-// TODO: name as class templates
-VB.Bases.View = Backbone.View.extend({
+/**
+ * More convenient handlebars templates
+ */
+VB.Views.View = Backbone.View.extend({
 
+    // TODO: name as class templates
     // Set this to the name of the template instead of compiling yourself
     templateId: '',
 
@@ -26,25 +29,14 @@ VB.Bases.View = Backbone.View.extend({
 });
 
 /**
- * // All that's needed!
- * var MyListView = VB.Bases.ListView.extend({
- *     itemView: MyBackboneView
- * })
+ * Makes it easier to have subviews
  */
-VB.Bases.ListView = VB.Bases.View.extend({
+VB.Views.ParentView = VB.Views.View.extend({
 
-    itemView: null,
+    // it is important to use this array to store subviews for
+    // the rest to work
     subviews: [],
 
-    // overriding constructor to allow childs to have an initialize-method without
-    // needing to, and probably forgetting to call super.
-    constructor: function () {
-        // This gets me every time. Needed when a method calls another method that uses 'this'.
-        _.bindAll(this, 'addOne');
-        Backbone.View.apply(this, arguments); // super
-    },
-
-    // override remove to take care of subviews
     remove: function () {
         this.removeSubviews();
         Backbone.View.prototype.remove.apply(this, arguments);
@@ -57,6 +49,26 @@ VB.Bases.ListView = VB.Bases.View.extend({
         });
         // empty subiews
         this.subviews.length = 0;
+    },
+
+});
+
+/**
+ * // All that's needed!
+ * var MyListView = VB.Views.ListView.extend({
+ *     itemView: MyBackboneView
+ * })
+ */
+VB.Views.ListView = VB.Views.ParentView.extend({
+
+    itemView: null,
+
+    // overriding constructor to allow childs to have an initialize-method without
+    // needing to, and probably forgetting to call super.
+    constructor: function () {
+        // This gets me every time. Needed when a method calls another method that uses 'this'.
+        _.bindAll(this, 'addOne');
+        Backbone.View.apply(this, arguments); // super
     },
 
     addOne: function (model) {
@@ -72,23 +84,5 @@ VB.Bases.ListView = VB.Bases.View.extend({
     }
 });
 
-/**
- * Baseclass that handles paginated result-sets from Django Rest Framework
- */
-VB.Bases.DRFCollection = Backbone.PageableCollection.extend({
-    mode: 'server',
-
-    queryParams: {
-        currentPage: 'page',
-        // TODO: ordering
-    },
-
-    parseRecords: function (resp) {
-        return resp.results;
-    },
-    parseState: function (resp, queryParams, state, options) {
-        return { totalRecords: resp.count };
-    }
-});
 
 }());

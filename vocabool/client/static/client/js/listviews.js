@@ -3,8 +3,8 @@
 window.VB = window.VB || {};
 VB.Views = VB.Views || {};
 
-var ListView = VB.Bases.ListView,
-    View = VB.Bases.View;
+var ListView = VB.Views.ListView,
+    View = VB.Views.View;
 
 VB.Views.VocabularyList = ListView.extend({
 
