@@ -22,10 +22,9 @@ VB.Models.Term = Backbone.Model.extend({
         var self = this,
             params = { define: null };
 
-        self.fetch({ data: params }).done(function () {
+        return self.fetch({ data: params }).done(function () {
             self.trigger('change');
         });
-        return self;
     },
 
     translate: function (language) {
@@ -34,20 +33,18 @@ VB.Models.Term = Backbone.Model.extend({
             params = { translate_to: language };
 
 
-        self.fetch({ data: params }).done(function () {
+        return self.fetch({ data: params }).done(function () {
             self.trigger('change');
         });
-        return self;
     },
 
     empty: function () {
         var self = this,
             params = { clear: null };
 
-        self.fetch({ data: params }).done(function () {
+        return self.fetch({ data: params }).done(function () {
             self.trigger('change');
         });
-        return self;
     },
 
 

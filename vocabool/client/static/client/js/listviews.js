@@ -38,7 +38,7 @@ VB.Views.PaginationLinks = View.extend({
         return {
             nextDisabled: !this.collection.hasNext(),
             previousDisabled: !this.collection.hasPrevious(),
-        }
+        };
     },
 
     events: {

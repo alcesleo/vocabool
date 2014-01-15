@@ -11,15 +11,22 @@ VB.Collections = VB.Collections || {};
 VB.Collections.DRFCollection = Backbone.PageableCollection.extend({
     mode: 'server',
 
+    state: {
+        pageSize: 10
+    },
+
     queryParams: {
         currentPage: 'page',
+        pageSize: 'page_size',
         // TODO: ordering
+        ordering: function () { return '-timestamp' }
     },
 
     parseRecords: function (resp) {
         return resp.results;
     },
     parseState: function (resp, queryParams, state, options) {
+        console.log(this.state);
         return { totalRecords: resp.count };
     }
 });
