@@ -53,8 +53,13 @@
             </div>
             <div class="col-sm-2 col-sm-offset-4">
                 <div class="pull-right">
-                    <button type="button" class="btn btn-warning btn-clear"><span class="glyphicon glyphicon-remove" /> </button>
-                    <button type="button" class="btn btn-danger btn-trash"><span class="glyphicon glyphicon-trash" /> </button>
+                    {{!-- FIXME: very ugly conditional, make helper? --}}
+                    <button type="button" class="btn btn-warning btn-clear {{#unless definitions}}{{#unless translations}}disabled{{/unless}}{{/unless}}">
+                        <span class="glyphicon glyphicon-remove" />
+                    </button>
+                    <button type="button" class="btn btn-danger btn-trash">
+                        <span class="glyphicon glyphicon-trash" />
+                    </button>
                 </div>
             </div>
         </div>
