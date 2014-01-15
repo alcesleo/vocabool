@@ -30,8 +30,7 @@ VB.Views.RegionManager = View.extend({
 
 
 VB.Views.Vocabulary = View.extend({
-    tagName: 'li',
-    className: 'vocabulary',
+    className: 'vocabulary panel panel-default',
     templateId: 'vocabulary',
 
     // TODO: don't hardcode the links
