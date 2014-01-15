@@ -1,6 +1,10 @@
-<a href="/app/#vocabulary/{{id}}">
-    <div class="vocabulary">
-        <div>Name: {{name}}</div>
-        <div>Count: {{count}}</div>
-    </div>
-</a>
+<div class="panel-heading">
+    <h4 class="panel-title">
+        {{!-- TODO: Don't have links in template --}}
+        <a href="/app/#vocabulary/{{id}}">
+            <span class="glyphicon glyphicon-book"></span>
+            {{name}}
+        </a>
+    </h4>
+</div>
+<div class="panel-footer">Count: {{count}}</div>

@@ -8,8 +8,8 @@ var ListView = VB.Bases.ListView,
 
 VB.Views.VocabularyList = ListView.extend({
 
-    tagName: 'ul',
-    className: 'vocabularies',
+    className: 'panel-group',
+    id: 'vocabulary-list',
     itemView: VB.Views.Vocabulary,
 
     initialize: function () {
