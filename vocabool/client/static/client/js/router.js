@@ -5,8 +5,8 @@ window.VB = window.VB || {};
 
 VB.Router = Backbone.Router.extend({
 
-    initialize: function () {
-        this.mainView = new VB.Views.RegionManager({el: '#view'});
+    initialize: function (options) {
+        this.region = new VB.Views.RegionManager({el: '#view'});
     },
 
     routes: {
@@ -23,7 +23,7 @@ VB.Router = Backbone.Router.extend({
         // TODO: Fail
         vocabularies.fetch().done(function () {
             var view = new VB.Views.VocabulariesPage({vocabularies: vocabularies});
-            self.mainView.show(view);
+            self.region.show(view);
         });
     },
 
@@ -39,7 +39,7 @@ VB.Router = Backbone.Router.extend({
         // fetch and show terms
         vocabulary.terms.fetch().done(function () {
             var view = new VB.Views.TermsPage({vocabulary: vocabulary});
-            self.mainView.show(view);
+            self.region.show(view);
         });
     },
 });
