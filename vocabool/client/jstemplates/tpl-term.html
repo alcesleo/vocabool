@@ -43,8 +43,12 @@
 
         <div class="row">
             <div class="col-sm-6">
-                <button type="button" class="btn btn-primary btn-define"><span class="glyphicon glyphicon-book" /> Add definition</button>
-                <button type="button" class="btn btn-primary btn-translate"><span class="glyphicon glyphicon-flag" /> Add translation</button>
+                <button type="button" class="btn btn-primary btn-define {{#if definitions}}disabled{{/if}}">
+                    <span class="glyphicon glyphicon-book" /> Add definition
+                </button>
+                <button type="button" class="btn btn-primary btn-translate">
+                    <span class="glyphicon glyphicon-flag" /> Add translation
+                </button>
                 {{>selectLanguage}}
             </div>
             <div class="col-sm-2 col-sm-offset-4">
