@@ -48,7 +48,7 @@ VB.Views.Term = View.extend({
     templateId: 'term',
 
     initialize: function () {
-        this.listenTo(this.model, 'change', this.render);
+        this.listenTo(this.model, 'change', function () {this.render(true)});
         this.listenTo(this.model, 'error', this.error);
     },
 
@@ -74,8 +74,12 @@ VB.Views.Term = View.extend({
         this.model.translate(lang);
     },
 
-    render: function () {
+    render: function (collapse) {
         this.$el.html(this.template(this.model.toJSON()));
+        if (collapse) {
+            // TODO: make it stay down
+            this.$('.collapse').collapse('show');
+        }
         return this;
     }
 });
