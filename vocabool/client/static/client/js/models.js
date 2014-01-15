@@ -18,13 +18,14 @@ VB.Models.Term = Backbone.Model.extend({
     },
 
     define: function () {
+        // TODO: DRY
         var self = this,
             params = { define: null };
 
-        this.fetch({ data: params }).done(function () {
+        self.fetch({ data: params }).done(function () {
             self.trigger('change');
         });
-        return this;
+        return self;
     },
 
     translate: function (language) {
@@ -33,10 +34,20 @@ VB.Models.Term = Backbone.Model.extend({
             params = { translate_to: language };
 
 
-        this.fetch({ data: params }).done(function () {
+        self.fetch({ data: params }).done(function () {
             self.trigger('change');
         });
-        return this;
+        return self;
+    },
+
+    empty: function () {
+        var self = this,
+            params = { clear: null };
+
+        self.fetch({ data: params }).done(function () {
+            self.trigger('change');
+        });
+        return self;
     },
 
 
@@ -49,6 +60,7 @@ VB.Models.Term = Backbone.Model.extend({
             // TODO: Complete events
             self.trigger('change');
         });
+        // TODO: return deferred
         return this;
 
     }

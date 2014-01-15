@@ -58,6 +58,7 @@ VB.Views.Term = View.extend({
         'click .btn-define': 'define',
         'click .btn-translate': 'translate',
         'click .btn-trash': 'trash',
+        'click .btn-clear': 'empty',
     },
 
     error: function (obj, xhr, options) {
@@ -80,6 +81,13 @@ VB.Views.Term = View.extend({
     trash: function () {
         if (confirm('Are you sure you want to delete this term?')) {
             this.model.destroy();
+        }
+    },
+
+    // 'clear' is also taken
+    empty: function () {
+        if (confirm('Remove all translations and definitions?')) {
+            this.model.empty();
         }
     },
 

@@ -67,8 +67,11 @@ class TermDetail(generics.RetrieveUpdateDestroyAPIView):
     GET-parameters:
         ?define           -- add a definition object before returning
         ?translate_to=en  -- add a translation (here to english) object before returning
+        ?clear            -- clear all associated translations and definitions
 
-    These can be used together:
+    translate_to and define can be used together, but clear overrides both of them.
+
+    Example:
 
         /api/term/3/?translate_to=ru&define
 
@@ -83,11 +86,16 @@ class TermDetail(generics.RetrieveUpdateDestroyAPIView):
         """Calls service methods on object based on GET-parameters."""
         service = Service()
 
+        if 'clear' in params:
+            service.clear(term)
+            return
+
         if 'define' in params:
             service.define(term)
 
         if 'translate_to' in params:
             service.translate(term, params['translate_to'])
+
 
     # handle query params
     def get_object(self):

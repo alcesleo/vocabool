@@ -52,3 +52,9 @@ class Service():
             raise Http404
 
         term_obj.definitions.add(definition)
+
+
+    def clear(self, term_obj):
+        """Clears all definitions and translations from a term object."""
+        term_obj.definitions.clear()
+        term_obj.translations.clear()
