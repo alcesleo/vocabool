@@ -41,6 +41,12 @@
             </ul>
         {{/if}}
 
+        {{#unless definitions}}{{#unless translations}}
+            <p>Please add a translation or a definition</p>
+        {{/unless}}{{/unless}}
+
+        <hr />
+
         <div class="row">
             <div class="col-sm-6">
                 <button type="button" class="btn btn-primary btn-define {{#if definitions}}disabled{{/if}}">
