@@ -15,6 +15,8 @@ First, create a Python2.7 web app, then enter a console.
     git clone https://github.com/alcesleo/vocabool.git
     cd vocabool
 
+Make sure `vocabool/settings/environment.py` contains your correct credentials.
+
     # install python dependencies
     pip install -r requirements.txt
 
