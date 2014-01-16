@@ -36,11 +36,16 @@ VB.Router = Backbone.Router.extend({
             // has the right id it will use the correct URL to fetch its terms
             vocabulary = new VB.Models.Vocabulary({id: id});
 
-        // fetch and show terms
-        vocabulary.terms.fetch().done(function () {
-            var view = new VB.Views.TermsPage({vocabulary: vocabulary});
-            self.region.show(view);
+        // FIXME: this is really ugly
+        // Fetch both the vocabulary and its terms
+        vocabulary.fetch().done(function () {
+            // fetch and show terms
+            vocabulary.terms.fetch().done(function () {
+                var view = new VB.Views.TermsPage({vocabulary: vocabulary});
+                self.region.show(view);
+            });
         });
+
     },
 });
 
