@@ -1,6 +1,8 @@
 # Vocabool
 
-Pretty much everything is Python3 ready except Compressor
+## Version
+
+Pretty much everything is Python3 ready except Compressor, so it's running on 2.7.5 for now
 
 ## Supported languages
 
@@ -38,10 +40,10 @@ Minor:
 
 ## License
 
-TODO
+**MIT**
 
 ## TODO
 
 - Correct spelling
-- Define translations
-
+- Define based on translation
+- Custom text input
