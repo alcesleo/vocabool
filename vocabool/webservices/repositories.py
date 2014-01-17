@@ -4,6 +4,7 @@ from vocabool.webservices.adapters import WiktionaryAdapter, YandexTranslateAdap
 from vocabool.domain.models import Definition, Translation
 
 # TODO: if webservice unavailable
+# TODO: Maybe this and service.py should be in a standalone service app...
 
 class DefinitionRepository():
 
