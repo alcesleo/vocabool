@@ -3,7 +3,9 @@
 window.VB = window.VB || {};
 VB.Views = VB.Views || {};
 
+
 var View = VB.Views.View;
+
 
 VB.Views.TermsPage = View.extend({
     id: 'terms-page',
@@ -29,6 +31,7 @@ VB.Views.TermsPage = View.extend({
 
 });
 
+
 VB.Views.VocabulariesPage = View.extend({
 
     initialize: function (options) {
@@ -43,5 +46,6 @@ VB.Views.VocabulariesPage = View.extend({
         return this;
     }
 });
+
 
 }());

@@ -48,6 +48,7 @@ VB.Models.Term = Backbone.Model.extend({
     }
 });
 
+
 VB.Models.Vocabulary = Backbone.Model.extend({
     initialize: function () {
         // create empty term collection with reference to this vocabulary

@@ -3,6 +3,7 @@
 window.VB = window.VB || {};
 VB.Views = VB.Views || {};
 
+
 var View = VB.Views.View;
 
 
@@ -23,9 +24,6 @@ VB.Views.RegionManager = View.extend({
     }
 
 });
-
-
-// REPRESENTATION
 
 
 VB.Views.Vocabulary = View.extend({
@@ -106,5 +104,6 @@ VB.Views.Term = View.extend({
         return this;
     }
 });
+
 
 }());

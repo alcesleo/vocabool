@@ -3,8 +3,10 @@
 window.VB = window.VB || {};
 VB.Views = VB.Views || {};
 
+
 var ListView = VB.Views.ListView,
     View = VB.Views.View;
+
 
 VB.Views.VocabularyList = ListView.extend({
 
@@ -29,6 +31,7 @@ VB.Views.TermList = ListView.extend({
     },
 
 });
+
 
 VB.Views.PaginationLinks = View.extend({
 
@@ -66,5 +69,6 @@ VB.Views.PaginationLinks = View.extend({
     }
 
 });
+
 
 }());

@@ -1,7 +1,7 @@
 (function () {
-
 'use strict';
 window.VB = window.VB || {};
+
 
 VB.Router = Backbone.Router.extend({
 
@@ -48,5 +48,6 @@ VB.Router = Backbone.Router.extend({
 
     },
 });
+
 
 }());
