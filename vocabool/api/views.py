@@ -51,13 +51,14 @@ class TermList(generics.ListCreateAPIView):
 
     def _deny_double_insert(self):
         """Manual check to prevent inserting a term that already exists in this vocabulary."""
-
         vocabulary = self.kwargs['pk']
         text = self.request.DATA['text']
         lang = self.request.DATA['language']
+
         exists = Term.objects.filter(vocabulary=vocabulary,
                                      text=text,
                                      language=lang).exists()
+
         if exists:
             raise DuplicateNotAllowed()
 
@@ -91,7 +92,6 @@ class TermDetail(generics.RetrieveUpdateDestroyAPIView):
     Example:
 
         /api/term/3/?translate_to=ru&define
-
     """
 
     model = Term
