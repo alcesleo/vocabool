@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from rest_framework import permissions, exceptions, generics, filters
 from .serializers import VocabularySerializer, TermSerializer, UserSerializer
 from .permissions import IsOwnerOrReadOnly
+from .exceptions import DuplicateNotAllowed
 from vocabool.domain.models import Vocabulary, Term, Definition
 from vocabool.webservices.service import Service
 
@@ -48,7 +49,23 @@ class TermList(generics.ListCreateAPIView):
     ordering = ('text', 'timestamp')
 
 
+    def _deny_double_insert(self):
+        """Manual check to prevent inserting a term that already exists in this vocabulary."""
+
+        vocabulary = self.kwargs['pk']
+        text = self.request.DATA['text']
+        lang = self.request.DATA['language']
+        exists = Term.objects.filter(vocabulary=vocabulary,
+                                     text=text,
+                                     language=lang).exists()
+        if exists:
+            raise DuplicateNotAllowed()
+
     def pre_save(self, obj):
+
+        # Prevent duplicate terms
+        self._deny_double_insert()
+
         obj.owner = self.request.user
         obj.vocabulary_id = self.kwargs['pk'] # TODO: if not exists
 
