@@ -37,6 +37,7 @@ Minor:
 - Flags from <http://flag-sprites.com/>
 - Caching using [Django Compressor](http://django-compressor.readthedocs.org/en/latest/)
 - Authentication using [Django Registration](https://django-registration.readthedocs.org/en/latest/)
+- [MWParserFromHell](http://mwparserfromhell.readthedocs.org/en/latest/) helped with parsing Wiktionary data
 
 ## License
 
@@ -44,6 +45,9 @@ Minor:
 
 ## TODO
 
+- Offline cache manifest
 - Correct spelling
 - Define based on translation
 - Custom text input
+- Move terms between vocabularies
+- Batch delete
