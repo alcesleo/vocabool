@@ -45,21 +45,6 @@ VB.Models.Term = Backbone.Model.extend({
         return self.fetch({ data: params }).done(function () {
             self.trigger('change');
         });
-    },
-
-
-    translateAndDefine: function (language) {
-
-        var params = {define: '', translate_to: language},
-            self = this;
-
-        this.fetch({ data: params }).done(function () {
-            // TODO: Complete events
-            self.trigger('change');
-        });
-        // TODO: return deferred
-        return this;
-
     }
 });
 
