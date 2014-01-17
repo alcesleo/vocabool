@@ -57,11 +57,4 @@ VB.Models.Vocabulary = Backbone.Model.extend({
 });
 
 
-VB.Models.Status = Backbone.Model.extend({
-    defaults: {
-        user: null,
-        vocabulary: null,
-    }
-});
-
 }());
