@@ -4,6 +4,24 @@
 
 Pretty much everything is Python3 ready except Compressor, so it's running on 2.7.5 for now
 
+## Structure
+
+Overview of the folder structure.
+
+- `docs/` - documentation
+- `templates` - template overrides, other templates are in their apps
+- `vocabool` - pretty much the whole application, contains a bunch of apps
+    - `accounts/` - login and registration
+    - `api/` - the REST interface
+    - `client/` - the javascript client app
+        - `jstemplates` - the handlebars templates, handled on the client
+        - `static` - all js and css
+        - `templates` - the few django templates needed to start up the client app
+    - `domain` - the domain models
+    - `libs` - what couldn't fit anywhere else
+    - `settings` - a settings.py module, but as a folder
+    - `webservices` - handles communication with external api:s
+
 ## Supported languages
 
 - Czech
