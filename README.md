@@ -34,9 +34,9 @@ have seriously impressed me, and make me proud to be a human being.
 
 Minor:
 
-- flags from <http://flag-sprites.com/>
-- caching django compressor
-- django-registration login outside the SPA
+- Flags from <http://flag-sprites.com/>
+- Caching using [Django Compressor](http://django-compressor.readthedocs.org/en/latest/)
+- Authentication using [Django Registration](https://django-registration.readthedocs.org/en/latest/)
 
 ## License
 
