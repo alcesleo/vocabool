@@ -82,7 +82,7 @@ teknikerna jag arbetat med.
 Jag har dock gjort ett väldigt dåligt jobb när det kommer till planering, jag har
 inte haft mycket att visa fram tills sista veckan i projektet. Jag tror att det till
 stor del beror på ovana att arbeta med de här teknikerna - det här är första gången
-jag skriver ett eget API, och första gången jag använder ett API för att driva
+jag skriver ett eget REST API, och första gången jag använder ett REST API för att driva
 en SPA på klientsidan. Det kändes som att det var svårt att testa utförligt under
 projektets gång då både server och klient behövde vara någorlunda funktionsdugliga
 för att något skulle fungera.
