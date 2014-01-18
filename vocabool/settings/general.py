@@ -135,5 +135,4 @@ BOWER_INSTALLED_APPS = (
     'backbone',
     'handlebars',
     'bootstrap',
-    'spinjs',
 )
