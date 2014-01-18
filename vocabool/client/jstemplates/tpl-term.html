@@ -48,6 +48,7 @@
         <hr />
 
         <div class="row">
+            {{!-- Define/Translate --}}
             <div class="col-sm-6">
                 <button type="button" class="btn btn-primary btn-define {{#if definitions}}disabled{{/if}}">
                     <span class="glyphicon glyphicon-book" /> Add definition
@@ -57,6 +58,7 @@
                 </button>
                 {{>selectLanguage}}
             </div>
+            {{!-- Clear/Delete --}}
             <div class="col-sm-2 col-sm-offset-4">
                 <div class="pull-right">
                     {{!-- FIXME: very ugly conditional, make helper? --}}
