@@ -9,3 +9,7 @@ body {
 .container {
     padding: 0 15px;
 }
+
+.well .form-control {
+    margin-bottom: 10px;
+}
