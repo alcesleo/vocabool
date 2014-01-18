@@ -44,9 +44,8 @@ VB.Views.Term = View.extend({
     templateId: 'term',
 
     initialize: function () {
-        this.listenTo(this.model, 'change', function () {this.render(true)});
-        this.listenTo(this.model, 'error', this.error);
-        this.listenTo(this.model, 'destroy', this.remove); // TODO: handle in collection as well
+        this.listenTo(this.model, 'change', function () {this.render(true)}); // FIXME: very ugly
+        this.listenTo(this.model, 'destroy', this.remove);
     },
 
 
@@ -57,9 +56,6 @@ VB.Views.Term = View.extend({
         'click .btn-clear': 'empty',
     },
 
-    error: function (obj, xhr, options) {
-        alert(xhr.responseJSON.detail);
-    },
 
     define: function () {
         // TODO: DRY
@@ -69,6 +65,7 @@ VB.Views.Term = View.extend({
             btn.button('reset');
         });
     },
+
 
     translate: function () {
         // TODO: Refactor loading buttons

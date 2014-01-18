@@ -8,7 +8,9 @@ var View = VB.Views.View;
 VB.Views.AddTerm = View.extend({
 
     initialize: function () {
-        this.listenTo(this.collection, 'invalid', this.showErrors);
+        this.listenTo(this.collection, 'invalid', this.validationError);
+        this.listenTo(this.collection, 'error', this.serverError);
+        this.listenTo(this.collection, 'all', function () {console.log(arguments)});
     },
 
     className: 'add-term',
@@ -22,10 +24,24 @@ VB.Views.AddTerm = View.extend({
         'click .btn-sort': 'sort'
     },
 
-    showErrors: function (model, errors) {
-        alert(errors.join('\n'));
+    // renders errormessage
+    showError: function (message) {
+        alert(message);
     },
 
+    // local error
+    validationError: function (model, errors) {
+        this.showError(errors.join('\n'));
+    },
+
+    // remote error
+    serverError: function (model, xhr, options) {
+        // FIXME: Should be done in a nicer way
+        model.destroy(); // didn't work, remove it
+        this.showError(xhr.responseJSON.detail);
+    },
+
+    // TODO: Implement sorting
     sort: function (event) {
         // Get data attr
         var $target = $(event.target);

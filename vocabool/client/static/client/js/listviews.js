@@ -46,7 +46,6 @@ VB.Views.PaginationLinks = View.extend({
 
     initialize: function () {
         this.listenTo(this.collection, 'sync', this.render);
-        this.listenTo(this.collection, 'all', function () {console.log(arguments)});
     },
 
     // Disable buttons if necessary
