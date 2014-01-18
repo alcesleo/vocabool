@@ -37,6 +37,11 @@ VB.Views.PaginationLinks = View.extend({
 
     templateId: 'paginationlinks',
 
+    initialize: function () {
+        this.listenTo(this.collection, 'sync', this.render);
+    },
+
+    // Disable buttons if necessary
     getOptions: function () {
         return {
             nextDisabled: !this.collection.hasNext(),
