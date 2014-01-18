@@ -1,17 +1,21 @@
-Den skriftliga projektrapporten du lämnar in ska innehålla följande:
-
-## TODO:
-
-- kunde gjort bättre: planering, prototypat - hade inget att visa tills sista veckan
-
-
 # Inledning / Bakgrund
 
-Inledning där du beskriver vad du gjort och bakgrunden till din applikation
+Vocabool är en persistent ordliste-app. Man kan skapa ordlistor(vokabulär) där
+man förvarar ett antal termer med tillhörande definitioner och översättningar.
+
+Jag använder detta framförallt när jag ser på TV-serier, när jag hör ett ord
+jag inte förstår så skriver jag in det i appen och lägger till en definition och
+en översättning till svenska. Då och då skrollar jag igenom listan och ser om jag
+kommer ihåg alla ord. Jag känner att jag lär mig snabbt av detta då jag har en
+historik över orden jag lär mig, och dessutom ofta förknippar dem med en scen.
+
+Ett annat användningsområde är att ha en turist-ordlista där man skriver in ord
+som "hej", "tack", "mat" osv, och lägger till översättningar till språken som
+används i länderna man ska resa till.
 
 # Struktur
 
-Inkludera en schematisk bild över applikationens beståndsdelar så att läsaren har enklare att förstå applikationens dataflöde.
+![](structure.jpg)
 
 # Backend
 
@@ -40,6 +44,7 @@ komplexiteten på klientapplikationen.
 Definitionerna hämtas från [Wiktionary](http://www.wiktionary.org/), som har extremt
 bra och mycket data, lagrad i det mest svårtolkade formatet jag någonsin sett.
 I slutändan så var den värd tiden den tog att få [parsningen][Wiktionary parsing] rätt.
+Wiktionary kräver ingen nyckel, dock en User-Agent header för varje request.
 
 Översättningarna hämtas från [Yandex Translate](http://translate.yandex.com/),
 Yandex är Googles ryska motsvarighet, som tyvärr inte är alls lika bra på översättning
@@ -69,10 +74,6 @@ länkar mellan olika sidor skapar onödigt mycket problem.
 
 # Reflektion
 
-**TODOOOOOOOOOOOOOOOOOOOOOOO------------------------------------------**
-
-Egenreflektion kring projektet: Här tar du upp hur projektet har gått. Vilka eventuella problem har du stött på? Finns det funktioner som du velat implementera men inte hunnit? Hur skulle du vilja jobba vidare med din applikation?
-
 Det känns som detta har varit det mest lärorika projektet hittills, då jag praktiskt
 taget lärt mig ett nytt språk, och ett nytt ramverk, något som
 jag är väldigt glad att jag gjorde. Python och Django är utan tvekan de trevligaste
@@ -82,25 +83,40 @@ Jag har dock gjort ett väldigt dåligt jobb när det kommer till planering, jag
 inte haft mycket att visa fram tills sista veckan i projektet. Jag tror att det till
 stor del beror på ovana att arbeta med de här teknikerna - det här är första gången
 jag skriver ett eget API, och första gången jag använder ett API för att driva
-en SPA på klientsidan.
+en SPA på klientsidan. Det kändes som att det var svårt att testa utförligt under
+projektets gång då både server och klient behövde vara någorlunda funktionsdugliga
+för att något skulle fungera.
 
-Med mer arbete är jag övertygad om att en SPA ger ett bättre resultat än en vanlig
-hemsida, men de är uppenbarligen fortfarande mycket svårare att utveckla. Det
-kändes som att borra en tunnel genom ett berg - man börjar i var sin ände och
-gör bäst i att träffas på mitten, men inget tåg kommer att köra på rälsen tills
-dess. Tyvärr är det ganska mycket dubbelarbete att göra såhär.
+En SPA ger definitivt ett bättre resultat i slutändan, men det behövs en hel del
+mer arbete för att nå dit.
 
 ## Vidareutveckling
 
-- Offline cache manifest
+Det finns mycket som jag fortfarande vill lägga till i applikationen, men jag
+har lyckats göra den så pass funktionsduglig att jag nu använder den till det
+jag planerat. De mest kritiska funktionerna som saknas är sökning och sortering,
+möjligheten att flytta termer mellan vokabulär och att kunna skriva in egen text
+på termerna.
+
+Det är stor chans att jag jobbar mer på detta projektet i framtiden då jag
+faktiskt använder det själv.
 
 # Risker
 
+**TODO**
 Risker med din applikation. Reflektera över vilka risker det finns med din applikation; rent tekniskt, säkerhet, etiskt m.m.
 
 # Betygshöjande
 
-Skriv också om de eventuella delar du anser vara betygshöjande med din applikation. Motivera varför du anser dessa vara betygshöjande.
+Applikationen är responsiv och webbläsarens framåt/bakåt-knappar fungerar som de ska,
+jag tycker också att jag lyckats göra ett ganska bra API som returnerar rätt statuskoder
+osv. Trots att detta är första gången jag använder Django i ett riktigt projekt
+(och dessutom inte använder det på det "vanliga" sättet) så tycker jag att jag
+har använt ramverket på ett bra sätt, jag har tagit till mig de standarder som
+finns och projektet är välorganiserat. De externa API:erna som används är inkapslade
+i adaptrar som gör det mycket enkelt att byta ut en tjänst mot en annan, om jag
+till exempel skulle vilja byta ut Yandex Translate mot Google Translate så kan jag
+göra det utan att det påverkar resten av applikationen.
 
 ---
 
