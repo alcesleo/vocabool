@@ -63,9 +63,11 @@ Minor:
 
 ## TODO
 
+- Sorting
 - Offline cache manifest
 - Correct spelling
 - Define based on translation
 - Custom text input
 - Move terms between vocabularies
 - Batch delete
+- Loading icon
