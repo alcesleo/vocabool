@@ -1,5 +1,4 @@
 (function () {
-
 'use strict';
 window.VB = window.VB || {};
 VB.Views = VB.Views || {};
@@ -70,6 +69,8 @@ VB.Views.ListView = VB.Views.ParentView.extend({
         _.bindAll(this, 'addOne');
         Backbone.View.apply(this, arguments); // super
     },
+
+    // FIXME: I really don't like this part, not very flexible
 
     addOne: function (model) {
         var view = new this.itemView({model: model});
