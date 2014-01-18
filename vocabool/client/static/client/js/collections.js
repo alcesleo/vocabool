@@ -1,5 +1,4 @@
 (function () {
-
 'use strict';
 window.VB = window.VB || {};
 VB.Collections = VB.Collections || {};
@@ -25,8 +24,8 @@ VB.Collections.DRFCollection = Backbone.PageableCollection.extend({
     parseRecords: function (resp) {
         return resp.results;
     },
+
     parseState: function (resp, queryParams, state, options) {
-        console.log(this.state);
         return { totalRecords: resp.count };
     }
 });
