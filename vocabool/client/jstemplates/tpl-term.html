@@ -49,17 +49,20 @@
 
         <div class="row">
             {{!-- Define/Translate --}}
-            <div class="col-sm-6">
+            <div class="col-sm-10">
                 <button type="button" class="btn btn-primary btn-define {{#if definitions}}disabled{{/if}}">
                     <span class="glyphicon glyphicon-book" /> Add definition
                 </button>
-                <button type="button" class="btn btn-primary btn-translate">
-                    <span class="glyphicon glyphicon-flag" /> Add translation
-                </button>
-                {{>selectLanguage}}
+
+                <div class="inline-group">
+                    <button type="button" class="btn btn-primary btn-translate">
+                        <span class="glyphicon glyphicon-flag" /> Add translation
+                    </button>
+                    {{>selectLanguage}}
+                </div>
             </div>
             {{!-- Clear/Delete --}}
-            <div class="col-sm-2 col-sm-offset-4">
+            <div class="col-sm-2">
                 <div class="pull-right">
                     {{!-- FIXME: very ugly conditional, make helper? --}}
                     <button type="button" class="btn btn-warning btn-clear {{#unless definitions}}{{#unless translations}}disabled{{/unless}}{{/unless}}">

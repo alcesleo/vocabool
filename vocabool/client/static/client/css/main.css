@@ -13,3 +13,8 @@ body {
 .well .form-control {
     margin-bottom: 10px;
 }
+
+.inline-group {
+    display: inline-block;
+    margin: 3px 0;
+}
