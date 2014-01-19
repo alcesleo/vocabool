@@ -40,7 +40,7 @@ VB.Views.Vocabulary = View.extend({
 
     // TODO: don't hardcode the links
     trash: function () {
-        if (confirm('Are you sure you want to delete this term?')) {
+        if (confirm('Are you sure you want to delete this vocabulary and all its terms?\nThis can not be undone!')) {
             this.model.destroy();
         }
     },
