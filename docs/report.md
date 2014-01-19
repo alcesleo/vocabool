@@ -88,7 +88,8 @@ projektets gång då både server och klient behövde vara någorlunda funktions
 för att något skulle fungera.
 
 En SPA ger definitivt ett bättre resultat i slutändan, men det behövs en hel del
-mer arbete för att nå dit.
+mer arbete för att nå dit. Det kommer krävas ytterligare lite kärlek för att projektet
+ska kännas färdigt.
 
 ## Vidareutveckling
 
@@ -101,10 +102,16 @@ på termerna.
 Det är stor chans att jag jobbar mer på detta projektet i framtiden då jag
 faktiskt använder det själv.
 
-# Risker
+# Säkerhet/Risker
 
-**TODO**
-Risker med din applikation. Reflektera över vilka risker det finns med din applikation; rent tekniskt, säkerhet, etiskt m.m.
+Båda tjänsterna jag använder verkar vara trygga och stabila, parsingen av Wiktionarys
+data är inte riktigt så vältestad som den borde vara men ger oftast tillfredsställande
+resultat. De har en hyfsat genomgånende standard som i alla fall verkar fungera
+att tolka än så länge. Jag cachear resultaten från båda tjänsterna så inga onödiga
+förfrågningar går ut ifrån applikationen, dock om något ändras i API:erna så får
+jag inte veta detta.
+
+All användarinteraktion är skyddad med CSRF.
 
 # Betygshöjande
 
