@@ -22,7 +22,7 @@ class Definition(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
-        return '{0}: {1}'.format(ellipsify(self.text),
+        return u'{0}: {1}'.format(ellipsify(self.text),
                                  ellipsify(self.definition))
 
 
@@ -34,7 +34,7 @@ class Translation(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
-        return '{0}: {1}'.format(ellipsify(self.text),
+        return u'{0}: {1}'.format(ellipsify(self.text),
                                  ellipsify(self.translation))
 
 
