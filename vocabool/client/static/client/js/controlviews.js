@@ -15,8 +15,6 @@ VB.Views.AddTerm = View.extend({
 
     className: 'add-term',
 
-    // TODO: Handle 'invalid' event
-
     templateId: 'termcontrols',
 
     events: {
@@ -37,7 +35,6 @@ VB.Views.AddTerm = View.extend({
     // remote error
     serverError: function (model, xhr, options) {
         // FIXME: Should be done in a nicer way
-        model.destroy(); // didn't work, remove it
         this.showError(xhr.responseJSON.detail);
     },
 
@@ -77,6 +74,7 @@ VB.Views.AddTerm = View.extend({
         this.collection.create(attrs, {validate: true});
 
         // TODO: scroll to added term, make sure it's open
+        // TODO: Successmessage!!!
     },
 
     render: function () {
