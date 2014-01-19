@@ -1,6 +1,7 @@
 # Vocabool
 
-[Link](http://alcesleo.pythonanywhere.com/) to the live app.
+- [Link to the live app](http://alcesleo.pythonanywhere.com/)
+- [Link to a video demo (swedish)](https://www.youtube.com/watch?v=WhHxrrN5yBU&feature=youtu.be)
 
 ## Version
 
