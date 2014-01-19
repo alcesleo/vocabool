@@ -1,6 +1,15 @@
-<a href="/app/#vocabulary/{{id}}">
-    <div class="vocabulary">
-        <div>Name: {{name}}</div>
-        <div>Count: {{count}}</div>
-    </div>
-</a>
+<div class="panel-heading">
+    <h4 class="panel-title">
+        {{!-- TODO: Don't have links in template --}}
+        <a href="/app/#vocabulary/{{id}}">
+            <span class="glyphicon glyphicon-folder-open"></span> {{name}}
+        </a>
+
+        <div class="pull-right">
+            <button type="button" class="btn btn-danger btn-trash">
+                <span class="glyphicon glyphicon-trash" />
+            </button>
+        </div>
+    </h4>
+</div>
+<div class="panel-footer">Count: {{count}}</div>

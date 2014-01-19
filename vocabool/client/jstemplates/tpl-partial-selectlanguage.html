@@ -1,0 +1,8 @@
+<select name="language" class="language-selector">
+    {{!-- Access global VB.languages --}}
+    {{#global 'VB'}}
+        {{#each languages}}
+            <option value="{{@key}}">{{this}}</option>
+        {{/each}}
+    {{/global}}
+</select>

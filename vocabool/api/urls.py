@@ -6,5 +6,5 @@ urlpatterns = patterns('',
     url(r'vocabulary/$', views.VocabularyList.as_view()),
     url(r'vocabulary/(?P<pk>[0-9]+)/$', views.VocabularyDetail.as_view()),
     url(r'vocabulary/(?P<pk>[0-9]+)/term/$', views.TermList.as_view()),
-    url(r'vocabulary/(?P<vocabulary>[0-9]+)/term/(?P<pk>[0-9]+)/$', views.TermDetail.as_view()),
+    url(r'vocabulary/(?P<v_pk>[0-9]+)/term/(?P<pk>[0-9]+)/$', views.TermDetail.as_view()),
 )

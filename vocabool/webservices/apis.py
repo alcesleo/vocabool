@@ -34,7 +34,6 @@ class YandexTranslateAPI(APIBase):
             to_language)
 
         url = base_url + data
-        # TODO: if response == input, no translation available?
 
         # fetch and parse data
         return self._get_json_data(url)

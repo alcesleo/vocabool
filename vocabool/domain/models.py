@@ -9,7 +9,7 @@ from vocabool.libs.helpers import ellipsify
 # From a database design perspective, these are a catastrophe, and they are not
 # suited for HUGE amounts of data. They are however very logical and understandable,
 # and are very easy to work with.
-# The definition and translation CharFields can contain multiple definitions, each on their own
+# The definition and translation-fields can contain multiple definitions, each on their own
 # row - since they should be limited, and always displayed together, this has
 # not been broken up into separate rows and should be handled later(like surrounding
 # each line with p-tags or similar)
@@ -67,7 +67,7 @@ class Term(models.Model):
     translations = models.ManyToManyField(Translation, blank=True, related_name='terms')
 
     class Meta:
-        unique_together = ('text', 'vocabulary')
+        unique_together = ('text', 'language', 'vocabulary')
 
     def __unicode__(self):
         return ellipsify(self.text)

@@ -1,8 +1,8 @@
 from django.contrib.auth.models import User
-from rest_framework import permissions, exceptions
-from rest_framework import generics
+from rest_framework import permissions, exceptions, generics, filters
 from .serializers import VocabularySerializer, TermSerializer, UserSerializer
 from .permissions import IsOwnerOrReadOnly
+from .exceptions import DuplicateNotAllowed
 from vocabool.domain.models import Vocabulary, Term, Definition
 from vocabool.webservices.service import Service
 
@@ -21,7 +21,7 @@ class VocabularyList(generics.ListCreateAPIView):
         user = self.request.user
         if user.is_authenticated():
             return Vocabulary.objects.filter(owner=user)
-        return Vocabulary.objects.all() # TODO: When logged out?
+        raise exceptions.NotAuthenticated()
 
 
 class VocabularyDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -34,19 +34,46 @@ class VocabularyDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class TermList(generics.ListCreateAPIView):
+    """
+    Lists terms in a specific vocabulary (from query-string).
+    Owner has full permissions, everyone has read premissions.
+    Handles ?ordering= in query-string.
+    """
+
     model = Term
     serializer_class = TermSerializer
     permission_classes = (IsOwnerOrReadOnly,)
 
+    # enable ?ordering=
+    filter_backends = (filters.OrderingFilter,)
+    ordering = ('text', 'timestamp')
+
+
+    def _deny_double_insert(self):
+        """Manual check to prevent inserting a term that already exists in this vocabulary."""
+        vocabulary = self.kwargs['pk']
+        text = self.request.DATA['text']
+        lang = self.request.DATA['language']
+
+        exists = Term.objects.filter(vocabulary=vocabulary,
+                                     text=text,
+                                     language=lang).exists()
+
+        if exists:
+            raise DuplicateNotAllowed()
 
     def pre_save(self, obj):
+
+        # Prevent duplicate terms
+        self._deny_double_insert()
+
         obj.owner = self.request.user
-        obj.vocabulary_id = self.kwargs['pk']
+        obj.vocabulary_id = self.kwargs['pk'] # TODO: if not exists
 
 
     def get_queryset(self):
         # select only terms from vocabulary
-        vocabulary = self.kwargs['pk'] # TODO: slugfield?
+        vocabulary = self.kwargs['pk']
         return Term.objects.filter(vocabulary=vocabulary)
 
 
@@ -58,26 +85,34 @@ class TermDetail(generics.RetrieveUpdateDestroyAPIView):
     GET-parameters:
         ?define           -- add a definition object before returning
         ?translate_to=en  -- add a translation (here to english) object before returning
+        ?clear            -- clear all associated translations and definitions
 
-    These can be used together:
+    translate_to and define can be used together, but clear overrides both of them.
+
+    Example:
 
         /api/term/3/?translate_to=ru&define
-
     """
 
     model = Term
     serializer_class = TermSerializer
+    permission_classes = (IsOwnerOrReadOnly,)
 
 
     def _handle_query(self, term, params):
         """Calls service methods on object based on GET-parameters."""
         service = Service()
 
+        if 'clear' in params:
+            service.clear(term)
+            return
+
         if 'define' in params:
             service.define(term)
 
         if 'translate_to' in params:
             service.translate(term, params['translate_to'])
+
 
     # handle query params
     def get_object(self):

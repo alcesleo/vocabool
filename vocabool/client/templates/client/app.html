@@ -1,22 +1,17 @@
 {% extends 'base.html' %}
-{% block title %}The app{% endblock %}
+{% block title %}Vocabool{% endblock %}
 
-{% block content %}
-
-    {% include 'client/navbar.html' %}
-
-    <!-- Main Backbone view -->
-    <div id="container">
-        <div id="view"></div>
-    </div>
-
+{% block javascript %}
 
     <!-- Handlebars templates -->
     {% load jstemplate %}
     {% handlebarsjs 'tpl-vocabulary' %}
     {% handlebarsjs 'tpl-term' %}
-    {% handlebarsjs 'tpl-termlist' %}
-    {% handlebarsjs 'tpl-login' %}
+    {% handlebarsjs 'tpl-termcontrols' %}
+    {% handlebarsjs 'tpl-addvocabulary' %}
+    {% handlebarsjs 'tpl-paginationlinks' %}
+    {% handlebarsjs 'tpl-heading' %}
+    {% handlebarsjs 'tpl-partial-selectlanguage' %}
 
     {% load staticfiles %}
     {% load compress %}
@@ -30,14 +25,17 @@
     <script src="{% static 'backbone/backbone.js' %}"></script>
     <script src="{% static 'backbone-pageable/lib/backbone-pageable.js' %}"></script>
     <script src="{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'spinjs/spin.js' %}"></script>
-    <script src="{% static 'spinjs/jquery.spin.js' %}"></script>
 
     <!-- Application -->
     <script src="{% static 'client/js/models.js' %}"></script>
     <script src="{% static 'client/js/collections.js' %}"></script>
+
+    <script src="{% static 'client/js/baseviews.js' %}"></script>
     <script src="{% static 'client/js/views.js' %}"></script>
     <script src="{% static 'client/js/listviews.js' %}"></script>
+    <script src="{% static 'client/js/controlviews.js' %}"></script>
+    <script src="{% static 'client/js/pageviews.js' %}"></script>
+
     <script src="{% static 'client/js/router.js' %}"></script>
     <script src="{% static 'client/js/helpers.js' %}"></script>
     <script src="{% static 'client/js/template-helpers.js' %}"></script>

@@ -5,6 +5,8 @@
 from .general import *
 import os
 
+# TODO: SECRET_KEY
+
 DEBUG = True
 ALLOWED_HOSTS = ['localhost', 'www.yourdomain.com']
 

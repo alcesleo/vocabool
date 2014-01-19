@@ -4,7 +4,7 @@ https://www.pythonanywhere.com/wiki/VirtualEnvForNewerDjango
 """
 
 # activate virtualenv
-activate_this = '/home/alcesleo/.virtualenvs/vocabool2/bin/activate_this.py'
+activate_this = '/home/alcesleo/.virtualenvs/vocabool/bin/activate_this.py'
 execfile(activate_this, dict(__file__=activate_this))
 
 import os

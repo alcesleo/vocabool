@@ -31,8 +31,8 @@ class Service():
     def translate(self, term_obj, to_language):
         """Adds a translation to the passed term object."""
         # validate requested language
-        if to_language not in SUPPORTED_LANGUAGES:
-            raise Http404
+        # if to_language not in SUPPORTED_LANGUAGES:
+            # TODO: raise bas request, not supported language
 
         # try to get translation object
         try:
@@ -52,3 +52,9 @@ class Service():
             raise Http404
 
         term_obj.definitions.add(definition)
+
+
+    def clear(self, term_obj):
+        """Clears all definitions and translations from a term object."""
+        term_obj.definitions.clear()
+        term_obj.translations.clear()

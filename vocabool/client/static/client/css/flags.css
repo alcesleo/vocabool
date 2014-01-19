@@ -5,16 +5,18 @@
 	background:url(/static/client/img/flags.png) no-repeat;
 }
 
-.flag.flag-cz {background-position: -16px 0}
+/* From http://flag-sprites.com/ */
+/* The country codes have been modified to match the standard used in the rest of the app */
+.flag.flag-cs {background-position: -16px 0}
 .flag.flag-de {background-position: -32px 0}
-.flag.flag-dk {background-position: -48px 0}
+.flag.flag-da {background-position: -48px 0}
 .flag.flag-es {background-position: 0 -11px}
 .flag.flag-fi {background-position: -16px -11px}
 .flag.flag-fr {background-position: -32px -11px}
-.flag.flag-en {background-position: -48px -11px} /* default: gb */
-.flag.flag-gr {background-position: 0 -22px}
+.flag.flag-en {background-position: -48px -11px}
+.flag.flag-el {background-position: 0 -22px}
 .flag.flag-hr {background-position: -16px -22px}
 .flag.flag-hu {background-position: -32px -22px}
 .flag.flag-it {background-position: -48px -22px}
 .flag.flag-ru {background-position: 0 -33px}
-.flag.flag-sv {background-position: -16px -33px} /* default: se */
+.flag.flag-sv {background-position: -16px -33px}

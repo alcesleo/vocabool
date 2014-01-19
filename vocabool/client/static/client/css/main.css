@@ -5,3 +5,16 @@ body {
 .term ul {
     list-style-type: none;
 }
+
+.container {
+    padding: 0 15px;
+}
+
+.well .form-control {
+    margin-bottom: 10px;
+}
+
+.inline-group {
+    display: inline-block;
+    margin: 3px 0;
+}

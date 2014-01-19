@@ -1,94 +1,86 @@
-// Super
-
-/**
- * // All that's needed!
- * var MyListView = VB.Views.ListView.extend({
- *     itemView: MyBackboneView
- * })
- */
-VB.Views.ListView = Backbone.View.extend({
-
-    itemView: null,
-    subviews: [],
-
-    // overriding constructor to allow childs to have an initialize-method without
-    // needing to, and probably forgetting to call super.
-    constructor: function () {
-        // This gets me every time. Needed when a method calls another method that uses 'this'.
-        _.bindAll(this, 'renderItem');
-        Backbone.View.apply(this, arguments); // super
-    },
-
-    // override remove to take care of subviews
-    remove: function () {
-        this.removeSubviews();
-        Backbone.View.prototype.remove.apply(this, arguments);
-    },
-
-    removeSubviews: function () {
-        // remove all subviews
-        this.subviews.forEach(function (view) {
-            view.remove();
-        });
-        // empty subiews
-        this.subviews.length = 0;
-    },
-
-    renderItem: function (model) {
-        var view = new this.itemView({model: model});
-        this.subviews.push(view);
-        this.$el.append(view.render().el);
-    },
-
-    render: function () {
-        this.removeSubviews();
-        this.collection.each(this.renderItem);
-        return this;
-    }
-});
+(function () {
+'use strict';
+window.VB = window.VB || {};
+VB.Views = VB.Views || {};
 
 
-VB.Views.VocabularyList = VB.Views.ListView.extend({
-
-    tagName: 'ul',
-    className: 'vocabularies',
-    itemView: VB.Views.Vocabulary
-
-});
+// Dependencies
+var ListView = VB.Views.ListView,
+    View = VB.Views.View,
+    TermView = VB.Views.Term,
+    VocabularyView = VB.Views.Vocabulary;
 
 
-VB.Views.TermList = VB.Views.ListView.extend({
+VB.Views.VocabularyList = ListView.extend({
 
-    // TODO: listento add
+    className: 'panel-group',
+    id: 'vocabulary-list',
+    itemView: VocabularyView,
+
     initialize: function () {
-        this.listenTo(this.collection, 'add', function (data) { console.log(data)});
-    },
+        this.listenTo(this.collection, 'sync', this.render);
+    }
+
+});
+
+
+VB.Views.TermList = ListView.extend({
 
     className: 'panel-group',
     id: 'term-list',
-    itemView: VB.Views.Term,
-    template: Handlebars.compile($('#tpl-termlist').html()),
+    itemView: TermView,
+
+    // TODO: Open terms when added, maybe add them to the top of the list
+
+    initialize: function () {
+        this.listenTo(this.collection, 'sync', this.render); // re-render when new page etc
+        this.listenTo(this.collection, 'add', this.addOne); // a new term has been added
+    },
+
+});
+
+
+VB.Views.PaginationLinks = View.extend({
+
+    templateId: 'paginationlinks',
+
+    initialize: function () {
+        this.listenTo(this.collection, 'sync', this.render);
+    },
+
+    // Disable buttons if necessary
+    getOptions: function () {
+        return {
+            nextDisabled: !this.collection.hasNext(),
+            previousDisabled: !this.collection.hasPrevious(),
+        };
+    },
 
     events: {
-        'click #add-term-btn': 'addTerm'
+        'click .previous': 'previous',
+        'click .next a': 'next',
     },
 
-    addTerm: function () {
-        // get attributes
-        var text = this.$('#add-term-text').val();
-
-        // add to collection
-        this.collection.create({
-            text: text,
-            language: 'en' // TODO: lang
-        });
-        // TODO: scroll to added term, make sure it's open
+    next: function (e) {
+        if (this.collection.hasNext()) {
+            this.collection.getNextPage();
+        }
+        return false;
     },
 
-    // override to prepend template
+    previous: function (e) {
+        if (this.collection.hasPrevious()) {
+            this.collection.getPreviousPage();
+        }
+        return false;
+    },
+
     render: function () {
-        this.$el.html(this.template());
-        this.constructor.__super__.render.apply(this);
+        this.$el.html(this.template(this.getOptions()));
+        return this;
     }
 
 });
+
+
+}());

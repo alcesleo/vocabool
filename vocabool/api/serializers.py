@@ -1,6 +1,7 @@
 from rest_framework import serializers
-from vocabool.domain.models import Vocabulary, Term, Definition, Translation
 from django.contrib.auth.models import User
+from vocabool.domain.models import Vocabulary, Term, Definition, Translation
+from vocabool.libs.helpers import strip_on_last
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -12,10 +13,13 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class DefinitionSerializer(serializers.ModelSerializer):
-    # TODO: strip_on_last('\n', text, max_length)
     class Meta:
         model = Definition
         fields = ('definition', 'language')
+
+    def transform_definition(self, obj, value):
+        """Shorten long definition texts."""
+        return strip_on_last('\n', value, 400)
 
 
 class TranslationSerializer(serializers.ModelSerializer):
@@ -36,7 +40,6 @@ class TermSerializer(serializers.ModelSerializer):
 
 class VocabularySerializer(serializers.ModelSerializer):
     count = serializers.Field(source='count')
-    # TODO: hyperlink to terms
 
     class Meta:
         model = Vocabulary

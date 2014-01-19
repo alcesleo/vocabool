@@ -1,3 +1,6 @@
+(function () {
+'use strict';
+
 /**
  * Replace all occurences in text
  */
@@ -19,24 +22,30 @@ Handlebars.registerHelper('eachLine', function(text, options) {
     return ret;
 });
 
-/**
- * Create a select-element from an object
- */
-Handlebars.registerHelper('selectFrom', function (hash, name, options) {
-    // TODO if hash len
-    // TODO selected option
-    var ret = '<select name="' + name + '">';
-    for (var key in hash) {
-        ret += '<option value="' + key + '">' + hash[key] + '</option>';
-    }
-    ret += '</select>';
-
-    return new Handlebars.SafeString(ret);
+// Gives Handlebars access to global variable
+Handlebars.registerHelper('global', function (name, options) {
+    return options.fn(window[name]);
 });
 
+Handlebars.registerHelper('debug', function(optionalValue) {
+    console.log('Current Context');
+    console.log(this);
+
+    if (optionalValue) {
+        console.log('Value');
+        console.log(optionalValue);
+    }
+});
+
+// TODO: This should probably be a partial
 /**
  * A flag icon
  */
 Handlebars.registerHelper('countryFlag', function (country_code) {
     return new Handlebars.SafeString('<div class="flag flag-' + country_code + '" />');
 });
+
+
+Handlebars.registerPartial('selectLanguage', $('#tpl-partial-selectlanguage').html());
+
+}());

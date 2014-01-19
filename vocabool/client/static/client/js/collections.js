@@ -1,3 +1,4 @@
+(function () {
 'use strict';
 window.VB = window.VB || {};
 VB.Collections = VB.Collections || {};
@@ -9,13 +10,21 @@ VB.Collections = VB.Collections || {};
 VB.Collections.DRFCollection = Backbone.PageableCollection.extend({
     mode: 'server',
 
+    state: {
+        pageSize: 10
+    },
+
     queryParams: {
-        currentPage: 'page'
+        currentPage: 'page',
+        pageSize: 'page_size',
+        // TODO: ordering
+        ordering: function () { return '-timestamp' }
     },
 
     parseRecords: function (resp) {
         return resp.results;
     },
+
     parseState: function (resp, queryParams, state, options) {
         return { totalRecords: resp.count };
     }
@@ -35,6 +44,7 @@ VB.Collections.Terms = VB.Collections.DRFCollection.extend({
     url: function () {
         return this.vocabulary.url() + '/term/';
     }
+
 });
 
 
@@ -42,3 +52,5 @@ VB.Collections.Vocabularies = VB.Collections.DRFCollection.extend({
     model: VB.Models.Vocabulary,
     url: '/api/vocabulary/',
 });
+
+}());
