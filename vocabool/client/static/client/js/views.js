@@ -30,7 +30,20 @@ VB.Views.Vocabulary = View.extend({
     className: 'vocabulary panel panel-default',
     templateId: 'vocabulary',
 
+    initialize: function () {
+        this.listenTo(this.model, 'destroy', this.remove);
+    },
+
+    events: {
+        'click .btn-trash': 'trash'
+    },
+
     // TODO: don't hardcode the links
+    trash: function () {
+        if (confirm('Are you sure you want to delete this term?')) {
+            this.model.destroy();
+        }
+    },
 
     render: function () {
         this.$el.html(this.template(this.model.toJSON()));

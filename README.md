@@ -65,7 +65,7 @@ Minor:
 
 ## TODO
 
-- Remove/change name of vocabulary
+- Change name of vocabulary
 - Sorting
 - "Added 5 minutes ago"-type timestamps
 - Offline cache manifest
