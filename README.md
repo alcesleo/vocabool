@@ -64,10 +64,12 @@ Minor:
 ## TODO
 
 - Sorting
+- "Added 5 minutes ago"-type timestamps
 - Offline cache manifest
-- Correct spelling
+- Correct spelling mistakes
 - Define based on translation
 - Custom text input
 - Move terms between vocabularies
 - Batch delete
 - Loading icon
+- django-profiles
