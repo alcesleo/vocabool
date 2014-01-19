@@ -65,6 +65,7 @@ Minor:
 
 ## TODO
 
+- Remove/change name of vocabulary
 - Sorting
 - "Added 5 minutes ago"-type timestamps
 - Offline cache manifest
@@ -75,3 +76,9 @@ Minor:
 - Batch delete
 - Loading icon
 - django-profiles
+
+## Bugs
+
+Needs fixing!
+
+- Adding something to a term breaks the accordion effect
