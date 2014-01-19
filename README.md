@@ -77,6 +77,9 @@ Minor:
 - Batch delete
 - Loading icon
 - django-profiles
+- fabric deployment automation
+- touch icon for mobile devices
+
 
 ## Bugs
 
