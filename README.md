@@ -67,8 +67,11 @@ Minor:
 ## TODO
 
 - **Success messages**
-- Change name of vocabulary
+- **Vocabulary restore** - permanent cascading delete is way too easy
 - Sorting
+- Page numbering
+- Smarter defaults of language select menus
+- Change name of vocabulary
 - Better caching on client
 - "Added 5 minutes ago"-type timestamps
 - Offline cache manifest
