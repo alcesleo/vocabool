@@ -68,6 +68,7 @@ Minor:
 
 - **Success messages**
 - **Vocabulary restore** - permanent cascading delete is way too easy
+- Validate vocabulary names for duplicates and empty
 - Sorting
 - Page numbering
 - Smarter defaults of language select menus
@@ -90,3 +91,4 @@ Minor:
 Needs fixing!
 
 - Adding something to a term breaks the accordion effect
+- Adding a duplicate term adds it to the list even if it doesn't register on the backend
