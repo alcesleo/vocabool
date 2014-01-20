@@ -66,6 +66,7 @@ Minor:
 
 ## TODO
 
+- **Success messages**
 - Change name of vocabulary
 - Sorting
 - "Added 5 minutes ago"-type timestamps
