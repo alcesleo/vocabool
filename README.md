@@ -69,6 +69,7 @@ Minor:
 - **Success messages**
 - Change name of vocabulary
 - Sorting
+- Better caching on client
 - "Added 5 minutes ago"-type timestamps
 - Offline cache manifest
 - Correct spelling mistakes
