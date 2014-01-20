@@ -73,7 +73,6 @@ Minor:
 - Smarter defaults of language select menus
 - Change name of vocabulary
 - Better caching on client
-- "Added 5 minutes ago"-type timestamps
 - Offline cache manifest
 - Correct spelling mistakes
 - Define based on translation

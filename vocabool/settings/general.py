@@ -130,6 +130,7 @@ BOWER_INSTALLED_APPS = (
     'underscore',
     'jquery',
     'jquery.cookie',
+    'jquery-timeago',
     'backbone',
     'backbone-pageable',
     'backbone',

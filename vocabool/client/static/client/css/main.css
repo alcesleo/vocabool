@@ -18,3 +18,8 @@ body {
     display: inline-block;
     margin: 3px 0;
 }
+
+.info {
+    color: #999;
+    vertical-align: middle;
+}

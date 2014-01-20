@@ -45,6 +45,11 @@ Handlebars.registerHelper('countryFlag', function (country_code) {
     return new Handlebars.SafeString('<div class="flag flag-' + country_code + '" />');
 });
 
+// Pretty relative timestamp
+Handlebars.registerHelper('timeago', function (date) {
+    return jQuery.timeago(date);
+});
+
 
 Handlebars.registerPartial('selectLanguage', $('#tpl-partial-selectlanguage').html());
 
