@@ -9,8 +9,8 @@
     </h4>
     {{!-- Timestamp --}}
     {{#if timestamp}}
-    <div class="pull-right info">
-        <small><span class="glyphicon glyphicon-time"></span> {{timeago timestamp}}</small>
+    <div class="timestamp pull-right info">
+        <small><span class="glyphicon glyphicon-time"></span> <time datetime="{{timestamp}}">{{timeago timestamp}}</time></small>
     </div>
     {{/if}}
     <div class="clearfix"></div>
