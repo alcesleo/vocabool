@@ -33,6 +33,7 @@ VB.Views.TermList = ListView.extend({
     // TODO: Open terms when added, maybe add them to the top of the list
 
     initialize: function () {
+        // TODO: render whole list when created to keep pages and terms correctly ordered
         this.listenTo(this.collection, 'sync', this.render); // re-render when new page etc
         this.listenTo(this.collection, 'add', this.addOne); // a new term has been added
     },
