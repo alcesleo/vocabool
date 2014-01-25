@@ -30,7 +30,7 @@ Add static files to Web configuration, like so:
 `/static/` -> `/home/alcesleo/vocabool/static/`
 
     # install css/js dependencies
-    npm install bower
+    npm install bower yuglify
     python manage.py bower_install
     python manage.py collectstatic
 

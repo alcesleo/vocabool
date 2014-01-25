@@ -83,6 +83,7 @@ Minor:
 - Loading icon
 - django-profiles
 - fabric deployment automation
+- deploy-branch to not have to do a lot of processing on the server
 - touch icon for mobile devices
 - Get a domain
 

@@ -123,12 +123,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'djangobower.finders.BowerFinder',
-
-    # Pipeline
-    'pipeline.finders.FileSystemFinder',
-    'pipeline.finders.AppDirectoriesFinder',
     'pipeline.finders.PipelineFinder',
-    'pipeline.finders.CachedFileFinder',
 )
 
 BOWER_INSTALLED_APPS = (
@@ -147,11 +142,11 @@ BOWER_INSTALLED_APPS = (
 ### Static compression
 
 # Make Bower and Pipeline play together
-STATICFILES_DIRS = (
-  os.path.join(BOWER_COMPONENTS_ROOT, 'bower_components'),
-)
+# STATICFILES_DIRS = (
+#     os.path.join(BOWER_COMPONENTS_ROOT, 'bower_components'),
+# )
 
-STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
 
 PIPELINE_CSS = {
     'main': {
@@ -164,8 +159,16 @@ PIPELINE_CSS = {
 }
 
 
+# TODO: Use pipeline for Handlebars files also
+# PIPELINE_TEMPLATE_NAMESPACE = 'window.VB.templates'
+# PIPELINE_TEMPLATE_EXT = '.html'
+# PIPELINE_TEMPLATE_FUNC = 'Handlebars.compile'
+
+# couldn't get yuglify to work with js
+PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.jsmin.JSMinCompressor'
+
 PIPELINE_JS = {
-    'main': {
+    'app': {
         'source_filenames': (
             # dependencies
             'underscore/underscore.js',
@@ -176,6 +179,9 @@ PIPELINE_JS = {
             'backbone/backbone.js',
             'backbone-pageable/lib/backbone-pageable.js',
             'bootstrap/dist/js/bootstrap.min.js',
+
+            # FIXME: cannot be globbed since their order matters
+            # 'client/js/*.js',
 
             # application
             'client/js/models.js',
@@ -190,7 +196,7 @@ PIPELINE_JS = {
             'client/js/template-helpers.js',
             'client/js/main.js',
         ),
-        'output_filename': 'js/main.js'
+        'output_filename': 'js/app.js'
     }
 
 }
