@@ -32,7 +32,7 @@ class WiktionaryAdapter():
         try:
             for key, value in data['query']['pages'].items():
                 return value['revisions'][0]['*']
-        except Exception, e:
+        except Exception:
             raise NotFound
 
 
