@@ -98,6 +98,7 @@ class TermDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = TermSerializer
     permission_classes = (IsOwnerOrReadOnly,)
 
+    # FIXME: Doing things on a GET is bad restful design
 
     def _handle_query(self, term, params):
         """Calls service methods on object based on GET-parameters."""
