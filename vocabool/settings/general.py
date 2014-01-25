@@ -21,7 +21,7 @@ SECRET_KEY = '1&*)1_0&zavd7)#b6v3gfyp(9ike6%(!!jvv-o*-gsw@o*bwlj'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-# COMPRESS_ENABLED = True
+
 
 TEMPLATE_DEBUG = True
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
@@ -43,7 +43,7 @@ INSTALLED_APPS = (
     'south',
     'djangobower',
     'jstemplate',
-    'compressor',
+    'pipeline',
 
     # authentication
     'registration',
@@ -122,8 +122,13 @@ BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'components')
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'compressor.finders.CompressorFinder',
     'djangobower.finders.BowerFinder',
+
+    # Pipeline
+    'pipeline.finders.FileSystemFinder',
+    'pipeline.finders.AppDirectoriesFinder',
+    'pipeline.finders.PipelineFinder',
+    'pipeline.finders.CachedFileFinder',
 )
 
 BOWER_INSTALLED_APPS = (
@@ -137,3 +142,56 @@ BOWER_INSTALLED_APPS = (
     'handlebars',
     'bootstrap',
 )
+
+
+### Static compression
+
+# Make Bower and Pipeline play together
+STATICFILES_DIRS = (
+  os.path.join(BOWER_COMPONENTS_ROOT, 'bower_components'),
+)
+
+STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+
+PIPELINE_CSS = {
+    'main': {
+        'source_filenames': (
+            'bootstrap/dist/css/bootstrap.min.css',
+            'client/css/*.css',
+        ),
+        'output_filename': 'css/main.css',
+    },
+}
+
+
+PIPELINE_JS = {
+    'main': {
+        'source_filenames': (
+            # dependencies
+            'underscore/underscore.js',
+            'jquery/jquery.js',
+            'jquery.cookie/jquery.cookie.js',
+            'jquery-timeago/jquery.timeago.js',
+            'handlebars/handlebars.js',
+            'backbone/backbone.js',
+            'backbone-pageable/lib/backbone-pageable.js',
+            'bootstrap/dist/js/bootstrap.min.js',
+
+            # application
+            'client/js/models.js',
+            'client/js/collections.js',
+            'client/js/baseviews.js',
+            'client/js/views.js',
+            'client/js/listviews.js',
+            'client/js/controlviews.js',
+            'client/js/pageviews.js',
+            'client/js/router.js',
+            'client/js/helpers.js',
+            'client/js/template-helpers.js',
+            'client/js/main.js',
+        ),
+        'output_filename': 'js/main.js'
+    }
+
+}
+

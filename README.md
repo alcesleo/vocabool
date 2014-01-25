@@ -56,7 +56,7 @@ have seriously impressed me, and make me proud to be a human being.
 Minor:
 
 - Flags from <http://flag-sprites.com/>
-- Caching using [Django Compressor](http://django-compressor.readthedocs.org/en/latest/)
+- Caching using [Django Pipeline](http://django-pipeline.readthedocs.org/)
 - Authentication using [Django Registration](https://django-registration.readthedocs.org/en/latest/)
 - [MWParserFromHell](http://mwparserfromhell.readthedocs.org/en/latest/) helped with parsing Wiktionary data
 
@@ -74,7 +74,7 @@ Minor:
 - Smarter defaults of language select menus
 - Change name of vocabulary
 - Better caching on client
-- Offline cache manifest
+- Offline cache manifest (https://github.com/nephila/django-html5-appcache)
 - Correct spelling mistakes
 - Define based on translation
 - Custom text input
