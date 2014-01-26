@@ -10,7 +10,6 @@ VB.Views.AddTerm = View.extend({
     initialize: function () {
         this.listenTo(this.collection, 'invalid', this.validationError);
         this.listenTo(this.collection, 'error', this.serverError);
-        this.listenTo(this.collection, 'all', function () {console.log(arguments)});
     },
 
     className: 'add-term',
@@ -46,16 +45,16 @@ VB.Views.AddTerm = View.extend({
 
         switch (sortBy) {
             case 'a-z':
-                console.log('a-z')
+                console.log('a-z');
                 break;
             case 'z-a':
-                console.log('z-a')
+                console.log('z-a');
                 break;
             case 'new-old':
-                console.log('new-old')
+                console.log('new-old');
                 break;
             case 'old-new':
-                console.log('old-new')
+                console.log('old-new');
                 break;
             default:
                 console.log('none');
@@ -95,7 +94,7 @@ VB.Views.AddVocabulary = View.extend({
     addVocabulary: function () {
         var attrs = {
             name: this.$('#add-vocabulary-name').val()
-        }
+        };
         // Wait for the server to respond,
         // the link will not work until the model gets a PK.
         this.collection.create(attrs);

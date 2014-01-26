@@ -57,7 +57,7 @@ VB.Views.Term = View.extend({
     templateId: 'term',
 
     initialize: function () {
-        this.listenTo(this.model, 'change', function () {this.render(true)}); // FIXME: very ugly
+        this.listenTo(this.model, 'change', function () { this.render(true); }); // FIXME: very ugly
         this.listenTo(this.model, 'destroy', this.remove);
     },
 

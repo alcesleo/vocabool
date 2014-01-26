@@ -18,7 +18,7 @@ VB.Collections.DRFCollection = Backbone.PageableCollection.extend({
         currentPage: 'page',
         pageSize: 'page_size',
         // TODO: ordering
-        ordering: function () { return '-timestamp' }
+        ordering: function () { return '-timestamp'; }
     },
 
     parseRecords: function (resp) {
@@ -37,7 +37,7 @@ VB.Collections.Terms = VB.Collections.DRFCollection.extend({
     initialize: function (models, options) {
         // Must get a vocabulary
         if (!(options.vocabulary instanceof VB.Models.Vocabulary)) {
-            throw new Error('Terms must be associated with a Vocabulary.')
+            throw new Error('Terms must be associated with a Vocabulary.');
         }
         this.vocabulary = options.vocabulary;
     },
