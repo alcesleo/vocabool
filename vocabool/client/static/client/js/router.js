@@ -17,7 +17,7 @@ VB.Router = Backbone.Router.extend({
 
     vocabularies: function () {
         var self = this;
-        var vocabularies = new VB.Collections.Vocabularies()
+        var vocabularies = new VB.Collections.Vocabularies();
 
         // Fetch vocabularies and display a list on success
         // TODO: Fail

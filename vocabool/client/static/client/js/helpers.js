@@ -32,7 +32,7 @@ VB.helpers.enableCsrf = function () {
         };
         return oldSync(method, model, options);
     };
-}
+};
 
 
 VB.debug = {
@@ -44,7 +44,7 @@ VB.debug = {
         console.warn = noop;
         console.info = noop;
     }
-}
+};
 
 /**
  * Places text at the start and end of every line in a string,
@@ -60,6 +60,6 @@ VB.debug = {
 VB.helpers.surroundLines = function (text, start, end) {
     var lines = text.trim().split('\n');
     return start + lines.join(end + start) + end;
-}
+};
 
 }());

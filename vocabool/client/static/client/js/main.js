@@ -5,5 +5,5 @@ $(function () {
 
     VB.helpers.enableCsrf();
     VB.app.router = new VB.Router();
-    Backbone.history.start({pushState: false, root: '/app/'})
+    Backbone.history.start({pushState: false, root: '/app/'});
 });
