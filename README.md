@@ -5,7 +5,8 @@
 
 ## Version
 
-Pretty much everything is Python3 ready except Compressor, so it's running on 2.7.5 for now
+Couldn't get the deps to work on Python 3, but I believe all of my code is Python 3 compatible, it's
+running on 2.7.5 for now though.
 
 ## Structure
 
