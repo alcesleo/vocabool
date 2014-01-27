@@ -122,8 +122,8 @@ BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'components')
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'djangobower.finders.BowerFinder',
     'pipeline.finders.PipelineFinder',
+    'djangobower.finders.BowerFinder',
 )
 
 BOWER_INSTALLED_APPS = (
@@ -141,12 +141,18 @@ BOWER_INSTALLED_APPS = (
 
 ### Static compression
 
-# Make Bower and Pipeline play together
-# STATICFILES_DIRS = (
-#     os.path.join(BOWER_COMPONENTS_ROOT, 'bower_components'),
-# )
+# Use forgiving storage, some external libs cause errors otherwise
+STATICFILES_STORAGE = 'django_pipeline_forgiving.storages.PipelineForgivingStorage'
 
-STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
+
+# TODO: Use pipeline for Handlebars files also
+# PIPELINE_TEMPLATE_NAMESPACE = 'window.VB.templates'
+# PIPELINE_TEMPLATE_EXT = '.html'
+# PIPELINE_TEMPLATE_FUNC = 'Handlebars.compile'
+
+# because pip
+PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.jsmin.JSMinCompressor'
+PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.cssmin.CSSMinCompressor'
 
 PIPELINE_CSS = {
     'main': {
@@ -158,21 +164,12 @@ PIPELINE_CSS = {
     },
 }
 
-
-# TODO: Use pipeline for Handlebars files also
-# PIPELINE_TEMPLATE_NAMESPACE = 'window.VB.templates'
-# PIPELINE_TEMPLATE_EXT = '.html'
-# PIPELINE_TEMPLATE_FUNC = 'Handlebars.compile'
-
-# couldn't get yuglify to work with js
-PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.jsmin.JSMinCompressor'
-
 PIPELINE_JS = {
     'app': {
         'source_filenames': (
             # dependencies
             'underscore/underscore.js',
-            'jquery/jquery.js',
+            'jquery/jquery.min.js',
             'jquery.cookie/jquery.cookie.js',
             'jquery-timeago/jquery.timeago.js',
             'handlebars/handlebars.js',
@@ -180,10 +177,10 @@ PIPELINE_JS = {
             'backbone-pageable/lib/backbone-pageable.js',
             'bootstrap/dist/js/bootstrap.min.js',
 
-            # FIXME: cannot be globbed since their order matters
-            # 'client/js/*.js',
+            # # FIXME: cannot be globbed since their order matters
+            # # 'client/js/*.js',
 
-            # application
+            # # application
             'client/js/models.js',
             'client/js/collections.js',
             'client/js/baseviews.js',
@@ -198,6 +195,5 @@ PIPELINE_JS = {
         ),
         'output_filename': 'js/app.js'
     }
-
 }
 
