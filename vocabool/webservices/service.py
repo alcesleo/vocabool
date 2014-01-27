@@ -37,7 +37,7 @@ class Service():
         # try to get translation object
         try:
             translation = self.translation_repo.get_translation(term_obj.text, term_obj.language, to_language)
-        except Exception, e:
+        except Exception:
             raise Http404
 
         term_obj.translations.add(translation)
@@ -48,7 +48,7 @@ class Service():
         # try to get definition object
         try:
             definition = self.definition_repo.get_definition(term_obj.text, term_obj.language)
-        except Exception, e:
+        except Exception:
             raise Http404
 
         term_obj.definitions.add(definition)

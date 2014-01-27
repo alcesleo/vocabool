@@ -6,15 +6,9 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-        {% load staticfiles %}
-        {% load compress %}
 
-        {% compress css %}
-        <!-- CSS -->
-        <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'client/css/flags.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'client/css/main.css' %}">
-        {% endcompress %}
+        {% load compressed %}
+        {% compressed_css 'main' %}
 
     </head>
     <body>
@@ -28,12 +22,12 @@
             {% include 'client/navbar-logged-out.html' %}
         {% endif %}
 
+        {# TODO: block.super #}
         {# Main Bootstrap content container #}
         <div class="container" id="view">
             {% block content %}{% endblock %}
         </div>
 
-        {# TODO: Put compress up here? #}
         {# Javascript dependencies #}
         {% block javascript %}{% endblock %}
     </body>

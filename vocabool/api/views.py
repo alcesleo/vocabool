@@ -100,6 +100,7 @@ class TermDetail(generics.RetrieveUpdateDestroyAPIView):
 
     # FIXME: Doing things on a GET is bad restful design
 
+    # FIXME: Very bad RESTful design to do stuff on a GET
     def _handle_query(self, term, params):
         """Calls service methods on object based on GET-parameters."""
         service = Service()
